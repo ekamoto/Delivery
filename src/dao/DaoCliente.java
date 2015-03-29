@@ -2,11 +2,7 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-
 import model.Cliente;
-
-import com.sun.corba.se.pept.transport.Connection;
 
 import conexao.Conexao;
 
