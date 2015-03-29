@@ -1,21 +1,17 @@
 package main;
-import janelas.JanelaPrincipal;
+import view.JanelaPrincipal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import classes.Cliente;
-import classes.Entregador;
-import classes.Pedido;
-import classes.Pessoa;
-import classes.Produto;
+import model.Cliente;
+import model.Entregador;
+import model.Pedido;
+import model.Produto;
 
 
 public class Delivery {
-	
-	//static private JanelaPrincipal janelaPrincipal;
+
 	static public List<Cliente> listaDeCliente;
 	static public List<Produto> listaDeProdutos;
 	static public List<Produto> listaProdSelec;
