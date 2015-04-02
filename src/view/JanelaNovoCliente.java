@@ -24,9 +24,6 @@ import model.PessoaModel;
 
 public class JanelaNovoCliente extends JFrame implements ActionListener {
 
-	private JTextField tfId;
-	private JLabel lId;
-
 	private JTextField tfNome;
 	private JLabel lNome;
 
@@ -47,9 +44,6 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 
 	public JanelaNovoCliente() {
 
-		lId = new JLabel("Id");
-		tfId = new JTextField(4);
-
 		lNome = new JLabel("Nome");
 		tfNome = new JTextField(40);
 
@@ -66,17 +60,6 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 		// Aparecer na janela
 		container = this.getContentPane();
 		container.setLayout(layout);
-
-		container.add(lId);
-		layout.putConstraint(SpringLayout.WEST, lId, 30, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.NORTH, lId, 30, SpringLayout.NORTH,
-				container);
-		container.add(tfId);
-		layout.putConstraint(SpringLayout.WEST, tfId, 55, SpringLayout.WEST,
-				lId);
-		layout.putConstraint(SpringLayout.NORTH, tfId, 30, SpringLayout.NORTH,
-				container);
 
 		container.add(lNome);
 		layout.putConstraint(SpringLayout.WEST, lNome, 30, SpringLayout.WEST,
@@ -145,14 +128,12 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 		if (e.getSource() == btCadastrar) {
 			
 			ClienteModel novo = new ClienteModel();
-			novo.setId(tfId.getText());
 			novo.setNome(tfNome.getText());
 			novo.setCpf(tfCpf.getText());
 			novo.setEndereco(tfEndereco.getText());
 			
 			controller.cadastrarCliente(novo);
 			
-			Delivery.listaDeCliente.add(novo);
 			JOptionPane.showMessageDialog(this,
 					"Cadastro realizado com sucesso");
 			limpar();
@@ -164,7 +145,7 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 	}
 
 	public void limpar() {
-		tfId.setText("");
+
 		tfNome.setText("");
 		tfCpf.setText("");
 		tfEndereco.setText("");
