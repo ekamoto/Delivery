@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 
 import main.Delivery;
-import model.Cliente;
-import model.Entregador;
+import model.ClienteModel;
+import model.EntregadorModel;
 
 public class JanelaListarEntregador  extends JFrame{
 	
@@ -57,16 +57,16 @@ public class JanelaListarEntregador  extends JFrame{
 	public void pesquisar(DefaultTableModel modelo) {
 		modelo.setNumRows(0);
 		
-		for(Entregador e: listarEntregador()) {
+		for(EntregadorModel e: listarEntregador()) {
 			modelo.addRow(new Object[] {e.getId() ,e.getNome(), e.getCpf(), e.getEndereco(), e.getCarteiraDeTrabalho()});
 		}
 	}
 	
-	public List<Entregador> listarEntregador() {
-		List<Entregador> resultado = new ArrayList<Entregador>();
+	public List<EntregadorModel> listarEntregador() {
+		List<EntregadorModel> resultado = new ArrayList<EntregadorModel>();
 		
 		for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
-			Entregador temp = new Entregador();
+			EntregadorModel temp = new EntregadorModel();
 			temp.setId(Delivery.listaDeEntregador.get(i).getId());
 			temp.setNome(Delivery.listaDeEntregador.get(i).getNome());
 			temp.setCpf(Delivery.listaDeEntregador.get(i).getCpf());

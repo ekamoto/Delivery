@@ -24,20 +24,20 @@ import javax.xml.ws.handler.MessageContext.Scope;
 
 
 import main.Delivery;
-import model.Cliente;
-import model.Entregador;
-import model.Pedido;
-import model.Produto;
+import model.ClienteModel;
+import model.EntregadorModel;
+import model.PedidoModel;
+import model.ProdutoModel;
 
 public class JanelaNovoPedido extends JFrame implements ActionListener {
 
 	private JComboBox comboCliente, comboEntregador;
 	private JLabel labelCliente, labelEntregador, labelProduto;
 	private Container container;
-	private List<Cliente> listaCliente;
-	private List<Entregador> listaEntregador;
-	private List<Produto> listProd = new ArrayList<Produto>();
-	private List<Produto> prodSel = new ArrayList<Produto>();
+	private List<ClienteModel> listaCliente;
+	private List<EntregadorModel> listaEntregador;
+	private List<ProdutoModel> listProd = new ArrayList<ProdutoModel>();
+	private List<ProdutoModel> prodSel = new ArrayList<ProdutoModel>();
 
 	private JTextField tfCodigo;
 	private JLabel lbCodigo;
@@ -65,7 +65,7 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		labelCliente = new JLabel("Cliente");
 		comboCliente = new JComboBox();
 		listaCliente = listarClientes();
-		for (Cliente cliente : listaCliente) {
+		for (ClienteModel cliente : listaCliente) {
 			comboCliente.addItem(cliente);
 		}
 
@@ -73,7 +73,7 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		labelEntregador = new JLabel("Entregador");
 		comboEntregador = new JComboBox();
 		listaEntregador = listarEntregador();
-		for (Entregador entregador : listaEntregador) {
+		for (EntregadorModel entregador : listaEntregador) {
 			comboEntregador.addItem(entregador);
 		}
 
@@ -86,7 +86,7 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		scroll = new ScrollPane();
 		scroll.add(listaDeProduto);
 		listProd = listarProduto();
-		for (Produto produto : listProd) {
+		for (ProdutoModel produto : listProd) {
 			listModel.addElement(produto);
 		}
 
@@ -173,15 +173,15 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAdd) {
 
-			prodSel.add((Produto) listaDeProduto.getSelectedValue());
+			prodSel.add((ProdutoModel) listaDeProduto.getSelectedValue());
 			
 			tfValorPedido.setText(valorTotal());
 		} 
 		else if (e.getSource() == btnConfirmar) {
-			Pedido pedido = new Pedido();
-			Cliente selecionaCliente = (Cliente) comboCliente.getSelectedItem();
+			PedidoModel pedido = new PedidoModel();
+			ClienteModel selecionaCliente = (ClienteModel) comboCliente.getSelectedItem();
 			pedido.setCodigo(tfCodigo.getText());
-			Entregador selecionaEntregador = (Entregador) comboEntregador
+			EntregadorModel selecionaEntregador = (EntregadorModel) comboEntregador
 					.getSelectedItem();
 
 			pedido.setCliente(selecionaCliente);
@@ -204,11 +204,11 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		
 	}
 
-	public List<Cliente> listarClientes() {
-		List<Cliente> resultado = new ArrayList<Cliente>();
+	public List<ClienteModel> listarClientes() {
+		List<ClienteModel> resultado = new ArrayList<ClienteModel>();
 
 		for (int i = 0; i < Delivery.listaDeCliente.size(); i++) {
-			Cliente temp = new Cliente();
+			ClienteModel temp = new ClienteModel();
 			temp.setId(Delivery.listaDeCliente.get(i).getId());
 			temp.setCpf(Delivery.listaDeCliente.get(i).getCpf());
 			temp.setNome(Delivery.listaDeCliente.get(i).getNome());
@@ -218,11 +218,11 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		return resultado;
 	}
 
-	public List<Entregador> listarEntregador() {
-		List<Entregador> resultado = new ArrayList<Entregador>();
+	public List<EntregadorModel> listarEntregador() {
+		List<EntregadorModel> resultado = new ArrayList<EntregadorModel>();
 
 		for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
-			Entregador temp = new Entregador();
+			EntregadorModel temp = new EntregadorModel();
 			temp.setId(Delivery.listaDeEntregador.get(i).getId());
 			temp.setCpf(Delivery.listaDeEntregador.get(i).getCpf());
 			temp.setNome(Delivery.listaDeEntregador.get(i).getNome());
@@ -234,11 +234,11 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		return resultado;
 	}
 
-	public List<Produto> listarProduto() {
-		List<Produto> resultado = new ArrayList<Produto>();
+	public List<ProdutoModel> listarProduto() {
+		List<ProdutoModel> resultado = new ArrayList<ProdutoModel>();
 
 		for (int i = 0; i < Delivery.listaDeProdutos.size(); i++) {
-			Produto temp = new Produto();
+			ProdutoModel temp = new ProdutoModel();
 			temp.setCodigo(Delivery.listaDeProdutos.get(i).getCodigo());
 			temp.setNome(Delivery.listaDeProdutos.get(i).getNome());
 			temp.setDescricao(Delivery.listaDeProdutos.get(i).getDescricao());

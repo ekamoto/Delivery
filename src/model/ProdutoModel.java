@@ -1,6 +1,6 @@
 package model;
 
-public class Produto {
+public class ProdutoModel {
 
 	private String codigo;
 	private String nome;
@@ -8,7 +8,7 @@ public class Produto {
 	private String quantidade;
 	private String valor;
 	
-	public Produto() {
+	public ProdutoModel() {
 		super();
 	}
 

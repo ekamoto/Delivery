@@ -19,9 +19,9 @@ import javax.swing.table.DefaultTableModel;
 
 
 import main.Delivery;
-import model.Entregador;
-import model.Pedido;
-import model.Produto;
+import model.EntregadorModel;
+import model.PedidoModel;
+import model.ProdutoModel;
 
 public class JanelaListarPedido extends JFrame implements ActionListener{
 	private JPanel painelFundo;
@@ -98,19 +98,19 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	
 	public void pesquisar(DefaultTableModel modelo) {
 		modelo.setNumRows(0);
-		List<Pedido> listaPedido = new ArrayList<Pedido>();
+		List<PedidoModel> listaPedido = new ArrayList<PedidoModel>();
 
-		for (Pedido p : listarPedidos()) {
+		for (PedidoModel p : listarPedidos()) {
 			modelo.addRow(new Object[] {p.getCodigo(), p.getCliente(), p.getValorPedido(),
 					p.getValorPagamento(), p.getValorTroco(), p.getEntregador(), p.getListaProduto()});
 		}
 	}
 
-	public List<Pedido> listarPedidos() {
-		List<Pedido> resultado = new ArrayList<Pedido>();
+	public List<PedidoModel> listarPedidos() {
+		List<PedidoModel> resultado = new ArrayList<PedidoModel>();
 
 		for (int i = 0; i < Delivery.listaDePedidos.size(); i++) {
-			Pedido temp = new Pedido();
+			PedidoModel temp = new PedidoModel();
 			temp.setCodigo(Delivery.listaDePedidos.get(i).getCodigo());
 			temp.setCliente(Delivery.listaDePedidos.get(i).getCliente());
 			temp.setValorPedido(Delivery.listaDePedidos.get(i).getValorPedido());

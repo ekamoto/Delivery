@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 import main.Delivery;
-import model.Cliente;
+import model.ClienteModel;
 
 public class JanelaBuscarCliente extends JFrame implements ActionListener {
 

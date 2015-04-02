@@ -2,17 +2,17 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import model.Cliente;
+import model.ClienteModel;
 
 import conexao.Conexao;
 
-public class DaoCliente extends Conexao {
+public class ClienteDao extends Conexao {
 	
-	public DaoCliente() {
+	public ClienteDao() {
 		
 	}
 	
-	public boolean cadastrar(Cliente cliente) {
+	public boolean cadastrar(ClienteModel cliente) {
 		
 		abreConexao();
 		
@@ -29,9 +29,22 @@ public class DaoCliente extends Conexao {
 	        pst.setString(3, cliente.getEndereco());
 	          
 	        pst.execute();
+	        pst.close();
+	        
+	        con.commit();
+	        System.out.println("Cliente inserido com sucesso!");
 			
 		} catch (SQLException e1) {
-		
+			
+			try {
+				
+				con.rollback();
+				System.out.println("Rollback na inserção de cliente");
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+				System.out.println("Falha so executar rollback na inserção de cliente");
+			}
 			e1.printStackTrace();
 			return false;
 		}

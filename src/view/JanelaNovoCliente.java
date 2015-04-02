@@ -15,12 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import controller.ControllerCliente;
+import controller.ClienteController;
 
 
 import main.Delivery;
-import model.Cliente;
-import model.Pessoa;
+import model.ClienteModel;
+import model.PessoaModel;
 
 public class JanelaNovoCliente extends JFrame implements ActionListener {
 
@@ -43,7 +43,7 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 	private Container container;
 	private SpringLayout layout = new SpringLayout();
 	
-	private ControllerCliente controller = new ControllerCliente();
+	private ClienteController controller = new ClienteController();
 
 	public JanelaNovoCliente() {
 
@@ -144,7 +144,7 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 		
 		if (e.getSource() == btCadastrar) {
 			
-			Cliente novo = new Cliente();
+			ClienteModel novo = new ClienteModel();
 			novo.setId(tfId.getText());
 			novo.setNome(tfNome.getText());
 			novo.setCpf(tfCpf.getText());

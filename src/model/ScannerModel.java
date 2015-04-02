@@ -6,12 +6,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.StringCharacterIterator;
 
-public class Scanner {
+public class ScannerModel {
 	
 	private static String input;
 	private StringCharacterIterator inputIt;
 	 
-	public Scanner (String fileName)
+	public ScannerModel (String fileName)
 	{
 		File inputFile = new File(fileName);
 		

@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
 
 
 import main.Delivery;
-import model.Cliente;
-import model.Produto;
+import model.ClienteModel;
+import model.ProdutoModel;
 
 public class JanelaListarCliente extends JFrame {
 	
@@ -55,16 +55,16 @@ public class JanelaListarCliente extends JFrame {
 	public void pesquisar(DefaultTableModel modelo) {
 		modelo.setNumRows(0);
 		
-		for(Cliente c: listarClientes()) {
+		for(ClienteModel c: listarClientes()) {
 			modelo.addRow(new Object[] {c.getId(), c.getNome(), c.getCpf(), c.getEndereco()});
 		}
 	}
 	
-	public List<Cliente> listarClientes() {
-		List<Cliente> resultado = new ArrayList<Cliente>();
+	public List<ClienteModel> listarClientes() {
+		List<ClienteModel> resultado = new ArrayList<ClienteModel>();
 		
 		for (int i = 0; i < Delivery.listaDeCliente.size(); i++) {
-			Cliente temp = new Cliente();
+			ClienteModel temp = new ClienteModel();
 			temp.setId(Delivery.listaDeCliente.get(i).getId());
 			temp.setNome(Delivery.listaDeCliente.get(i).getNome());
 			temp.setCpf(Delivery.listaDeCliente.get(i).getCpf());

@@ -8,7 +8,7 @@ CREATE DATABASE delivery
        CONNECTION LIMIT = -1;
 
 create table pessoas (
-id_pk serial primary key not null,
+id serial primary key not null,
 nome varchar(70) not null,
 cpf varchar(14) not null,
 endereco varchar(150)

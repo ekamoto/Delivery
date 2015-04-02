@@ -4,26 +4,26 @@ import view.JanelaPrincipal;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Cliente;
-import model.Entregador;
-import model.Pedido;
-import model.Produto;
+import model.ClienteModel;
+import model.EntregadorModel;
+import model.PedidoModel;
+import model.ProdutoModel;
 
 
 public class Delivery {
 
-	static public List<Cliente> listaDeCliente;
-	static public List<Produto> listaDeProdutos;
-	static public List<Produto> listaProdSelec;
-	static public List<Entregador> listaDeEntregador;
-	static public List<Pedido> listaDePedidos;
+	static public List<ClienteModel> listaDeCliente;
+	static public List<ProdutoModel> listaDeProdutos;
+	static public List<ProdutoModel> listaProdSelec;
+	static public List<EntregadorModel> listaDeEntregador;
+	static public List<PedidoModel> listaDePedidos;
 	
 	public static void main(String[] args) {
-		listaDeCliente = new ArrayList<Cliente>();
-		listaDeEntregador = new ArrayList<Entregador>();
-		listaDeProdutos = new ArrayList<Produto>();
-		listaDePedidos = new ArrayList<Pedido>();
-		listaProdSelec = new ArrayList<Produto>();
+		listaDeCliente = new ArrayList<ClienteModel>();
+		listaDeEntregador = new ArrayList<EntregadorModel>();
+		listaDeProdutos = new ArrayList<ProdutoModel>();
+		listaDePedidos = new ArrayList<PedidoModel>();
+		listaProdSelec = new ArrayList<ProdutoModel>();
 		
 		JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
 	}

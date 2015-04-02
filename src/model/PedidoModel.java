@@ -3,17 +3,17 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido {
+public class PedidoModel {
 
 	private String codigo;
-	private Cliente cliente;
-	private List<Produto> listaProduto = new ArrayList<Produto>();
+	private ClienteModel cliente;
+	private List<ProdutoModel> listaProduto = new ArrayList<ProdutoModel>();
 	private String valorPedido;
 	private String valorPagamento;
 	private String valorTroco;
-	private Entregador entregador;
+	private EntregadorModel entregador;
 	
-	public Pedido() {
+	public PedidoModel() {
 		super();
 	}
 
@@ -25,19 +25,19 @@ public class Pedido {
 		this.codigo = codigo;
 	}
 
-	public Cliente getCliente() {
+	public ClienteModel getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(ClienteModel cliente) {
 		this.cliente = cliente;
 	}
 
-	public List<Produto> getListaProduto() {
+	public List<ProdutoModel> getListaProduto() {
 		return listaProduto;
 	}
 
-	public void setListaProduto(List<Produto> listaProduto) {
+	public void setListaProduto(List<ProdutoModel> listaProduto) {
 		this.listaProduto = listaProduto;
 	}
 
@@ -49,11 +49,11 @@ public class Pedido {
 		this.valorPedido = valorPedido;
 	}
 
-	public Entregador getEntregador() {
+	public EntregadorModel getEntregador() {
 		return entregador;
 	}
 
-	public void setEntregador(Entregador entregador) {
+	public void setEntregador(EntregadorModel entregador) {
 		this.entregador = entregador;
 	}
 	

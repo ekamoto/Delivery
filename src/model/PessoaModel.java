@@ -1,13 +1,13 @@
 package model;
 
-public class Pessoa {
+public class PessoaModel {
 
 	private String id;
 	private String nome;
 	private String cpf;
 	private String endereco;
 	
-	public Pessoa() {
+	public PessoaModel() {
 		super();
 	}
 	

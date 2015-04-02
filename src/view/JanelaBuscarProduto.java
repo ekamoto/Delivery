@@ -17,8 +17,8 @@ import javax.swing.SpringLayout;
 
 
 import main.Delivery;
-import model.Cliente;
-import model.Produto;
+import model.ClienteModel;
+import model.ProdutoModel;
 
 public class JanelaBuscarProduto extends JFrame implements ActionListener {
 
@@ -169,10 +169,10 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 		}
 	}
 
-	public Produto buscaPorId(String id) {
+	public ProdutoModel buscaPorId(String id) {
 		boolean encontrou = false;
 
-		Produto produto = new Produto();
+		ProdutoModel produto = new ProdutoModel();
 
 		for (int i = 0; !encontrou && i < Delivery.listaDeProdutos.size(); i++) {
 			if (Delivery.listaDeProdutos.get(i).getCodigo().equals(id)) {

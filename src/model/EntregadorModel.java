@@ -1,10 +1,10 @@
 package model;
 
-public class Entregador extends Pessoa {
+public class EntregadorModel extends PessoaModel {
 
 	private String carteiraDeTrabalho;
 	
-	public Entregador() {
+	public EntregadorModel() {
 		super();
 	}
 

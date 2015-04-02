@@ -38,6 +38,7 @@ public class Conexao {
 			
 			con = DriverManager.getConnection(url + bd, usuario, senha);
 			System.out.println("Banco conectado com sucesso!");
+			con.setAutoCommit(false);
 		} catch (SQLException se) {
 			
 			System.out.println("Falha ao conectar banco de dados:");
@@ -49,6 +50,7 @@ public class Conexao {
 	public void fechaConexao() {
 		try {
 			con.close();
+			System.out.println("Banco de dados fechado com sucesso");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

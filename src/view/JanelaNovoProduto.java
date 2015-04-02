@@ -15,7 +15,7 @@ import javax.swing.SpringLayout;
 
 
 import main.Delivery;
-import model.Produto;
+import model.ProdutoModel;
 
 public class JanelaNovoProduto extends JFrame implements ActionListener {
 
@@ -124,7 +124,7 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCadastrar) {
 	
-			Produto produto = new Produto();
+			ProdutoModel produto = new ProdutoModel();
 			produto.setCodigo(tfCodigo.getText());
 			produto.setNome(tfNome.getText());
 			produto.setDescricao(tfDescricao.getText());

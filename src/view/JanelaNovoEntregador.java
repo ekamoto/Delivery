@@ -15,7 +15,7 @@ import javax.swing.SpringLayout;
 
 
 import main.Delivery;
-import model.Entregador;
+import model.EntregadorModel;
 
 
 public class JanelaNovoEntregador extends JFrame implements ActionListener{
@@ -127,7 +127,7 @@ public class JanelaNovoEntregador extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btCadastrar){
-			Entregador entregador = new Entregador();
+			EntregadorModel entregador = new EntregadorModel();
 			entregador.setId(tfId.getText());
 			entregador.setNome(tfNome.getText());
 			entregador.setEndereco(tfEndereco.getText());
