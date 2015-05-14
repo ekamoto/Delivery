@@ -1,4 +1,5 @@
 package main;
+import view.JanelaLogin;
 import view.JanelaPrincipal;
 
 import java.util.ArrayList;
@@ -19,13 +20,15 @@ public class Delivery {
 	static public List<PedidoModel> listaDePedidos;
 	
 	public static void main(String[] args) {
+		
 		listaDeCliente = new ArrayList<ClienteModel>();
 		listaDeEntregador = new ArrayList<EntregadorModel>();
 		listaDeProdutos = new ArrayList<ProdutoModel>();
 		listaDePedidos = new ArrayList<PedidoModel>();
 		listaProdSelec = new ArrayList<ProdutoModel>();
 		
-		JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
-	}
+		// JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
+		JanelaLogin.start();
 
+	}
 }

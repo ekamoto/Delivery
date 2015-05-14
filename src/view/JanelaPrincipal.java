@@ -41,6 +41,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemListarProduto;
 	private JMenuItem itemListarEntregador;
 	private JMenuItem itemListarPedido;
+	private JMenuItem itemCancelarProduto;
 	
 	// Construtor
 	public JanelaPrincipal() {
@@ -65,6 +66,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarProduto = new JMenuItem("Listar");
 		itemListarEntregador = new JMenuItem("Listar");
 		itemListarPedido = new JMenuItem("Listar");
+		itemCancelarProduto = new JMenuItem("Cancelar");
 		
 		barraMenus.add(menuPedido);
 		barraMenus.add(menuCliente);
@@ -85,6 +87,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		menuProduto.add(itemListarProduto);
 		menuEntregador.add(itemListarEntregador);
 		menuPedido.add(itemListarPedido);
+		menuProduto.add(itemCancelarProduto);
 		
 		itemNovoCliente.addActionListener(this);
 		itemNovoPedido.addActionListener(this);
@@ -99,6 +102,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarProduto.addActionListener(this);
 		itemListarEntregador.addActionListener(this);
 		itemListarPedido.addActionListener(this);
+		itemCancelarProduto.addActionListener(this);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Finalizar a tela
 		this.setLayout(new FlowLayout());
@@ -146,6 +150,9 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		}
 		else if(e.getSource() == itemSobre) {
 			JOptionPane.showMessageDialog(null, "Trabalho de LPOO");
+		} else if(e.getSource() == itemCancelarProduto) {
+			System.out.println("teste");
+			JanelaCancelarProduto jcp = new JanelaCancelarProduto();
 		}
 	}
 	
