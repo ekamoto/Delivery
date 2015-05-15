@@ -41,7 +41,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemListarProduto;
 	private JMenuItem itemListarEntregador;
 	private JMenuItem itemListarPedido;
-	private JMenuItem itemCancelarProduto;
+	private JMenuItem itemDesativarProduto;
 	
 	// Construtor
 	public JanelaPrincipal() {
@@ -66,7 +66,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarProduto = new JMenuItem("Listar");
 		itemListarEntregador = new JMenuItem("Listar");
 		itemListarPedido = new JMenuItem("Listar");
-		itemCancelarProduto = new JMenuItem("Cancelar");
+		itemDesativarProduto = new JMenuItem("Desativar");
 		
 		barraMenus.add(menuPedido);
 		barraMenus.add(menuCliente);
@@ -87,7 +87,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		menuProduto.add(itemListarProduto);
 		menuEntregador.add(itemListarEntregador);
 		menuPedido.add(itemListarPedido);
-		menuProduto.add(itemCancelarProduto);
+		menuProduto.add(itemDesativarProduto);
 		
 		itemNovoCliente.addActionListener(this);
 		itemNovoPedido.addActionListener(this);
@@ -102,7 +102,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarProduto.addActionListener(this);
 		itemListarEntregador.addActionListener(this);
 		itemListarPedido.addActionListener(this);
-		itemCancelarProduto.addActionListener(this);
+		itemDesativarProduto.addActionListener(this);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Finalizar a tela
 		this.setLayout(new FlowLayout());
@@ -115,46 +115,47 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource()== itemNovoCliente) {
+			
 			JanelaNovoCliente janelaNovoCliente = new JanelaNovoCliente();
-		}
-		else if(e.getSource() == itemNovoEntregador) {
+		} else if(e.getSource() == itemNovoEntregador) {
+			
 			JanelaNovoEntregador janelaNovoEntregador = new JanelaNovoEntregador();
-		}
-		else if(e.getSource() == itemNovoProduto) {
+		} else if(e.getSource() == itemNovoProduto) {
+			
 			JanelaNovoProduto janelaNovoProduto = new JanelaNovoProduto();
-		}
-		else if(e.getSource() == itemNovoPedido) {
+		} else if(e.getSource() == itemNovoPedido) {
+			
 			JanelaNovoPedido janelaNovoPedido = new JanelaNovoPedido();
-		}
-		else if(e.getSource() == itemBuscarCliente) {
+		} else if(e.getSource() == itemBuscarCliente) {
+			
 			JanelaBuscarCliente janelaBuscarCliente = new JanelaBuscarCliente();
-		}
-		else if(e.getSource() == itemBuscarProduto) {
+		} else if(e.getSource() == itemBuscarProduto) {
+			
 			JanelaBuscarProduto janelaBuscarProduto = new JanelaBuscarProduto();
-		}
-		else if(e.getSource() == itemBuscarEntregador) {
+		} else if(e.getSource() == itemBuscarEntregador) {
+			
 			JanelaBuscarEntregador janelaBuscarEntregador = new JanelaBuscarEntregador();
-		}
-		else if(e.getSource() == itemListarCliente) {
+		} else if(e.getSource() == itemListarCliente) {
+			
 			JanelaListarCliente janelaListarCliente = new JanelaListarCliente();
-		}
-		else if(e.getSource() == itemListarProduto) {
+		} else if(e.getSource() == itemListarProduto) {
+			
 			JanelaListarProduto janelaListarProduto = new JanelaListarProduto();
-		}
-		else if(e.getSource() == itemListarEntregador) {
+		} else if(e.getSource() == itemListarEntregador) {
+			
 			JanelaListarEntregador janelaListarEntregador = new JanelaListarEntregador();
-		}
-		else if(e.getSource() == itemListarPedido) {
+		} else if(e.getSource() == itemListarPedido) {
+			
 			JanelaListarPedido janelaListarPedido = new JanelaListarPedido();
 		}
 		else if(e.getSource() == itemSobre) {
+			
 			JOptionPane.showMessageDialog(null, "Trabalho de LPOO");
-		} else if(e.getSource() == itemCancelarProduto) {
-			System.out.println("teste");
-			JanelaCancelarProduto jcp = new JanelaCancelarProduto();
+		} else if(e.getSource() == itemDesativarProduto) {
+
+			JanelaDesativarProduto jdp = new JanelaDesativarProduto();
 		}
 	}
-	
-
 }
