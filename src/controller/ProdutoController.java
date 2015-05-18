@@ -3,6 +3,7 @@ package controller;
 import java.util.List;
 
 import model.ClienteModel;
+import model.ProdutoModel;
 import dao.ClienteDao;
 import dao.ProdutoDao;
 
@@ -14,19 +15,19 @@ public class ProdutoController {
 
 	}
 
-	public boolean cadastrarCliente(ClienteModel cliente) {
+	public boolean cadastrarProduto(ProdutoModel produto) {
 
-		return dao.cadastrar(cliente);
+		return dao.cadastrar(produto);
 	}
 
-	public List<ClienteModel> getClientes() {
+	public List<ProdutoModel> getProdutos() {
 
-		return dao.getClientes();
+		return dao.getProdutos();
 	}
 
 	public ClienteModel getClienteID(int idCliente) {
 
-		return dao.getClienteID(idCliente);
+		return new ClienteModel();
 	}
 
 	public boolean deletarCliente(int idCliente) {

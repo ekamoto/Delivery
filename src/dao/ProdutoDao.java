@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import conexao.Conexao;
 
 import model.ClienteModel;
@@ -18,39 +20,40 @@ public class ProdutoDao extends Conexao {
 
 	}
 	
-	public boolean cadastrar(ProdutoModel cliente) {
+	public boolean cadastrar(ProdutoModel produto) {
 
 		abreConexao();
 
 		try {
 
-//			PreparedStatement pst = null;
-//
-//			String sql = "insert into pessoas (nome, cpf, endereco)"
-//					+ "values(?, ?, ?)";
+			PreparedStatement pst = null;
 
-//			pst = con.prepareStatement(sql);
-//			pst.setString(1, cliente.getNome());
-//			pst.setString(2, cliente.getCpf());
-//			pst.setString(3, cliente.getEndereco());
+			String sql = "insert into produtos (nome, descricao, quantidade, valor) values(?, ?, ?, ?)";
 
-//			pst.execute();
-//			pst.close();
+			pst = con.prepareStatement(sql);
+			pst.setString(1, produto.getNome());
+			pst.setString(2, produto.getDescricao());
+			pst.setInt(3, produto.getQuantidade());
+			pst.setDouble(4, produto.getValor());
+
+			pst.execute();
+			pst.close();
 
 			con.commit();
-			System.out.println("Cliente inserido com sucesso!");
+			System.out.println("Produto inserido com sucesso!");
+			JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
 
 		} catch (SQLException e1) {
 
 			try {
 
 				con.rollback();
-				System.out.println("Rollback na inserção de cliente");
+				System.out.println("Rollback na inserção de produto");
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 				System.out
-						.println("Falha so executar rollback na inserção de cliente");
+						.println("Falha so executar rollback na inserção de produto");
 			}
 			e1.printStackTrace();
 			return false;
@@ -61,7 +64,7 @@ public class ProdutoDao extends Conexao {
 		return true;
 	}
 
-	public List<ProdutoModel> getClientes() {
+	public List<ProdutoModel> getProdutos() {
 
 		List<ProdutoModel> resultado = new ArrayList<ProdutoModel>();
 

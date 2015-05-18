@@ -13,14 +13,13 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import controller.ProdutoController;
+
 
 import main.Delivery;
 import model.ProdutoModel;
 
 public class JanelaNovoProduto extends JFrame implements ActionListener {
-
-	private JTextField tfCodigo;
-	private JLabel lbCodigo;
 
 	private JTextField tfNome;
 	private JLabel lbNome;
@@ -39,11 +38,11 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 	private JButton btnLimpar;
 	private JButton btnFechar;
 	private SpringLayout layout = new SpringLayout();
+	private ProdutoController produtoController;
 
 	public JanelaNovoProduto() {
 
-		lbCodigo = new JLabel("Codigo");
-		tfCodigo = new JTextField(4);
+		produtoController = new ProdutoController();
 
 		lbNome = new JLabel("Nome");
 		tfNome = new JTextField(30);
@@ -63,13 +62,6 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 
 		container = this.getContentPane();
 		container.setLayout(layout);
-		
-		container.add(lbCodigo);
-		layout.putConstraint(SpringLayout.WEST, lbCodigo, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lbCodigo, 30, SpringLayout.NORTH, container);
-		container.add(tfCodigo);
-		layout.putConstraint(SpringLayout.WEST, tfCodigo, 80, SpringLayout.WEST, lbCodigo);
-		layout.putConstraint(SpringLayout.NORTH, tfCodigo, 30, SpringLayout.NORTH, container);
 		
 		container.add(lbNome);
 		layout.putConstraint(SpringLayout.WEST, lbNome, 30, SpringLayout.WEST, container);
@@ -125,14 +117,19 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 		if (e.getSource() == btnCadastrar) {
 	
 			ProdutoModel produto = new ProdutoModel();
-			produto.setCodigo(tfCodigo.getText());
 			produto.setNome(tfNome.getText());
 			produto.setDescricao(tfDescricao.getText());
-			produto.setQuantidade(tfQuantidade.getText());
-			produto.setValor(tfValor.getText());
-			Delivery.listaDeProdutos.add(produto);
-			JOptionPane.showMessageDialog(this,
-					"Cadastro realizado com sucesso");
+			
+			int quantidade = Integer.parseInt(tfQuantidade.getText());
+			produto.setQuantidade(quantidade);
+			
+			
+			produto.setValor(Double.parseDouble(tfValor.getText()));
+			
+			produtoController.cadastrarProduto(produto);
+			
+			//Delivery.listaDeProdutos.add(produto);
+			
 			limpar();
 		} else if (e.getSource() == btnLimpar) {
 			limpar();
@@ -142,7 +139,7 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 	}
 
 	public void limpar() {
-		tfCodigo.setText("");
+		
 		tfNome.setText("");
 		tfDescricao.setText("");
 		tfQuantidade.setText("");

@@ -2,31 +2,21 @@ package model;
 
 public class ProdutoModel {
 
-	private String codigo;
 	private String nome;
 	private String descricao;
-	private String quantidade;
-	private String valor;
+	private int quantidade;
+	private double valor;
 	
 	public ProdutoModel() {
 		super();
 	}
 
-	public String getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
-	}
-
-	// Getters and Setters
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -45,11 +35,11 @@ public class ProdutoModel {
 		this.descricao = descricao;
 	}
 
-	public String getQuantidade() {
+	public int getQuantidade() {
 		return quantidade;
 	}
 
-	public void setQuantidade(String quantidade) {
+	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
 	
