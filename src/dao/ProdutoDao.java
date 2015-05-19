@@ -28,13 +28,14 @@ public class ProdutoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into produtos (nome, descricao, quantidade, valor) values(?, ?, ?, ?)";
+			String sql = "insert into produtos (nome, descricao, quantidade, valor, ativo) values(?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, produto.getNome());
 			pst.setString(2, produto.getDescricao());
 			pst.setInt(3, produto.getQuantidade());
 			pst.setDouble(4, produto.getValor());
+			pst.setBoolean(5, true);
 
 			pst.execute();
 			pst.close();
@@ -74,24 +75,23 @@ public class ProdutoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "select * from pessoas";
+			String sql = "select * from produtos";
 
 			pst = con.prepareStatement(sql);
 
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
+				System.out.println("Entrou aqui");
+				ProdutoModel temp = new ProdutoModel();
+				temp.setId(Integer.parseInt(rs.getString("id")));
+				temp.setNome(rs.getString("nome"));
+				temp.setDescricao(rs.getString("descricao"));
+				temp.setQuantidade(rs.getInt("quantidade"));
+				temp.setValor(rs.getDouble("valor"));
+				temp.setAtivo(rs.getBoolean("ativo"));
 
-				String id = rs.getString("id");
-				String email = rs.getString("nome");
-				System.out.println(id + " :: " + email);
-
-//				ClienteModel temp = new ClienteModel();
-//				temp.setId(rs.getString("id"));
-//				temp.setNome(rs.getString("nome"));
-//				temp.setCpf(rs.getString("cpf"));
-//				temp.setEndereco(rs.getString("endereco"));
-//				resultado.add(temp);
+				resultado.add(temp);
 			}
 
 			pst.close();

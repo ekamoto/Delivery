@@ -51,6 +51,10 @@ public class JanelaLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         senha = new javax.swing.JPasswordField();
+        
+        usuario.setText("ekamoto");
+        senha.setText("senha123");
+        
         //senha.setFocusable(false);
         
 //        usuario.setText("Usuário");

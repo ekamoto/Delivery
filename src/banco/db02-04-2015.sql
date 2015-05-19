@@ -19,5 +19,6 @@ id serial primary key not null,
 nome varchar(70) not null,
 descricao varchar(14) not null,
 quantidade int,
-valor float not null
+valor float not null,
+ativo boolean NOT NULL DEFAULT TRUE
 );

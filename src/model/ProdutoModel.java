@@ -2,14 +2,47 @@ package model;
 
 public class ProdutoModel {
 
+	private int id;
 	private String nome;
 	private String descricao;
 	private int quantidade;
 	private double valor;
+	private boolean ativo;
 	
 	public ProdutoModel() {
 		super();
 	}
+	
+	public boolean isAtivo() {
+		
+		return ativo;
+	}
+
+	public boolean getAtivo() {
+		
+		return this.ativo;
+	}
+	
+	public void setAtivo(boolean ativo) {
+		
+		this.ativo = ativo;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
 
 	public double getValor() {
 		return valor;
