@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,17 +8,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
+import controller.ProdutoController;
 
-import main.Delivery;
-import model.ClienteModel;
+
 import model.ProdutoModel;
 
 public class JanelaBuscarProduto extends JFrame implements ActionListener {
 
+	private static final long serialVersionUID = 1L;
 	private JTextField tfCodigo;
 	private JTextField tfNome;
 	private JTextField taDescricao;
@@ -36,10 +33,10 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 
 	private JButton btnBuscar;
 	private JButton btFechar;
-	private JButton btExcluir;
 
 	private Container container;
 	private SpringLayout layout = new SpringLayout();
+	private ProdutoController produtoController = new ProdutoController();
 
 	public JanelaBuscarProduto() {
 
@@ -47,6 +44,7 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 		tfNome = new JTextField(30);
 		tfNome.setEditable(false);
 		taDescricao = new JTextField(50);
+		layout.putConstraint(SpringLayout.WEST, taDescricao, 105, SpringLayout.WEST, getContentPane());
 		taDescricao.setEditable(false);
 		tfQuantidade = new JTextField(3);
 		tfQuantidade.setEditable(false);
@@ -54,12 +52,25 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 		tfValor.setEditable(false);
 		lbCodigo = new JLabel("Codigo");
 		lbNome = new JLabel("Nome");
+		layout.putConstraint(SpringLayout.WEST, tfNome, 15, SpringLayout.EAST, lbNome);
+		layout.putConstraint(SpringLayout.NORTH, lbNome, 2, SpringLayout.NORTH, tfNome);
 		lbDescricao = new JLabel("Descricao");
+		layout.putConstraint(SpringLayout.NORTH, lbDescricao, 4, SpringLayout.SOUTH, lbNome);
+		layout.putConstraint(SpringLayout.EAST, lbNome, 0, SpringLayout.EAST, lbDescricao);
+		layout.putConstraint(SpringLayout.EAST, lbDescricao, -15, SpringLayout.WEST, taDescricao);
 		lbQuantidade = new JLabel("Quantidade");
+		layout.putConstraint(SpringLayout.NORTH, lbQuantidade, 10, SpringLayout.SOUTH, lbDescricao);
+		layout.putConstraint(SpringLayout.WEST, tfQuantidade, 12, SpringLayout.EAST, lbQuantidade);
+		layout.putConstraint(SpringLayout.WEST, lbQuantidade, 10, SpringLayout.WEST, getContentPane());
 		lbValor = new JLabel("Valor");
+		layout.putConstraint(SpringLayout.WEST, tfValor, 15, SpringLayout.EAST, lbValor);
+		layout.putConstraint(SpringLayout.NORTH, lbValor, 2,
+				SpringLayout.NORTH, tfValor);
+		layout.putConstraint(SpringLayout.EAST, lbValor, 0, SpringLayout.EAST, lbNome);
 		btnBuscar = new JButton("Buscar");
 		btFechar = new JButton("Fechar");
-		btExcluir = new JButton("Excluir");
+		layout.putConstraint(SpringLayout.NORTH, btFechar, 67, SpringLayout.SOUTH, taDescricao);
+		layout.putConstraint(SpringLayout.WEST, btFechar, 388, SpringLayout.WEST, getContentPane());
 
 		container = this.getContentPane();
 		container.setLayout(layout);
@@ -80,63 +91,28 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 				SpringLayout.NORTH, container);
 
 		container.add(lbNome);
-		layout.putConstraint(SpringLayout.WEST, lbNome, 40, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.NORTH, lbNome, 100,
-				SpringLayout.NORTH, container);
 		container.add(tfNome);
-		layout.putConstraint(SpringLayout.WEST, tfNome, 65, SpringLayout.WEST,
-				lbNome);
 		layout.putConstraint(SpringLayout.NORTH, tfNome, 100,
 				SpringLayout.NORTH, container);
 
 		container.add(lbDescricao);
-		layout.putConstraint(SpringLayout.WEST, lbDescricao, 40,
-				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lbDescricao, 125,
-				SpringLayout.NORTH, container);
 		container.add(taDescricao);
-		layout.putConstraint(SpringLayout.WEST, taDescricao, 65,
-				SpringLayout.WEST, lbDescricao);
 		layout.putConstraint(SpringLayout.NORTH, taDescricao, 125,
 				SpringLayout.NORTH, container);
 
 		container.add(lbQuantidade);
-		layout.putConstraint(SpringLayout.WEST, lbQuantidade, 40,
-				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lbQuantidade, 150,
-				SpringLayout.NORTH, container);
 		container.add(tfQuantidade);
-		layout.putConstraint(SpringLayout.WEST, tfQuantidade, 65,
-				SpringLayout.WEST, lbQuantidade);
 		layout.putConstraint(SpringLayout.NORTH, tfQuantidade, 150,
 				SpringLayout.NORTH, container);
 
 		container.add(lbValor);
-		layout.putConstraint(SpringLayout.WEST, lbValor, 40, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.NORTH, lbValor, 175,
-				SpringLayout.NORTH, container);
 		container.add(tfValor);
-		layout.putConstraint(SpringLayout.WEST, tfValor, 65, SpringLayout.WEST,
-				lbValor);
 		layout.putConstraint(SpringLayout.NORTH, tfValor, 175,
 				SpringLayout.NORTH, container);
-
-		container.add(btExcluir);
-		layout.putConstraint(SpringLayout.WEST, btExcluir, 220,
-				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btExcluir, 225,
-				SpringLayout.NORTH, container);
 		container.add(btFechar);
-		layout.putConstraint(SpringLayout.WEST, btFechar, 350,
-				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btFechar, 225,
-				SpringLayout.NORTH, container);
 
 		btnBuscar.addActionListener(this);
 		btFechar.addActionListener(this);
-		btExcluir.addActionListener(this);
 
 		this.setResizable(true);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -151,42 +127,21 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 			buscaPorId(tfCodigo.getText());
 		} else if (e.getSource() == btFechar) {
 			dispose();
-		} else if (e.getSource() == btExcluir) {
-			remove();
-			JOptionPane.showMessageDialog(null, "Produto apagado com sucesso!");
-			dispose();
-			JanelaBuscarProduto jbp = new JanelaBuscarProduto();
-		}
-	}
-
-	public void remove() {
-		String remover = JOptionPane
-				.showInputDialog("Digite o Codigo do Produto que deseja excluir:");
-		for (int i = 0; i < Delivery.listaDeProdutos.size(); i++) {
-			if (Delivery.listaDeProdutos.get(i).getCodigo().equals(remover)) {
-				remover += Delivery.listaDeProdutos.remove(i);
-			}
 		}
 	}
 
 	public ProdutoModel buscaPorId(String id) {
-		boolean encontrou = false;
 
 		ProdutoModel produto = new ProdutoModel();
 
-		for (int i = 0; !encontrou && i < Delivery.listaDeProdutos.size(); i++) {
-			if (Delivery.listaDeProdutos.get(i).getCodigo().equals(id)) {
-				encontrou = true;
-				tfNome.setText(Delivery.listaDeProdutos.get(i).getNome());
-				taDescricao.setText(Delivery.listaDeProdutos.get(i)
-						.getDescricao());
-				tfQuantidade.setText(Delivery.listaDeProdutos.get(i)
-						.getQuantidade());
-				tfValor.setText(Delivery.listaDeProdutos.get(i).getValor());
-
-			}
-		}
-		if (!encontrou) {
+		produto = produtoController.getProdutoID(Integer.parseInt(id));
+		
+		tfNome.setText(produto.getNome());
+		taDescricao.setText(produto.getDescricao());
+		tfQuantidade.setText(Integer.toString(produto.getQuantidade()));
+		tfValor.setText(Double.toString(produto.getValor()));
+		
+		if (produto.getNome().equals("")) {
 			JOptionPane.showMessageDialog(null, "Produto nao cadastrado");
 			tfCodigo.setText("");
 			tfNome.setText("");
@@ -194,7 +149,7 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 			tfQuantidade.setText("");
 			tfValor.setText("");
 		}
-
+		
 		return produto;
 	}
 

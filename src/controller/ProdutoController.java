@@ -25,13 +25,23 @@ public class ProdutoController {
 		return dao.getProdutos();
 	}
 
-	public ClienteModel getClienteID(int idCliente) {
+	public ProdutoModel getProdutoID(int idProduto) {
 
-		return new ClienteModel();
+		return dao.getProdutoID(idProduto);
 	}
 
 	public boolean deletarCliente(int idCliente) {
 
 		return dao.deletarCliente(idCliente);
+	}
+	
+	public boolean desativarProduto(int idProduto) {
+		
+		return dao.desativarProduto(idProduto);
+	}
+	
+	public boolean ativarProduto(int idProduto) {
+		
+		return dao.ativarProduto(idProduto);
 	}
 }

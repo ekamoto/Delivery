@@ -19,7 +19,7 @@ public class JanelaListarProduto extends JFrame{
 	private JTable tabela;
 	private JScrollPane barraRolagem;
 	private DefaultTableModel modelo = new DefaultTableModel();
-	private ProdutoController produtoController = new ProdutoController();;
+	private ProdutoController produtoController = new ProdutoController();
 	
 	public JanelaListarProduto () {
 		

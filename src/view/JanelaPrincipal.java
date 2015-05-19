@@ -42,6 +42,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemListarEntregador;
 	private JMenuItem itemListarPedido;
 	private JMenuItem itemDesativarProduto;
+	private JMenuItem itemAtivarProduto;
 	
 	// Construtor
 	public JanelaPrincipal() {
@@ -67,6 +68,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarEntregador = new JMenuItem("Listar");
 		itemListarPedido = new JMenuItem("Listar");
 		itemDesativarProduto = new JMenuItem("Desativar");
+		itemAtivarProduto = new JMenuItem("Ativar");
 		
 		barraMenus.add(menuPedido);
 		barraMenus.add(menuCliente);
@@ -88,6 +90,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		menuEntregador.add(itemListarEntregador);
 		menuPedido.add(itemListarPedido);
 		menuProduto.add(itemDesativarProduto);
+		menuProduto.add(itemAtivarProduto);
 		
 		itemNovoCliente.addActionListener(this);
 		itemNovoPedido.addActionListener(this);
@@ -103,6 +106,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarEntregador.addActionListener(this);
 		itemListarPedido.addActionListener(this);
 		itemDesativarProduto.addActionListener(this);
+		itemAtivarProduto.addActionListener(this);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Finalizar a tela
 		this.setLayout(new FlowLayout());
@@ -156,6 +160,9 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		} else if(e.getSource() == itemDesativarProduto) {
 
 			JanelaDesativarProduto jdp = new JanelaDesativarProduto();
+		} else if(e.getSource() == itemAtivarProduto) {
+
+			JanelaAtivarProduto jap = new JanelaAtivarProduto();
 		}
 	}
 }

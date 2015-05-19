@@ -19,27 +19,27 @@ import javax.swing.SpringLayout;
 
 import controller.ProdutoController;
 
-public class JanelaDesativarProduto extends JFrame implements ActionListener {
+public class JanelaAtivarProduto extends JFrame implements ActionListener {
 
 	private JTextField tfCodigo;
 	private JLabel lCodigo;
 
 	private JButton btLimpar;
-	private JButton btDesativar;
+	private JButton btAtivar;
 	private JButton btFechar;
 
 	private Container container;
 	private SpringLayout layout = new SpringLayout();
 	private ProdutoController produtoController = new ProdutoController();
 
-	public JanelaDesativarProduto() {
+	public JanelaAtivarProduto() {
 
 		lCodigo = new JLabel("Código");
 		tfCodigo = new JTextField(40);
 		layout.putConstraint(SpringLayout.WEST, tfCodigo, 15, SpringLayout.EAST, lCodigo);
 
 		btLimpar = new JButton("Limpar");
-		btDesativar = new JButton("Desativar");
+		btAtivar = new JButton("Ativar");
 		btFechar = new JButton("Fechar");
 
 		// Aparecer na janela
@@ -61,10 +61,10 @@ public class JanelaDesativarProduto extends JFrame implements ActionListener {
 				SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, btLimpar, 115,
 				SpringLayout.NORTH, container);
-		container.add(btDesativar);
-		layout.putConstraint(SpringLayout.WEST, btDesativar, 110,
+		container.add(btAtivar);
+		layout.putConstraint(SpringLayout.WEST, btAtivar, 110,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btDesativar, 115,
+		layout.putConstraint(SpringLayout.NORTH, btAtivar, 115,
 				SpringLayout.NORTH, container);
 		container.add(btFechar);
 		layout.putConstraint(SpringLayout.WEST, btFechar, 30,
@@ -73,25 +73,25 @@ public class JanelaDesativarProduto extends JFrame implements ActionListener {
 				SpringLayout.NORTH, container);
 
 		btLimpar.addActionListener(this);
-		btDesativar.addActionListener(this);
+		btAtivar.addActionListener(this);
 		btFechar.addActionListener(this);
 
 //		this.pack();
 		this.setResizable(true);
 //		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
-		this.setTitle("Desativar Produto");
+		this.setTitle("Ativar Produto");
 		this.setSize(875, 300);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource() == btDesativar) {
+		if (e.getSource() == btAtivar) {
 			
-			if(produtoController.desativarProduto(Integer.parseInt(tfCodigo.getText()))) {
+			if(produtoController.ativarProduto(Integer.parseInt(tfCodigo.getText()))) {
 				
-				JOptionPane.showMessageDialog(this, "Produto desativado com sucesso");	
+				JOptionPane.showMessageDialog(this, "Produto ativado com sucesso");	
 			} else {
 				
 				JOptionPane.showMessageDialog(this, "Falha ao desativar produto");
@@ -109,5 +109,7 @@ public class JanelaDesativarProduto extends JFrame implements ActionListener {
 
 		tfCodigo.setText("");
 	}
+
+	
 	
 }

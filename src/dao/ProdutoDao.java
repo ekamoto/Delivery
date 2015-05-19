@@ -106,9 +106,9 @@ public class ProdutoDao extends Conexao {
 		return resultado;
 	}
 
-	public ProdutoModel getClienteID(int idCliente) {
+	public ProdutoModel getProdutoID(int idProduto) {
 
-		ProdutoModel cliente = new ProdutoModel();
+		ProdutoModel produto = new ProdutoModel();
 
 		abreConexao();
 
@@ -116,19 +116,21 @@ public class ProdutoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "select * from pessoas where id = ? ";
+			String sql = "select * from produtos where id = ? ";
 
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, idCliente);
+			pst.setInt(1, idProduto);
 
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
 
-//				cliente.setId(rs.getString("id"));
-//				cliente.setNome(rs.getString("nome"));
-//				cliente.setCpf(rs.getString("cpf"));
-//				cliente.setEndereco(rs.getString("endereco"));
+				produto.setId(rs.getInt("id"));
+				produto.setNome(rs.getString("nome"));
+				produto.setDescricao(rs.getString("descricao"));
+				produto.setQuantidade(rs.getInt("quantidade"));
+				produto.setValor(rs.getFloat("valor"));
+				produto.setAtivo(rs.getBoolean("ativo"));
 			}
 
 			pst.close();
@@ -140,7 +142,7 @@ public class ProdutoDao extends Conexao {
 
 		fechaConexao();
 
-		return cliente;
+		return produto;
 	}
 
 	public boolean deletarCliente(int idCliente) {
@@ -181,5 +183,75 @@ public class ProdutoDao extends Conexao {
 		fechaConexao();
 
 		return true;
+	}
+	
+	public boolean desativarProduto(int idProduto) {
+		
+		ProdutoModel produto = getProdutoID(idProduto);
+		
+		if(!produto.getNome().equals("")) {
+			
+			try {
+				
+				abreConexao();
+				
+				PreparedStatement pst = null;
+
+				String sql = "update produtos set ativo=false where id=? ";
+
+				pst = con.prepareStatement(sql);
+				pst.setInt(1, idProduto);
+
+				pst.execute();
+				pst.close();
+
+				con.commit();
+				
+				fechaConexao();
+				return true;
+			}catch (SQLException e1) {
+				
+				return false;
+			}
+			
+		} else {
+			
+			return false;
+		}
+	}
+	
+	public boolean ativarProduto(int idProduto) {
+		
+		ProdutoModel produto = getProdutoID(idProduto);
+		
+		if(!produto.getNome().equals("")) {
+			
+			try {
+				
+				abreConexao();
+				
+				PreparedStatement pst = null;
+
+				String sql = "update produtos set ativo=true where id=? ";
+
+				pst = con.prepareStatement(sql);
+				pst.setInt(1, idProduto);
+
+				pst.execute();
+				pst.close();
+
+				con.commit();
+				
+				fechaConexao();
+				return true;
+			}catch (SQLException e1) {
+				
+				return false;
+			}
+			
+		} else {
+			
+			return false;
+		}
 	}
 }
