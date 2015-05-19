@@ -76,9 +76,7 @@ public class JanelaAtivarProduto extends JFrame implements ActionListener {
 		btAtivar.addActionListener(this);
 		btFechar.addActionListener(this);
 
-//		this.pack();
 		this.setResizable(true);
-//		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
 		this.setTitle("Ativar Produto");
 		this.setSize(875, 300);
@@ -99,8 +97,10 @@ public class JanelaAtivarProduto extends JFrame implements ActionListener {
 			
 			limpar();
 		} else if (e.getSource() == btLimpar) {
+			
 			limpar();
 		} else if (e.getSource() == btFechar) {
+			
 			dispose();
 		}
 	}
