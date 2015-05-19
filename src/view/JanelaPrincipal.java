@@ -10,7 +10,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import main.Delivery;
 import model.ClienteModel;
+import model.EntregadorModel;
 
 
 
@@ -46,6 +48,14 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	
 	// Construtor
 	public JanelaPrincipal() {
+		
+		EntregadorModel entregador = new EntregadorModel();
+		entregador.setId("1");
+		entregador.setNome("Leandro");
+		entregador.setEndereco("asdfasdf");
+		entregador.setCpf("asdfasffsad");
+		entregador.setCarteiraDeTrabalho("asdfasdf");
+		Delivery.listaDeEntregador.add(entregador);
 		
 		barraMenus = new JMenuBar();
 		menuPedido = new JMenu("Pedido");

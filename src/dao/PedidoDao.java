@@ -1,7 +1,9 @@
 package dao;
 
+import java.beans.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,7 @@ public class PedidoDao extends Conexao {
 	
 	private ClienteDao clienteDao = new ClienteDao();
 	
+	
 	public PedidoDao() {
 
 	}
@@ -37,7 +40,7 @@ public class PedidoDao extends Conexao {
 
 			System.out.println("idCliente:"+pedido.getCliente().getId());
 			
-			pst = con.prepareStatement(sql);
+			pst = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, Integer.parseInt(pedido.getCliente().getId()));
 			pst.setInt(2, Integer.parseInt(pedido.getEntregador().getId()));
 			pst.setDouble(3, pedido.getValorPedido());
@@ -46,6 +49,63 @@ public class PedidoDao extends Conexao {
 			pst.setBoolean(6, true);
 
 			pst.execute();
+			
+			ResultSet rs = pst.getGeneratedKeys();
+			
+			int idPedidoInserido = 0;
+			
+			while(rs.next()) {
+				
+				idPedidoInserido = rs.getInt("id");
+			}
+			
+			List<ProdutoModel> listaProduto = new ArrayList<ProdutoModel>();
+			List<ProdutoModel> listaProduto2 = new ArrayList<ProdutoModel>();
+			
+			listaProduto =  pedido.getListaProduto();
+			int tamanho = listaProduto.size();
+			int tamanho2 = listaProduto2.size();
+			
+			boolean achou = false;
+			
+			for (int i = 0; i < tamanho; i++) {
+				
+				tamanho2 = listaProduto2.size();
+				achou = false;
+				//System.out.println("Produto:"+listaProduto.get(i).getNome());
+				
+				for (int j = 0; j < tamanho2; j++) {
+					if(listaProduto2.get(j).getNome() == listaProduto.get(i).getNome()) {
+						
+						listaProduto2.get(j).setQuantidade(listaProduto2.get(j).getQuantidade()+1);
+						achou = true;
+					}
+				}
+				if(!achou) {
+					
+					listaProduto.get(i).setQuantidade(1);
+					listaProduto2.add(listaProduto.get(i));
+				}
+			}
+			
+			
+			tamanho2 = listaProduto2.size();
+			for (int i = 0; i < tamanho2; i++) {
+				
+				
+				sql = "insert into itensPedido (idPedido, idProduto, valorUnitario, quantidade) values(?, ?, ?, ?)";
+				
+				pst = con.prepareStatement(sql);
+				pst.setInt(1, idPedidoInserido);
+				pst.setInt(2, listaProduto2.get(i).getId());
+				pst.setDouble(3, listaProduto2.get(i).getValor());
+				pst.setInt(4, listaProduto2.get(i).getQuantidade());
+				
+				pst.execute();
+				
+				System.out.println("Produto:"+listaProduto2.get(i).getNome()+" quantidade:"+listaProduto2.get(i).getQuantidade());
+			}
+			
 			pst.close();
 
 			con.commit();
