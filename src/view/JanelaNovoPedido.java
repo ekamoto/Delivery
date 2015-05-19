@@ -22,6 +22,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
 import javax.xml.ws.handler.MessageContext.Scope;
 
+import controller.ClienteController;
+import controller.ProdutoController;
+
 
 import main.Delivery;
 import model.ClienteModel;
@@ -58,6 +61,9 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 	private ScrollPane scroll;
 	
 	private SpringLayout layout = new SpringLayout();
+	
+	private ClienteController clienteController = new ClienteController();
+	private ProdutoController produtoController = new ProdutoController();
 
 	public JanelaNovoPedido() {
 
@@ -205,17 +211,8 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 	}
 
 	public List<ClienteModel> listarClientes() {
-		List<ClienteModel> resultado = new ArrayList<ClienteModel>();
 
-		for (int i = 0; i < Delivery.listaDeCliente.size(); i++) {
-			ClienteModel temp = new ClienteModel();
-			temp.setId(Delivery.listaDeCliente.get(i).getId());
-			temp.setCpf(Delivery.listaDeCliente.get(i).getCpf());
-			temp.setNome(Delivery.listaDeCliente.get(i).getNome());
-			temp.setEndereco(Delivery.listaDeCliente.get(i).getEndereco());
-			resultado.add(temp);
-		}
-		return resultado;
+		return clienteController.getClientes();
 	}
 
 	public List<EntregadorModel> listarEntregador() {
@@ -235,18 +232,8 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 	}
 
 	public List<ProdutoModel> listarProduto() {
-		List<ProdutoModel> resultado = new ArrayList<ProdutoModel>();
-
-		for (int i = 0; i < Delivery.listaDeProdutos.size(); i++) {
-			ProdutoModel temp = new ProdutoModel();
-			temp.setCodigo(Delivery.listaDeProdutos.get(i).getCodigo());
-			temp.setNome(Delivery.listaDeProdutos.get(i).getNome());
-			temp.setDescricao(Delivery.listaDeProdutos.get(i).getDescricao());
-			temp.setQuantidade(Delivery.listaDeProdutos.get(i).getQuantidade());
-			temp.setValor(Delivery.listaDeProdutos.get(i).getValor());
-			resultado.add(temp);
-		}
-		return resultado;
+		
+		return produtoController.getProdutos();
 	}
 
 	private String valorTotal() {
@@ -256,7 +243,7 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 
 		for (int i = 0; i < prodSel.size(); i++) {
 			resultado = resultado
-					+ Double.parseDouble(prodSel.get(i).getValor());
+					+ prodSel.get(i).getValor();
 		}
 
 		result = String.valueOf(resultado);
