@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,13 +14,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpringLayout;
-import javax.xml.ws.handler.MessageContext.Scope;
-
 import controller.ClienteController;
+import controller.PedidoController;
 import controller.ProdutoController;
 
 
@@ -64,6 +60,7 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 	
 	private ClienteController clienteController = new ClienteController();
 	private ProdutoController produtoController = new ProdutoController();
+	private PedidoController pedidoController = new PedidoController();
 
 	public JanelaNovoPedido() {
 
@@ -184,19 +181,28 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 			tfValorPedido.setText(valorTotal());
 		} 
 		else if (e.getSource() == btnConfirmar) {
+			
+			
 			PedidoModel pedido = new PedidoModel();
 			ClienteModel selecionaCliente = (ClienteModel) comboCliente.getSelectedItem();
-			pedido.setCodigo(tfCodigo.getText());
+			pedido.setId(Integer.parseInt(tfCodigo.getText()));
 			EntregadorModel selecionaEntregador = (EntregadorModel) comboEntregador
 					.getSelectedItem();
 
 			pedido.setCliente(selecionaCliente);
-			pedido.setListaProduto(prodSel);
-			pedido.setValorPedido(valorTotal());
-			pedido.setValorPagamento(tfPagamento.getText());
-			pedido.setValorTroco(pedido.valorTroco());
+			pedido.setValorPedido(Double.parseDouble(valorTotal()));
+			pedido.setValorPagamento(Double.parseDouble(tfPagamento.getText()));
+			pedido.setValorTroco(Double.parseDouble(pedido.valorTroco()));
 			pedido.setEntregador(selecionaEntregador);
-			Delivery.listaDePedidos.add(pedido);
+			
+			
+			// ItensPedido
+			pedido.setListaProduto(prodSel);
+			
+			
+			pedidoController.cadastrarPedido(pedido);
+			
+			//Delivery.listaDePedidos.add(pedido);
 			
 			JOptionPane.showMessageDialog(null,
 					"Cadastro Realizado com sucesso");

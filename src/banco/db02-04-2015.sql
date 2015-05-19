@@ -22,3 +22,14 @@ quantidade int,
 valor float not null,
 ativo boolean NOT NULL DEFAULT TRUE
 );
+
+create table pedidos (
+id serial primary key not null,
+idCliente int not null references pessoas(id),
+idEntregador int not null, /*Não está forenkey por causa da iteração, isso será feito em outra iteração*/
+valorPedido float not null,
+valorPagamento float not null,
+valorTroco float not null,
+ativo boolean NOT NULL DEFAULT TRUE
+);
+

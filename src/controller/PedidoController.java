@@ -2,25 +2,26 @@ package controller;
 
 import java.util.List;
 
+import model.PedidoModel;
 import model.ProdutoModel;
-import dao.ProdutoDao;
+import dao.PedidoDao;
 
-public class ProdutoController {
+public class PedidoController {
 	
-	private ProdutoDao dao = new ProdutoDao();
+	private PedidoDao dao = new PedidoDao();
 
-	public ProdutoController() {
+	public PedidoController() {
 
 	}
 
-	public boolean cadastrarProduto(ProdutoModel produto) {
+	public boolean cadastrarPedido(PedidoModel pedido) {
 
-		return dao.cadastrar(produto);
+		return dao.cadastrar(pedido);
 	}
 
-	public List<ProdutoModel> getProdutos() {
+	public List<PedidoModel> getPedidos() {
 
-		return dao.getProdutos();
+		return dao.getPedidos();
 	}
 
 	public ProdutoModel getProdutoID(int idProduto) {

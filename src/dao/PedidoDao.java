@@ -10,16 +10,22 @@ import javax.swing.JOptionPane;
 
 import conexao.Conexao;
 
+import main.Delivery;
+import model.ClienteModel;
+import model.EntregadorModel;
+import model.PedidoModel;
 import model.ProdutoModel;
 
-public class ProdutoDao extends Conexao {
+public class PedidoDao extends Conexao {
 	
 	
-	public ProdutoDao() {
+	private ClienteDao clienteDao = new ClienteDao();
+	
+	public PedidoDao() {
 
 	}
 	
-	public boolean cadastrar(ProdutoModel produto) {
+	public boolean cadastrar(PedidoModel pedido) {
 
 		abreConexao();
 
@@ -27,20 +33,23 @@ public class ProdutoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into produtos (nome, descricao, quantidade, valor, ativo) values(?, ?, ?, ?, ?)";
+			String sql = "insert into pedidos (idCliente, idEntregador, valorPedido, valorPagamento, valorTroco, ativo) values(?, ?, ?, ?, ?, ?)";
 
+			System.out.println("idCliente:"+pedido.getCliente().getId());
+			
 			pst = con.prepareStatement(sql);
-			pst.setString(1, produto.getNome());
-			pst.setString(2, produto.getDescricao());
-			pst.setInt(3, produto.getQuantidade());
-			pst.setDouble(4, produto.getValor());
-			pst.setBoolean(5, true);
+			pst.setInt(1, Integer.parseInt(pedido.getCliente().getId()));
+			pst.setInt(2, Integer.parseInt(pedido.getEntregador().getId()));
+			pst.setDouble(3, pedido.getValorPedido());
+			pst.setDouble(4, pedido.getValorPagamento());
+			pst.setDouble(5, pedido.getValorTroco());
+			pst.setBoolean(6, true);
 
 			pst.execute();
 			pst.close();
 
 			con.commit();
-			System.out.println("Produto inserido com sucesso!");
+			System.out.println("Pedido inserido com sucesso!");
 			JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
 
 		} catch (SQLException e1) {
@@ -48,12 +57,12 @@ public class ProdutoDao extends Conexao {
 			try {
 
 				con.rollback();
-				System.out.println("Rollback na inserção de produto");
+				System.out.println("Rollback na inserção de pedido");
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 				System.out
-						.println("Falha so executar rollback na inserção de produto");
+						.println("Falha so executar rollback na inserção de pedido");
 			}
 			e1.printStackTrace();
 			return false;
@@ -64,9 +73,9 @@ public class ProdutoDao extends Conexao {
 		return true;
 	}
 
-	public List<ProdutoModel> getProdutos() {
+	public List<PedidoModel> getPedidos() {
 
-		List<ProdutoModel> resultado = new ArrayList<ProdutoModel>();
+		List<PedidoModel> resultado = new ArrayList<PedidoModel>();
 
 		abreConexao();
 
@@ -74,20 +83,41 @@ public class ProdutoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "select * from produtos";
+			String sql = "select * from pedidos";
 
 			pst = con.prepareStatement(sql);
 
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
-				System.out.println("Entrou aqui");
-				ProdutoModel temp = new ProdutoModel();
-				temp.setId(Integer.parseInt(rs.getString("id")));
-				temp.setNome(rs.getString("nome"));
-				temp.setDescricao(rs.getString("descricao"));
-				temp.setQuantidade(rs.getInt("quantidade"));
-				temp.setValor(rs.getDouble("valor"));
+				
+				PedidoModel temp = new PedidoModel();
+				temp.setId(rs.getInt("id"));
+				
+				ClienteModel cliente = clienteDao.getClienteID(rs.getInt("idCliente"));
+				temp.setCliente(cliente);
+				
+				EntregadorModel temp1 = new EntregadorModel();
+				
+				for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
+					
+					System.out.println("Id Entregador: "+Delivery.listaDeEntregador.get(i).getId()+"-"+rs.getString("idEntregador"));
+					if(Integer.parseInt(Delivery.listaDeEntregador.get(i).getId().trim()) == Integer.parseInt(rs.getString("idEntregador").trim())) {
+
+						temp1.setId(Delivery.listaDeEntregador.get(i).getId());
+						temp1.setCpf(Delivery.listaDeEntregador.get(i).getCpf());
+						temp1.setNome(Delivery.listaDeEntregador.get(i).getNome());
+						temp1.setEndereco(Delivery.listaDeEntregador.get(i).getEndereco());
+						temp1.setCarteiraDeTrabalho(Delivery.listaDeEntregador.get(i)
+								.getCarteiraDeTrabalho());	
+					}
+				}
+				
+				temp.setEntregador(temp1);
+				
+				temp.setValorPagamento(rs.getDouble("valorPagamento"));
+				temp.setValorPedido(rs.getDouble("valorPedido"));
+				temp.setValorTroco(rs.getDouble("valorTroco"));
 				temp.setAtivo(rs.getBoolean("ativo"));
 
 				resultado.add(temp);

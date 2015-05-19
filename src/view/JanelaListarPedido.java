@@ -17,6 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import controller.PedidoController;
+
 
 import main.Delivery;
 import model.EntregadorModel;
@@ -31,14 +33,17 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	private JMenuBar menuBar;
 	private JMenu menu;
 	private JMenuItem menuItemExcluir;
+	private PedidoController pedidoController = new PedidoController();
 
 	public JanelaListarPedido() {
+		
 		super("Lista de Pedidos");
 		criaJTable();
 		criaJanela();
 	}
 
 	public void criaJanela() {
+		
 		painelFundo = new JPanel();
 		barraRolagem = new JScrollPane(tabela);
 		menuBar = new JMenuBar();
@@ -57,6 +62,7 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	}
 
 	public void criaJTable() {
+		
 		tabela = new JTable(modelo);
 		modelo.addColumn("Codigo");
 		modelo.addColumn("Cliente");
@@ -77,7 +83,9 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if(e.getSource() == menuItemExcluir) {
+			
 			remove();
 			JOptionPane.showMessageDialog(null, "Pedido apagado com sucesso!");
 			dispose();
@@ -86,42 +94,29 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	}
 	
 	public void remove() {
-		String remover = JOptionPane
-				.showInputDialog("Digite o Codigo do Pedido que deseja excluir:");
-		for (int i = 0; i < Delivery.listaDePedidos.size(); i++) {
-			if (Delivery.listaDePedidos.get(i).getCodigo().equals(remover)) {
-				remover += Delivery.listaDePedidos.remove(i);
-			}
-		}
+		
+//		String remover = JOptionPane
+//				.showInputDialog("Digite o Codigo do Pedido que deseja excluir:");
+//		for (int i = 0; i < Delivery.listaDePedidos.size(); i++) {
+//			if (Delivery.listaDePedidos.get(i).getCodigo().equals(remover)) {
+//				remover += Delivery.listaDePedidos.remove(i);
+//			}
+//		}
 	
 	}
 	
 	public void pesquisar(DefaultTableModel modelo) {
 		modelo.setNumRows(0);
-		List<PedidoModel> listaPedido = new ArrayList<PedidoModel>();
 
 		for (PedidoModel p : listarPedidos()) {
-			modelo.addRow(new Object[] {p.getCodigo(), p.getCliente(), p.getValorPedido(),
+			modelo.addRow(new Object[] {p.getId(), p.getCliente(), p.getValorPedido(),
 					p.getValorPagamento(), p.getValorTroco(), p.getEntregador(), p.getListaProduto()});
 		}
 	}
 
 	public List<PedidoModel> listarPedidos() {
-		List<PedidoModel> resultado = new ArrayList<PedidoModel>();
 
-		for (int i = 0; i < Delivery.listaDePedidos.size(); i++) {
-			PedidoModel temp = new PedidoModel();
-			temp.setCodigo(Delivery.listaDePedidos.get(i).getCodigo());
-			temp.setCliente(Delivery.listaDePedidos.get(i).getCliente());
-			temp.setValorPedido(Delivery.listaDePedidos.get(i).getValorPedido());
-			temp.setValorPagamento(Delivery.listaDePedidos.get(i).getValorPagamento());
-			temp.setValorTroco(Delivery.listaDePedidos.get(i).getValorTroco());
-			temp.setEntregador(Delivery.listaDePedidos.get(i).getEntregador());
-			temp.setListaProduto(Delivery.listaDePedidos.get(i).getListaProduto());
-			resultado.add(temp);
-		}
-		return resultado;
+		return pedidoController.getPedidos();
 
 	}
-
 }
