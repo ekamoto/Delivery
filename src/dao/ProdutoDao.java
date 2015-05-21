@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import conexao.Conexao;
-
 import model.ProdutoModel;
 
 public class ProdutoDao extends Conexao {
@@ -27,7 +26,7 @@ public class ProdutoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into produtos (nome, descricao, quantidade, valor, ativo) values(?, ?, ?, ?, ?)";
+			String sql = "insert into produtos (nome, descricao, quantidade, valor, ativo, fabricante, categoria) values(?, ?, ?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, produto.getNome());
@@ -35,6 +34,8 @@ public class ProdutoDao extends Conexao {
 			pst.setInt(3, produto.getQuantidade());
 			pst.setDouble(4, produto.getValor());
 			pst.setBoolean(5, true);
+			pst.setString(6, produto.getFabricante());
+			pst.setInt(7, produto.getCategoria().getId());
 
 			pst.execute();
 			pst.close();
@@ -89,6 +90,7 @@ public class ProdutoDao extends Conexao {
 				temp.setQuantidade(rs.getInt("quantidade"));
 				temp.setValor(rs.getDouble("valor"));
 				temp.setAtivo(rs.getBoolean("ativo"));
+				temp.setFabricante(rs.getString("fabricante"));
 
 				resultado.add(temp);
 			}

@@ -182,6 +182,7 @@ public class PedidoDao extends Conexao {
 
 				resultado.add(temp);
 			}
+			
 
 			pst.close();
 

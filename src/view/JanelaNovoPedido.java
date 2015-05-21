@@ -38,9 +38,6 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 	private List<ProdutoModel> listProd = new ArrayList<ProdutoModel>();
 	private List<ProdutoModel> prodSel = new ArrayList<ProdutoModel>();
 
-	private JTextField tfCodigo;
-	private JLabel lbCodigo;
-	
 	private JTextField tfPagamento;
 	private JLabel lbPagamento;
 
@@ -93,8 +90,6 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 			listModel.addElement(produto);
 		}
 
-		tfCodigo = new JTextField(4);
-		lbCodigo = new JLabel("Codigo");
 		tfPagamento = new JTextField(5);
 		lbPagamento = new JLabel("Pagamento");
 		tfValorPedido = new JTextField(5);
@@ -108,12 +103,6 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		container = this.getContentPane();
 		container.setLayout(layout);
 		
-		container.add(lbCodigo);
-		layout.putConstraint(SpringLayout.WEST, lbCodigo, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lbCodigo, 5, SpringLayout.NORTH, container);
-		container.add(tfCodigo);
-		layout.putConstraint(SpringLayout.WEST, tfCodigo, 70, SpringLayout.WEST, lbCodigo);
-		layout.putConstraint(SpringLayout.NORTH, tfCodigo, 5, SpringLayout.NORTH, container);
 		container.add(labelCliente);
 		layout.putConstraint(SpringLayout.WEST, labelCliente, 30, SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, labelCliente, 30, SpringLayout.NORTH, container);
@@ -185,7 +174,6 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 			
 			PedidoModel pedido = new PedidoModel();
 			ClienteModel selecionaCliente = (ClienteModel) comboCliente.getSelectedItem();
-			pedido.setId(Integer.parseInt(tfCodigo.getText()));
 			EntregadorModel selecionaEntregador = (EntregadorModel) comboEntregador
 					.getSelectedItem();
 

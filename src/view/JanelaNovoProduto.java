@@ -1,23 +1,24 @@
 package view;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import controller.ProdutoController;
-
-
 import main.Delivery;
+import model.CategoriaModel;
+import model.EntregadorModel;
 import model.ProdutoModel;
+import controller.CategoriaController;
+import controller.ProdutoController;
 
 public class JanelaNovoProduto extends JFrame implements ActionListener {
 
@@ -33,13 +34,21 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 	private JTextField tfValor;
 	private JLabel lbValor;
 
+	private JTextField tfFabricante;
+	private JLabel lbFabricante;
+	
+	private JComboBox comboCategoria;
+	private JLabel labelCategoria;
+	
 	private Container container;
 	private JButton btnCadastrar;
 	private JButton btnLimpar;
 	private JButton btnFechar;
 	private SpringLayout layout = new SpringLayout();
+	private List<CategoriaModel> listaCategoria;
 	private ProdutoController produtoController;
-
+	private CategoriaController categoriaController = new CategoriaController();
+	
 	public JanelaNovoProduto() {
 
 		produtoController = new ProdutoController();
@@ -55,6 +64,16 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 
 		lbValor = new JLabel("Valor");
 		tfValor = new JTextField(10);
+		
+		lbFabricante = new JLabel("Fabricante");
+		tfFabricante = new JTextField(50);
+		
+		labelCategoria = new JLabel("Categoria");
+		comboCategoria = new JComboBox();
+		listaCategoria = listarCategorias();
+		for (CategoriaModel categoria: listaCategoria){
+			comboCategoria.addItem(categoria);
+		}
 
 		btnLimpar = new JButton("Limpar");
 		btnCadastrar = new JButton("Cadastrar");
@@ -72,33 +91,47 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 		
 		container.add(lbDescricao);
 		layout.putConstraint(SpringLayout.WEST, lbDescricao, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lbDescricao, 70, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, lbDescricao, 80, SpringLayout.NORTH, container);
 		container.add(tfDescricao);
 		layout.putConstraint(SpringLayout.WEST, tfDescricao, 80, SpringLayout.WEST, lbDescricao);
-		layout.putConstraint(SpringLayout.NORTH, tfDescricao, 70, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, tfDescricao, 80, SpringLayout.NORTH, container);
 		
 		container.add(lbQuantidade);
 		layout.putConstraint(SpringLayout.WEST, lbQuantidade, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lbQuantidade, 90, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, lbQuantidade, 110, SpringLayout.NORTH, container);
 		container.add(tfQuantidade);
 		layout.putConstraint(SpringLayout.WEST, tfQuantidade, 80, SpringLayout.WEST, lbQuantidade);
-		layout.putConstraint(SpringLayout.NORTH, tfQuantidade, 90, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, tfQuantidade, 110, SpringLayout.NORTH, container);
+		
+		container.add(lbFabricante);
+		layout.putConstraint(SpringLayout.WEST, lbFabricante, 30, SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, lbFabricante, 140, SpringLayout.NORTH, container);
+		container.add(tfFabricante);
+		layout.putConstraint(SpringLayout.WEST, tfFabricante, 80, SpringLayout.WEST, lbQuantidade);
+		layout.putConstraint(SpringLayout.NORTH, tfFabricante, 140, SpringLayout.NORTH, container);
+		
+		container.add(labelCategoria);
+		layout.putConstraint(SpringLayout.WEST, labelCategoria, 30, SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, labelCategoria, 170, SpringLayout.NORTH, container);
+		container.add(comboCategoria);
+		layout.putConstraint(SpringLayout.WEST, comboCategoria, 80, SpringLayout.WEST, lbQuantidade);
+		layout.putConstraint(SpringLayout.NORTH, comboCategoria, 170, SpringLayout.NORTH, container);
 		
 		container.add(lbValor);
 		layout.putConstraint(SpringLayout.WEST, lbValor, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lbValor, 110, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, lbValor, 200, SpringLayout.NORTH, container);
 		container.add(tfValor);
 		layout.putConstraint(SpringLayout.WEST, tfValor, 80, SpringLayout.WEST, lbValor);
-		layout.putConstraint(SpringLayout.NORTH, tfValor, 110, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, tfValor, 200, SpringLayout.NORTH, container);
 		container.add(btnCadastrar);
 		layout.putConstraint(SpringLayout.WEST, btnCadastrar, 110, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btnCadastrar, 140, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, btnCadastrar, 230, SpringLayout.NORTH, container);
 		container.add(btnLimpar);
 		layout.putConstraint(SpringLayout.WEST, btnLimpar, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btnLimpar, 140, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, btnLimpar, 230, SpringLayout.NORTH, container);
 		container.add(btnFechar);
 		layout.putConstraint(SpringLayout.WEST, btnFechar, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btnFechar, 200, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, btnFechar, 260, SpringLayout.NORTH, container);
 
 		btnCadastrar.addActionListener(this);
 		btnLimpar.addActionListener(this);
@@ -125,6 +158,9 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 			
 			
 			produto.setValor(Double.parseDouble(tfValor.getText()));
+			produto.setFabricante(tfFabricante.getText());
+			CategoriaModel selecionaCategoria = (CategoriaModel) comboCategoria.getSelectedItem();
+			produto.setCategoria(selecionaCategoria);
 			
 			produtoController.cadastrarProduto(produto);
 			
@@ -144,6 +180,11 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 		tfDescricao.setText("");
 		tfQuantidade.setText("");
 		tfValor.setText("");
+		tfFabricante.setText("");
+	}
+	
+	public List<CategoriaModel> listarCategorias() {
+		return categoriaController.getCategorias();
 	}
 
 }

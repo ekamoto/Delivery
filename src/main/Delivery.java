@@ -5,6 +5,7 @@ import view.JanelaPrincipal;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.CategoriaModel;
 import model.ClienteModel;
 import model.EntregadorModel;
 import model.PedidoModel;
@@ -18,6 +19,7 @@ public class Delivery {
 	static public List<ProdutoModel> listaProdSelec;
 	static public List<EntregadorModel> listaDeEntregador;
 	static public List<PedidoModel> listaDePedidos;
+	static public List<CategoriaModel> listaDeCategorias;
 	
 	public static void main(String[] args) {
 		
@@ -26,6 +28,7 @@ public class Delivery {
 		listaDeProdutos = new ArrayList<ProdutoModel>();
 		listaDePedidos = new ArrayList<PedidoModel>();
 		listaProdSelec = new ArrayList<ProdutoModel>();
+		listaDeCategorias = new ArrayList<CategoriaModel>();
 		
 		// JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
 		JanelaLogin.start();
