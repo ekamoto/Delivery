@@ -65,7 +65,7 @@ public class CategoriaDao extends Conexao{
 
 			PreparedStatement pst = null;
 
-			String sql = "select * from categoria";
+			String sql = "select * from categorias";
 
 			pst = con.prepareStatement(sql);
 
@@ -73,12 +73,12 @@ public class CategoriaDao extends Conexao{
 
 			while (rs.next()) {
 
-				int id = rs.getInt("idcategoria");
+				int id = rs.getInt("id");
 				String nome = rs.getString("nome");
 				System.out.println(id + " :: " + nome);
 
 				CategoriaModel temp = new CategoriaModel();
-				temp.setId(rs.getInt("idcategoria"));
+				temp.setId(rs.getInt("id"));
 				temp.setNome(rs.getString("nome"));
 				temp.setDescricao(rs.getString("descricao"));
 				resultado.add(temp);

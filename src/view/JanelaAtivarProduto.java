@@ -92,7 +92,7 @@ public class JanelaAtivarProduto extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Produto ativado com sucesso");	
 			} else {
 				
-				JOptionPane.showMessageDialog(this, "Falha ao desativar produto");
+				JOptionPane.showMessageDialog(this, "Falha ao ativar produto");
 			}
 			
 			limpar();

@@ -71,7 +71,9 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 		modelo.addColumn("Troco");
 		modelo.addColumn("Entregador");
 		modelo.addColumn("Itens");
+		modelo.addColumn("Status");
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(5);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -110,7 +112,7 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 
 		for (PedidoModel p : listarPedidos()) {
 			modelo.addRow(new Object[] {p.getId(), p.getCliente(), p.getValorPedido(),
-					p.getValorPagamento(), p.getValorTroco(), p.getEntregador(), p.getListaProduto()});
+					p.getValorPagamento(), p.getValorTroco(), p.getEntregador(), p.getListaProduto(), p.getStatusDescricao()});
 		}
 	}
 

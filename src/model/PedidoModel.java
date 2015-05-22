@@ -12,22 +12,43 @@ public class PedidoModel {
 	private double valorPagamento;
 	private double valorTroco;
 	private EntregadorModel entregador;
-	private boolean ativo;
+	private int status;
 	
 	public PedidoModel() {
 		super();
 	}
 
+	public int getStatus() {
+		return status;
+	}
 	
-	public boolean isAtivo() {
-		return ativo;
+	public String getStatusDescricao() {
+		
+		String descricaoStatus = "";
+		
+		switch (getStatus()) {
+		case 1:
+			descricaoStatus = "ADICIONADO";
+			break;
+		case 2:
+			descricaoStatus = "EM_ANDAMENTO";
+			break;
+		case 3:
+			descricaoStatus = "FINALIZADO";
+			break;
+		case 4:
+			descricaoStatus = "CANCELADO";
+			break;
+		default:
+			break;
+		}
+		
+		return descricaoStatus;
 	}
 
-
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setStatus(int status) {
+		this.status = status;
 	}
-
 
 	public int getId() {
 		return id;

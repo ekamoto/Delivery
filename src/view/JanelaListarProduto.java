@@ -49,11 +49,13 @@ public class JanelaListarProduto extends JFrame{
 		modelo.addColumn("Descricao");
 		modelo.addColumn("Quantidade");
 		modelo.addColumn("Valor Total");
-		modelo.addColumn("Ativo");
+		modelo.addColumn("Fabricante");
+		modelo.addColumn("Status");
 		
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(120);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(150);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(10);
@@ -66,7 +68,7 @@ public class JanelaListarProduto extends JFrame{
 		
 		for(ProdutoModel p: listarProdutos()) {
 
-			modelo.addRow(new Object[] {p.getId(), p.getNome(), p.getDescricao(), p.getQuantidade(), p.getValor(),p.getAtivo()});
+			modelo.addRow(new Object[] {p.getId(), p.getNome(), p.getDescricao(), p.getQuantidade(), p.getValor(),p.getFabricante(),p.getStatusDescricao()});
 		}
 	}
 	

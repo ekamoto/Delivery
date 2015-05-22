@@ -11,10 +11,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import conexao.Conexao;
+import controller.ProdutoController;
+import enums.EnumStatusPedido;
 
 import main.Delivery;
 import model.ClienteModel;
 import model.EntregadorModel;
+import model.ItensPedidoModel;
 import model.PedidoModel;
 import model.ProdutoModel;
 
@@ -36,7 +39,7 @@ public class PedidoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into pedidos (idCliente, idEntregador, valorPedido, valorPagamento, valorTroco, ativo) values(?, ?, ?, ?, ?, ?)";
+			String sql = "insert into pedidos (idCliente, idEntregador, valorPedido, valorPagamento, valorTroco, status) values(?, ?, ?, ?, ?, ?)";
 
 			System.out.println("idCliente:"+pedido.getCliente().getId());
 			
@@ -46,7 +49,7 @@ public class PedidoDao extends Conexao {
 			pst.setDouble(3, pedido.getValorPedido());
 			pst.setDouble(4, pedido.getValorPagamento());
 			pst.setDouble(5, pedido.getValorTroco());
-			pst.setBoolean(6, true);
+			pst.setInt(6, EnumStatusPedido.ADICIONADO.getStatus());
 
 			pst.execute();
 			
@@ -173,12 +176,33 @@ public class PedidoDao extends Conexao {
 					}
 				}
 				
+				ItensPedidoDao pedidoDao = new ItensPedidoDao();
+				List<ItensPedidoModel> itensPedido = new ArrayList<ItensPedidoModel>();
+				List<ProdutoModel> produtosPedido = new ArrayList<ProdutoModel>();
+				
+				itensPedido = pedidoDao.getItensPedido(temp.getId());
+
+				int qtdItensPedido = itensPedido.size();
+				
+				ProdutoController produtoController = new ProdutoController();
+				
+				
+				for (int i = 0; i < qtdItensPedido; i++) {
+					
+					ProdutoModel produtoModel = new ProdutoModel();
+					produtoModel = produtoController.getProdutoID(itensPedido.get(i).getIdProduto());
+					
+					produtosPedido.add(produtoModel);
+					
+				}
+				
 				temp.setEntregador(temp1);
 				
 				temp.setValorPagamento(rs.getDouble("valorPagamento"));
 				temp.setValorPedido(rs.getDouble("valorPedido"));
 				temp.setValorTroco(rs.getDouble("valorTroco"));
-				temp.setAtivo(rs.getBoolean("ativo"));
+				temp.setStatus(rs.getInt("status"));
+				temp.setListaProduto(produtosPedido);
 
 				resultado.add(temp);
 			}
@@ -220,7 +244,7 @@ public class PedidoDao extends Conexao {
 				produto.setDescricao(rs.getString("descricao"));
 				produto.setQuantidade(rs.getInt("quantidade"));
 				produto.setValor(rs.getFloat("valor"));
-				produto.setAtivo(rs.getBoolean("ativo"));
+				produto.setStatus(rs.getInt("status"));
 			}
 
 			pst.close();

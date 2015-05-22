@@ -9,27 +9,37 @@ public class ProdutoModel {
 	private CategoriaModel categoria;
 	private int quantidade;
 	private double valor;
-	private boolean ativo;
+	private int status;
 	
 	public ProdutoModel() {
 		super();
 	}
-	
-	public boolean isAtivo() {
-		
-		return ativo;
-	}
 
-	public boolean getAtivo() {
-		
-		return this.ativo;
+	public int getStatus() {
+		return status;
 	}
 	
-	public void setAtivo(boolean ativo) {
+	public String getStatusDescricao() {
 		
-		this.ativo = ativo;
+		String descricaoStatus = "";
+		
+		switch (getStatus()) {
+		case 1:
+			descricaoStatus = "ATIVO";
+			break;
+		case 2:
+			descricaoStatus = "DESATIVADO";
+			break;
+		default:
+			break;
+		}
+		
+		return descricaoStatus;
 	}
-
+	
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public int getId() {
 		return id;

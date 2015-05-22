@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import conexao.Conexao;
+import enums.EnumStatusProduto;
 import model.ProdutoModel;
 
 public class ProdutoDao extends Conexao {
@@ -26,14 +27,14 @@ public class ProdutoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into produtos (nome, descricao, quantidade, valor, ativo, fabricante, categoria) values(?, ?, ?, ?, ?, ?, ?)";
+			String sql = "insert into produtos (nome, descricao, quantidade, valor, status, fabricante, idCategoria) values(?, ?, ?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, produto.getNome());
 			pst.setString(2, produto.getDescricao());
 			pst.setInt(3, produto.getQuantidade());
 			pst.setDouble(4, produto.getValor());
-			pst.setBoolean(5, true);
+			pst.setInt(5, EnumStatusProduto.ATIVO.getStatus());
 			pst.setString(6, produto.getFabricante());
 			pst.setInt(7, produto.getCategoria().getId());
 
@@ -89,7 +90,7 @@ public class ProdutoDao extends Conexao {
 				temp.setDescricao(rs.getString("descricao"));
 				temp.setQuantidade(rs.getInt("quantidade"));
 				temp.setValor(rs.getDouble("valor"));
-				temp.setAtivo(rs.getBoolean("ativo"));
+				temp.setStatus(rs.getInt("status"));
 				temp.setFabricante(rs.getString("fabricante"));
 
 				resultado.add(temp);
@@ -131,7 +132,7 @@ public class ProdutoDao extends Conexao {
 				produto.setDescricao(rs.getString("descricao"));
 				produto.setQuantidade(rs.getInt("quantidade"));
 				produto.setValor(rs.getFloat("valor"));
-				produto.setAtivo(rs.getBoolean("ativo"));
+				produto.setStatus(rs.getInt("status"));
 			}
 
 			pst.close();
@@ -198,10 +199,12 @@ public class ProdutoDao extends Conexao {
 				
 				PreparedStatement pst = null;
 
-				String sql = "update produtos set ativo=false where id=? ";
+				String sql = "update produtos set status=? where id=? ";
 
 				pst = con.prepareStatement(sql);
-				pst.setInt(1, idProduto);
+				
+				pst.setInt(1, EnumStatusProduto.DESATIVADO.getStatus());
+				pst.setInt(2, idProduto);
 
 				pst.execute();
 				pst.close();
@@ -233,10 +236,11 @@ public class ProdutoDao extends Conexao {
 				
 				PreparedStatement pst = null;
 
-				String sql = "update produtos set ativo=true where id=? ";
+				String sql = "update produtos set status=? where id=? ";
 
 				pst = con.prepareStatement(sql);
-				pst.setInt(1, idProduto);
+				pst.setInt(1, EnumStatusProduto.ATIVO.getStatus());
+				pst.setInt(2, idProduto);
 
 				pst.execute();
 				pst.close();
