@@ -166,7 +166,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		}
 		else if(e.getSource() == itemSobre) {
 			
-			JOptionPane.showMessageDialog(null, "Trabalho de LPOO");
+			JOptionPane.showMessageDialog(null, "Trabalho de APSOO");
 		} else if(e.getSource() == itemDesativarProduto) {
 
 			JanelaDesativarProduto jdp = new JanelaDesativarProduto();
