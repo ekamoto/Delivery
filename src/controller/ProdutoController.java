@@ -42,4 +42,9 @@ public class ProdutoController {
 		
 		return dao.ativarProduto(idProduto);
 	}
+	
+	public boolean baixaEstoque(int idProduto, int quantidade) {
+		
+		return dao.baixaEstoque(idProduto, quantidade);
+	}
 }

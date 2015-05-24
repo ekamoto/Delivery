@@ -259,4 +259,31 @@ public class ProdutoDao extends Conexao {
 			return false;
 		}
 	}
+	
+	public boolean baixaEstoque(int idProduto, int quantidade) {
+		try {
+			
+			abreConexao();
+			
+			PreparedStatement pst = null;
+
+			String sql = "update produtos set quantidade=quantidade-? where id=? ";
+
+			pst = con.prepareStatement(sql);
+			
+			pst.setInt(1, quantidade);
+			pst.setInt(2, idProduto);
+
+			pst.execute();
+			pst.close();
+
+			con.commit();
+			
+			fechaConexao();
+			return true;
+		}catch (SQLException e1) {
+			
+			return false;
+		}
+	}
 }

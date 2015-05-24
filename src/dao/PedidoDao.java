@@ -26,6 +26,7 @@ public class PedidoDao extends Conexao {
 	
 	
 	private ClienteDao clienteDao = new ClienteDao();
+	private ProdutoController produtoController = new ProdutoController();
 	
 	
 	public PedidoDao() {
@@ -96,7 +97,6 @@ public class PedidoDao extends Conexao {
 			tamanho2 = listaProduto2.size();
 			for (int i = 0; i < tamanho2; i++) {
 				
-				
 				sql = "insert into itensPedido (idPedido, idProduto, valorUnitario, quantidade) values(?, ?, ?, ?)";
 				
 				pst = con.prepareStatement(sql);
@@ -106,6 +106,8 @@ public class PedidoDao extends Conexao {
 				pst.setInt(4, listaProduto2.get(i).getQuantidade());
 				
 				pst.execute();
+				
+				produtoController.baixaEstoque(listaProduto2.get(i).getId(), listaProduto2.get(i).getQuantidade());
 			}
 			
 			pst.close();
