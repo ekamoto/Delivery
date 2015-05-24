@@ -6,12 +6,29 @@ public class PessoaModel {
 	private String nome;
 	private String cpf;
 	private String endereco;
+	private int idGrupoUsuario;
+	private GrupoUsuarioModel grupoUsuarioModel;
 	
 	public PessoaModel() {
 		super();
 	}
 	
-	// Getters and Setters
+	public GrupoUsuarioModel getGrupoUsuarioModel() {
+		return grupoUsuarioModel;
+	}
+
+	public void setGrupoUsuarioModel(GrupoUsuarioModel grupoUsuarioModel) {
+		this.grupoUsuarioModel = grupoUsuarioModel;
+	}
+
+	public int getIdGrupoUsuario() {
+		return idGrupoUsuario;
+	}
+
+	public void setIdGrupoUsuario(int idGrupoUsuario) {
+		this.idGrupoUsuario = idGrupoUsuario;
+	}
+
 	public String getId() {
 		return id;
 	}

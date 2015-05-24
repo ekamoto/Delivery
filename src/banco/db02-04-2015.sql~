@@ -7,18 +7,20 @@ CREATE DATABASE delivery
        LC_CTYPE = 'pt_BR.UTF-8'
        CONNECTION LIMIT = -1;
 
-create table pessoas (
+create table grupoUsuarios (
 id serial primary key not null,
-nome varchar(150) not null,
-cpf varchar(14) not null,
-endereco varchar(150)
+descricao varchar(150) not null
 );
+
+insert into grupoUsuarios (descricao) values('Cliente');
+insert into grupoUsuarios (descricao) values('Entregador');
 
 create table pessoas (
 id serial primary key not null,
 nome varchar(150) not null,
 cpf varchar(14) not null,
-endereco varchar(150)
+endereco varchar(150),
+idGrupoUsuarios int not null references grupoUsuarios(id),
 );
 
 create table categorias (
@@ -26,8 +28,8 @@ id serial primary key not null,
 nome varchar(100) not null,
 descricao varchar(150) not null
 );
-insert into categorias (nome, descricao) values('Categoria x','Animais aquáticos');
-insert into categorias (nome, descricao) values('Categoria y','Animais terrestres');
+insert into categorias (nome, descricao) values('Destilados','Bebidas destiladas');
+insert into categorias (nome, descricao) values('Vinhos','Vinhos');
 
 create table produtos (
 id serial primary key not null,

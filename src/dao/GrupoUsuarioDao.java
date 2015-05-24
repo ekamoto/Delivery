@@ -6,18 +6,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Delivery;
+import conexao.Conexao;
+
 import model.ClienteModel;
 import model.GrupoUsuarioModel;
 
-import conexao.Conexao;
-
-public class ClienteDao extends Conexao {
-
-	public ClienteDao() {
+public class GrupoUsuarioDao extends Conexao {
+	
+	public GrupoUsuarioDao() {
 
 	}
 
+	/*
 	public boolean cadastrar(ClienteModel cliente) {
 
 		abreConexao();
@@ -26,14 +26,13 @@ public class ClienteDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into pessoas (nome, cpf, endereco, idGrupoUsuarios)"
-					+ "values(?, ?, ?, ?)";
+			String sql = "insert into pessoas (nome, cpf, endereco)"
+					+ "values(?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, cliente.getNome());
 			pst.setString(2, cliente.getCpf());
 			pst.setString(3, cliente.getEndereco());
-			pst.setInt(4, cliente.getIdGrupoUsuario());
 
 			pst.execute();
 			pst.close();
@@ -61,10 +60,11 @@ public class ClienteDao extends Conexao {
 
 		return true;
 	}
+*/
+	
+	public List<GrupoUsuarioModel> getGrupoUsuarios() {
 
-	public List<ClienteModel> getClientes() {
-
-		List<ClienteModel> resultado = new ArrayList<ClienteModel>();
+		List<GrupoUsuarioModel> resultado = new ArrayList<GrupoUsuarioModel>();
 
 		abreConexao();
 
@@ -72,10 +72,7 @@ public class ClienteDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "select pessoas.id as idPessoa, pessoas.nome, pessoas.cpf, pessoas.endereco, pessoas.idGrupoUsuarios," +
-					" grupoUsuarios.id as idGrupoUsuarios, grupoUsuarios.descricao "+
-					" from pessoas  " +
-					"inner join grupoUsuarios on (pessoas.idGrupoUsuarios = grupoUsuarios.id)";
+			String sql = "select * from grupoUsuarios";
 
 			pst = con.prepareStatement(sql);
 
@@ -83,23 +80,11 @@ public class ClienteDao extends Conexao {
 
 			while (rs.next()) {
 
-				String id = rs.getString("idPessoa");
-				String email = rs.getString("nome");
-				System.out.println(id + " :: " + email);
+				GrupoUsuarioModel temp = new GrupoUsuarioModel();
+				temp.setId(rs.getInt("id"));
+				temp.setDescricao(rs.getString("descricao"));
 				
-				GrupoUsuarioModel grupoUsuarioModel = new GrupoUsuarioModel();
-
-				ClienteModel temp = new ClienteModel();
-				temp.setId(rs.getString("idPessoa"));
-				temp.setNome(rs.getString("nome"));
-				temp.setCpf(rs.getString("cpf"));
-				temp.setEndereco(rs.getString("endereco"));
-				temp.setIdGrupoUsuario(rs.getInt("idGrupoUsuarios"));
-				
-				grupoUsuarioModel.setDescricao(rs.getString("descricao"));
-				grupoUsuarioModel.setId(rs.getInt("idGrupoUsuarios"));
-				temp.setGrupoUsuarioModel(grupoUsuarioModel);
-				
+				//System.out.println("id:"+rs.getInt("id")+" Descrição:"+rs.getString("descricao"));
 				resultado.add(temp);
 			}
 
@@ -115,6 +100,7 @@ public class ClienteDao extends Conexao {
 		return resultado;
 	}
 
+	/*
 	public ClienteModel getClienteID(int idCliente) {
 
 		ClienteModel cliente = new ClienteModel();
@@ -191,4 +177,5 @@ public class ClienteDao extends Conexao {
 
 		return true;
 	}
+	*/
 }
