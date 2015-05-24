@@ -18,10 +18,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import controller.PedidoController;
+import controller.ItensPedidoController;
+import controller.ProdutoController;
+import dao.ItensPedidoDao;
 
 
 import main.Delivery;
+import model.ClienteModel;
 import model.EntregadorModel;
+import model.ItensPedidoModel;
 import model.PedidoModel;
 import model.ProdutoModel;
 
@@ -107,12 +112,39 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	
 	}
 	
+	public String getProdutos(PedidoModel pedidoModel) {
+		
+		ItensPedidoDao pedidoDao = new ItensPedidoDao();
+		List<ItensPedidoModel> itensPedido = new ArrayList<ItensPedidoModel>();
+		
+		itensPedido = pedidoDao.getItensPedido(pedidoModel.getId());
+		
+		ProdutoController produtoController = new ProdutoController();
+		
+		int idProduto;
+		
+		String produtos = "";
+		
+		for(int i = 0 ; i < itensPedido.size() ; i++) {
+			
+			idProduto = itensPedido.get(i).getIdProduto();
+			ProdutoModel produtoModel = produtoController.getProdutoID(idProduto);
+			
+			produtos += itensPedido.get(i).getQuantidade() + "-" + produtoModel.getNome() + " ";
+			
+		}
+		
+		return produtos;
+		
+	}
+	
 	public void pesquisar(DefaultTableModel modelo) {
 		modelo.setNumRows(0);
 
 		for (PedidoModel p : listarPedidos()) {
+			
 			modelo.addRow(new Object[] {p.getId(), p.getCliente(), p.getValorPedido(),
-					p.getValorPagamento(), p.getValorTroco(), p.getEntregador(), p.getListaProduto(), p.getStatusDescricao()});
+					p.getValorPagamento(), p.getValorTroco(), p.getEntregador(), getProdutos(p), p.getStatusDescricao()});
 		}
 	}
 
