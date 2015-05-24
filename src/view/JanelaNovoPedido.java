@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -243,13 +244,17 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 
 		double resultado = 0;
 		String result;
+		NumberFormat format = NumberFormat.getInstance();
+		format.setMaximumFractionDigits(2);
 
-		for (int i = 0; i < prodSel.size(); i++) {
-			resultado = resultado
-					+ prodSel.get(i).getValor();
+		int tamanho = prodSel.size();
+		
+		for (int i = 0; i < tamanho; i++) {
+			
+			resultado += prodSel.get(i).getValor();
 		}
 
-		result = String.valueOf(resultado);
+		result = String.valueOf(format.format(resultado));
 		return result;
 	}
 	
