@@ -105,16 +105,11 @@ public class PedidoDao extends Conexao {
 				pst.setInt(4, listaProduto2.get(i).getQuantidade());
 				
 				pst.execute();
-				
-				System.out.println("Produto:"+listaProduto2.get(i).getNome()+" quantidade:"+listaProduto2.get(i).getQuantidade());
 			}
 			
 			pst.close();
 
 			con.commit();
-			System.out.println("Pedido inserido com sucesso!");
-			JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
-
 		} catch (SQLException e1) {
 
 			try {

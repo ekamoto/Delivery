@@ -171,7 +171,6 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		} 
 		else if (e.getSource() == btnConfirmar) {
 			
-			
 			PedidoModel pedido = new PedidoModel();
 			ClienteModel selecionaCliente = (ClienteModel) comboCliente.getSelectedItem();
 			EntregadorModel selecionaEntregador = (EntregadorModel) comboEntregador
@@ -183,17 +182,21 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 			pedido.setValorTroco(Double.parseDouble(pedido.valorTroco()));
 			pedido.setEntregador(selecionaEntregador);
 			
-			
 			// ItensPedido
 			pedido.setListaProduto(prodSel);
 			
-			
-			pedidoController.cadastrarPedido(pedido);
-			
-			//Delivery.listaDePedidos.add(pedido);
-			
-			JOptionPane.showMessageDialog(null,
-					"Cadastro Realizado com sucesso");
+			boolean res = pedidoController.cadastrarPedido(pedido);
+
+			if(res) {
+				
+				JOptionPane.showMessageDialog(null,
+						"Cadastro Realizado com sucesso");				
+			} else {
+				
+				JOptionPane.showMessageDialog(null,
+						"Falha ao inserir Peidido!");
+			}
+
 			dispose();
 			JanelaNovoPedido jnp = new JanelaNovoPedido();
 		} else if (e.getSource() == btnListar) {
