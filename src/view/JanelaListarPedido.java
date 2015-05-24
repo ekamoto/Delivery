@@ -37,7 +37,7 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem menuItemExcluir;
+	private JMenuItem menuItemCancelar;
 	private PedidoController pedidoController = new PedidoController();
 
 	public JanelaListarPedido() {
@@ -53,9 +53,9 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 		barraRolagem = new JScrollPane(tabela);
 		menuBar = new JMenuBar();
 		menu = new JMenu("Editar");
-		menuItemExcluir = new JMenuItem("Excluir");
+		menuItemCancelar = new JMenuItem("Cancelar");
 		menuBar.add(menu);
-		menu.add(menuItemExcluir);
+		menu.add(menuItemCancelar);
 		
 		painelFundo.setLayout(new BorderLayout());
 		painelFundo.add(BorderLayout.NORTH, menuBar);
@@ -63,7 +63,7 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 		getContentPane().add(painelFundo);
 		setSize(700, 320);
 		setVisible(true);
-		menuItemExcluir.addActionListener(this);
+		menuItemCancelar.addActionListener(this);
 	}
 
 	public void criaJTable() {
@@ -91,10 +91,20 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource() == menuItemExcluir) {
+		if(e.getSource() == menuItemCancelar) {
 			
-			remove();
-			JOptionPane.showMessageDialog(null, "Pedido apagado com sucesso!");
+			String idPedido = JOptionPane.showInputDialog("Digite o Codigo do Pedido que deseja Cancelar:");
+			
+			boolean res = pedidoController.cancelarPedido(Integer.parseInt(idPedido));
+			
+			if(res) {
+				
+				JOptionPane.showMessageDialog(null, "Pedido desativado com sucesso!");	
+			} else {
+				
+				JOptionPane.showMessageDialog(null, "Falha ao desativar pedido!");
+			}
+			
 			dispose();
 		}
 		

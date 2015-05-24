@@ -20,6 +20,7 @@ import model.EntregadorModel;
 import model.ItensPedidoModel;
 import model.PedidoModel;
 import model.ProdutoModel;
+import enums.EnumStatusPedido;
 
 public class PedidoDao extends Conexao {
 	
@@ -359,6 +360,33 @@ public class PedidoDao extends Conexao {
 			}
 			
 		} else {
+			
+			return false;
+		}
+	}
+
+	public boolean cancelarPedido(int idPedido) {
+			
+		try {
+			
+			abreConexao();
+			
+			PreparedStatement pst = null;
+
+			String sql = "update pedidos set status=? where id=? ";
+
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, EnumStatusPedido.CANCELADO.getStatus());
+			pst.setInt(2, idPedido);
+
+			pst.execute();
+			pst.close();
+
+			con.commit();
+			
+			fechaConexao();
+			return true;
+		}catch (SQLException e1) {
 			
 			return false;
 		}

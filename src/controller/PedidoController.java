@@ -43,4 +43,8 @@ public class PedidoController {
 		
 		return dao.ativarProduto(idProduto);
 	}
+	
+	public boolean cancelarPedido(int idPedido) {
+		return dao.cancelarPedido(idPedido);
+	}
 }
