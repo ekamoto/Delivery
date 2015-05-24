@@ -5,6 +5,7 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -20,7 +21,7 @@ import javax.swing.SpringLayout;
 import controller.ClienteController;
 import controller.PedidoController;
 import controller.ProdutoController;
-
+import enums.EnumStatusProduto;
 
 import main.Delivery;
 import model.ClienteModel;
@@ -86,8 +87,13 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		scroll = new ScrollPane();
 		scroll.add(listaDeProduto);
 		listProd = listarProduto();
+		
 		for (ProdutoModel produto : listProd) {
-			listModel.addElement(produto);
+			
+			if(produto.getStatus()==EnumStatusProduto.ATIVO.getStatus()) {
+				
+				listModel.addElement(produto);	
+			}
 		}
 
 		tfPagamento = new JTextField(5);
