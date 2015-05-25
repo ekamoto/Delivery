@@ -52,7 +52,7 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 		painelFundo = new JPanel();
 		barraRolagem = new JScrollPane(tabela);
 		menuBar = new JMenuBar();
-		menu = new JMenu("Editar");
+		menu = new JMenu("Opções");
 		menuItemCancelar = new JMenuItem("Cancelar");
 		menuBar.add(menu);
 		menu.add(menuItemCancelar);
