@@ -184,7 +184,12 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 					.getSelectedItem();
 
 			pedido.setCliente(selecionaCliente);
-			pedido.setValorPedido(Double.parseDouble(valorTotal()));
+			
+			String valorTotal = valorTotal();
+			
+			
+			
+			pedido.setValorPedido(Double.parseDouble(valorTotal));
 			pedido.setValorPagamento(Double.parseDouble(tfPagamento.getText()));
 			pedido.setValorTroco(Double.parseDouble(pedido.valorTroco()));
 			pedido.setEntregador(selecionaEntregador);
@@ -255,6 +260,8 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		}
 
 		result = String.valueOf(format.format(resultado));
+		
+		result = result.replaceAll("[.]", "").replaceAll("[,]", ".");
 		return result;
 	}
 	

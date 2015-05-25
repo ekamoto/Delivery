@@ -51,11 +51,19 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		
 		EntregadorModel entregador = new EntregadorModel();
 		entregador.setId("1");
-		entregador.setNome("Leandro");
+		entregador.setNome("Entregador1");
 		entregador.setEndereco("asdfasdf");
 		entregador.setCpf("asdfasffsad");
 		entregador.setCarteiraDeTrabalho("asdfasdf");
 		Delivery.listaDeEntregador.add(entregador);
+		
+		EntregadorModel entregador2 = new EntregadorModel();
+		entregador2.setId("1");
+		entregador2.setNome("Entregador2");
+		entregador2.setEndereco("asdfasdf");
+		entregador2.setCpf("asdfasffsad");
+		entregador2.setCarteiraDeTrabalho("asdfasdf");
+		Delivery.listaDeEntregador.add(entregador2);
 		
 		barraMenus = new JMenuBar();
 		menuPedido = new JMenu("Pedido");

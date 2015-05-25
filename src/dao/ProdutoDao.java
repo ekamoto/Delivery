@@ -191,7 +191,7 @@ public class ProdutoDao extends Conexao {
 		
 		ProdutoModel produto = getProdutoID(idProduto);
 		
-		if(!produto.getNome().equals("")) {
+		if(produto != null && !produto.getNome().equals("")) {
 			
 			try {
 				
