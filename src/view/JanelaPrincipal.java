@@ -2,13 +2,22 @@ package view;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+
+import crypt.FileCrypt;
 
 import main.Delivery;
 import model.ClienteModel;
@@ -49,6 +58,40 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	// Construtor
 	public JanelaPrincipal() {
 		
+		/* Rotina para gerar arquivo de configuração de banco
+		FileCrypt cripto = new FileCrypt("Delivery");  
+  	  
+        try {
+        	// Descomenta e cria o arquivo config2 onde vc coloca
+        	//   //servidor:porta/
+        	//   usuario
+        	//   senha
+        	//   banco
+			//cripto.criptografa(new FileInputStream("src/conf/config2"), new FileOutputStream("src/conf/config"));
+			cripto.descriptografa(new FileInputStream("src/conf/config"), new FileOutputStream("src/conf/config3"));
+		} catch (InvalidKeyException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidAlgorithmParameterException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		*/
+        
 		EntregadorModel entregador = new EntregadorModel();
 		entregador.setId("1");
 		entregador.setNome("Entregador1");

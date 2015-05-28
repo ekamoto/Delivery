@@ -11,11 +11,23 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import conexao.Conexao;
+
+import crypt.FileCrypt;
 
 /**
  *
@@ -31,8 +43,11 @@ public class JanelaLogin extends javax.swing.JFrame {
      * Creates new form login
      */
     public JanelaLogin() {
+    	
+    	Conexao c = new Conexao();
+    	
+    	
         initComponents();
-       
     }
 
     /**
