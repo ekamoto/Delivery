@@ -47,10 +47,14 @@ public class JanelaListarCliente extends JFrame {
 		modelo.addColumn("Nome");
 		modelo.addColumn("CPF");
 		modelo.addColumn("Endereco");
+		modelo.addColumn("Celular");
+		modelo.addColumn("Telefone");
 		modelo.addColumn("Grupo");
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(4);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(120);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 
@@ -66,7 +70,8 @@ public class JanelaListarCliente extends JFrame {
 		for (ClienteModel c : clientes) {
 
 			modelo.addRow(new Object[] { c.getId(), c.getNome(), c.getCpf(),
-					c.getEndereco(),c.getGrupoUsuarioModel().getDescricao() });
+					c.getEndereco(), c.getCelular(), c.getTelefone(),
+					c.getGrupoUsuarioModel().getDescricao() });
 		}
 	}
 }

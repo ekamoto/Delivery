@@ -6,6 +6,8 @@ public class PessoaModel {
 	private String nome;
 	private String cpf;
 	private String endereco;
+	private String celular;
+	private String telefone;
 	private int idGrupoUsuario;
 	private GrupoUsuarioModel grupoUsuarioModel;
 	
@@ -55,6 +57,22 @@ public class PessoaModel {
 		this.endereco = endereco;
 	}
 	
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	public String toString() {
 		return this.nome;
 	}

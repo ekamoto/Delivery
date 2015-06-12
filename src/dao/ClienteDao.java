@@ -26,14 +26,16 @@ public class ClienteDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into pessoas (nome, cpf, endereco, idGrupoUsuarios)"
-					+ "values(?, ?, ?, ?)";
+			String sql = "insert into pessoas (nome, cpf, endereco, celular, telefone, idGrupoUsuarios)"
+					+ "values(?, ?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, cliente.getNome());
 			pst.setString(2, cliente.getCpf());
 			pst.setString(3, cliente.getEndereco());
-			pst.setInt(4, cliente.getIdGrupoUsuario());
+			pst.setString(4, cliente.getCelular());
+			pst.setString(5, cliente.getTelefone());
+			pst.setInt(6, cliente.getIdGrupoUsuario());
 
 			pst.execute();
 			pst.close();
@@ -72,7 +74,8 @@ public class ClienteDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "select pessoas.id as idPessoa, pessoas.nome, pessoas.cpf, pessoas.endereco, pessoas.idGrupoUsuarios," +
+			String sql = "select pessoas.id as idPessoa, pessoas.nome, pessoas.cpf, pessoas.endereco, "
+					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios," +
 					" grupoUsuarios.id as idGrupoUsuarios, grupoUsuarios.descricao "+
 					" from pessoas  " +
 					"inner join grupoUsuarios on (pessoas.idGrupoUsuarios = grupoUsuarios.id)";
@@ -94,6 +97,8 @@ public class ClienteDao extends Conexao {
 				temp.setNome(rs.getString("nome"));
 				temp.setCpf(rs.getString("cpf"));
 				temp.setEndereco(rs.getString("endereco"));
+				temp.setCelular(rs.getString("celular"));
+				temp.setTelefone(rs.getString("telefone"));
 				temp.setIdGrupoUsuario(rs.getInt("idGrupoUsuarios"));
 				
 				grupoUsuarioModel.setDescricao(rs.getString("descricao"));

@@ -35,7 +35,13 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 
 	private JTextField tfEndereco;
 	private JLabel lEndereco;
-
+	
+	private JTextField tfCelular;
+	private JLabel lCelular;
+	
+	private JTextField tfTelefone;
+	private JLabel lTelefone;
+	
 	private JButton btLimpar;
 	private JButton btCadastrar;
 	private JButton btFechar;
@@ -62,6 +68,12 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 
 		lEndereco = new JLabel("Endereco");
 		tfEndereco = new JTextField(70);
+		
+		lCelular = new JLabel("Celular");
+		tfCelular = new JTextField(11);
+		
+		lTelefone = new JLabel("Telefone");
+		tfTelefone = new JTextField(11);
 
 		btLimpar = new JButton("Limpar");
 		btCadastrar = new JButton("Cadastrar");
@@ -98,48 +110,70 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 		container.add(lCpf);
 		layout.putConstraint(SpringLayout.WEST, lCpf, 30, SpringLayout.WEST,
 				container);
-		layout.putConstraint(SpringLayout.NORTH, lCpf, 70, SpringLayout.NORTH,
+		layout.putConstraint(SpringLayout.NORTH, lCpf, 75, SpringLayout.NORTH,
 				container);
 		container.add(tfCpf);
 		layout.putConstraint(SpringLayout.WEST, tfCpf, 65, SpringLayout.WEST,
 				lCpf);
-		layout.putConstraint(SpringLayout.NORTH, tfCpf, 70, SpringLayout.NORTH,
+		layout.putConstraint(SpringLayout.NORTH, tfCpf, 75, SpringLayout.NORTH,
 				container);
 
 		container.add(lEndereco);
 		layout.putConstraint(SpringLayout.WEST, lEndereco, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lEndereco, 90,
+		layout.putConstraint(SpringLayout.NORTH, lEndereco, 95,
 				SpringLayout.NORTH, container);
 		container.add(tfEndereco);
 		layout.putConstraint(SpringLayout.WEST, tfEndereco, 65,
 				SpringLayout.WEST, lEndereco);
-		layout.putConstraint(SpringLayout.NORTH, tfEndereco, 90,
+		layout.putConstraint(SpringLayout.NORTH, tfEndereco, 95,
 				SpringLayout.NORTH, container);
 
+		container.add(lCelular);
+		layout.putConstraint(SpringLayout.WEST, lCelular, 30,
+				SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, lCelular, 115,
+				SpringLayout.NORTH, container);
+		container.add(tfCelular);
+		layout.putConstraint(SpringLayout.WEST, tfCelular, 65,
+				SpringLayout.WEST, lCelular);
+		layout.putConstraint(SpringLayout.NORTH, tfCelular, 115,
+				SpringLayout.NORTH, container);
+		
+		container.add(lTelefone);
+		layout.putConstraint(SpringLayout.WEST, lTelefone, 30,
+				SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, lTelefone, 140,
+				SpringLayout.NORTH, container);
+		container.add(tfTelefone);
+		layout.putConstraint(SpringLayout.WEST, tfTelefone, 65,
+				SpringLayout.WEST, lTelefone);
+		layout.putConstraint(SpringLayout.NORTH, tfTelefone, 140,
+				SpringLayout.NORTH, container);
+		
 		container.add(btLimpar);
 		layout.putConstraint(SpringLayout.WEST, btLimpar, 130,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btLimpar, 150,
+		layout.putConstraint(SpringLayout.NORTH, btLimpar, 200,
 				SpringLayout.NORTH, container);
 		container.add(btCadastrar);
 		layout.putConstraint(SpringLayout.WEST, btCadastrar, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btCadastrar, 150,
+		layout.putConstraint(SpringLayout.NORTH, btCadastrar, 200,
 				SpringLayout.NORTH, container);
 		container.add(btFechar);
-		layout.putConstraint(SpringLayout.WEST, btFechar, 210,
+		layout.putConstraint(SpringLayout.WEST, btFechar, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btFechar, 150,
+		layout.putConstraint(SpringLayout.NORTH, btFechar, 250,
 				SpringLayout.NORTH, container);
 		
 		container.add(lGrupoUsuario);
 		layout.putConstraint(SpringLayout.WEST, lGrupoUsuario, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lGrupoUsuario, 115, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, lGrupoUsuario, 175, SpringLayout.NORTH, container);
 		
 		container.add(comboGrupoUsuario);
 		layout.putConstraint(SpringLayout.WEST, comboGrupoUsuario, 65, SpringLayout.WEST, lGrupoUsuario);
-		layout.putConstraint(SpringLayout.NORTH, comboGrupoUsuario, 115, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, comboGrupoUsuario, 175, SpringLayout.NORTH, container);
 
 		btLimpar.addActionListener(this);
 		btCadastrar.addActionListener(this);
@@ -162,6 +196,8 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 			novo.setNome(tfNome.getText());
 			novo.setCpf(tfCpf.getText());
 			novo.setEndereco(tfEndereco.getText());
+			novo.setCelular(tfCelular.getText());
+			novo.setTelefone(tfTelefone.getText());
 			
 			GrupoUsuarioModel selecionaCliente = (GrupoUsuarioModel) comboGrupoUsuario.getSelectedItem();
 			
@@ -184,6 +220,8 @@ public class JanelaNovoCliente extends JFrame implements ActionListener {
 		tfNome.setText("");
 		tfCpf.setText("");
 		tfEndereco.setText("");
+		tfCelular.setText("");
+		tfTelefone.setText("");
 	}
 	
 }

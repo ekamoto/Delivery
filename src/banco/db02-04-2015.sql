@@ -20,6 +20,8 @@ id serial primary key not null,
 nome varchar(150) not null,
 cpf varchar(14) not null,
 endereco varchar(150),
+celular character varying(11),
+telefone character varying(11),
 idGrupoUsuarios int not null references grupoUsuarios(id)
 );
 
