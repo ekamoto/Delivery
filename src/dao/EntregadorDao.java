@@ -6,94 +6,78 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Delivery;
 import model.ClienteModel;
+import model.EntregadorModel;
 import model.GrupoUsuarioModel;
-
 import conexao.Conexao;
 
-public class ClienteDao extends Conexao {
-
-	public ClienteDao() {
+public class EntregadorDao extends Conexao {
+	
+	public EntregadorDao() {
 
 	}
 
-	public boolean cadastrar(ClienteModel cliente) {
-
+	public boolean cadastrar(EntregadorModel entregador) {
+		
 		abreConexao();
-
+		
 		try {
-
 			PreparedStatement pst = null;
-
-			String sql = "insert into pessoas (nome, cpf, endereco, celular, telefone, idGrupoUsuarios)"
-					+ "values(?, ?, ?, ?, ?, ?)";
-
+			
+			String sql = "insert into pessoas(nome, cpf, endereco, celular, telefone, idGrupoUsuarios)"
+					+ "values(?,?,?,?,?,?)";
 			pst = con.prepareStatement(sql);
-			pst.setString(1, cliente.getNome());
-			pst.setString(2, cliente.getCpf());
-			pst.setString(3, cliente.getEndereco());
-			pst.setString(4, cliente.getCelular());
-			pst.setString(5, cliente.getTelefone());
-			pst.setInt(6, cliente.getIdGrupoUsuario());
-
+			pst.setString(1, entregador.getNome());
+			pst.setString(2, entregador.getCpf());
+			pst.setString(3, entregador.getEndereco());
+			pst.setString(4, entregador.getCelular());
+			pst.setString(5, entregador.getTelefone());
+			pst.setInt(6, entregador.getIdGrupoUsuario());
+			
 			pst.execute();
 			pst.close();
-
+			
 			con.commit();
-			System.out.println("Cliente inserido com sucesso!");
-
-		} catch (SQLException e1) {
-
-			try {
-
+		} catch(SQLException e1) {
+			
+			try{
 				con.rollback();
-				System.out.println("Rollback na inserção de cliente");
+				System.out.println("Rollback na inserção de entregador");
 			} catch (SQLException e) {
-
 				e.printStackTrace();
 				System.out
-						.println("Falha so executar rollback na inserção de cliente");
+				.println("Falha so executar rollback na inserção de entregador");
 			}
 			e1.printStackTrace();
 			return false;
 		}
-
 		fechaConexao();
-
 		return true;
 	}
-
-	public List<ClienteModel> getClientes() {
-
-		List<ClienteModel> resultado = new ArrayList<ClienteModel>();
-
+	
+	public List<EntregadorModel> getEntregador() {
+		
+		List<EntregadorModel> resultado = new ArrayList<EntregadorModel>();
 		abreConexao();
-
+		
 		try {
-
 			PreparedStatement pst = null;
-
 			String sql = "select pessoas.id as idPessoa, pessoas.nome, pessoas.cpf, pessoas.endereco, "
 					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios," +
 					" grupoUsuarios.id as idGrupoUsuarios, grupoUsuarios.descricao "+
 					" from pessoas  " +
 					"inner join grupoUsuarios on (pessoas.idGrupoUsuarios = grupoUsuarios.id) "
-					+ "and idGrupoUsuarios = 1";
-
+					+ "and idGrupoUsuarios = 2";
+			
 			pst = con.prepareStatement(sql);
-
 			ResultSet rs = pst.executeQuery();
-
-			while (rs.next()) {
-
+			
+			while(rs.next()) {
 				String id = rs.getString("idPessoa");
 				String email = rs.getString("nome");
-				System.out.println(id + " :: " + email);
 				
 				GrupoUsuarioModel grupoUsuarioModel = new GrupoUsuarioModel();
-
-				ClienteModel temp = new ClienteModel();
+				EntregadorModel temp = new EntregadorModel();
 				temp.setId(rs.getString("idPessoa"));
 				temp.setNome(rs.getString("nome"));
 				temp.setCpf(rs.getString("cpf"));
@@ -108,9 +92,7 @@ public class ClienteDao extends Conexao {
 				
 				resultado.add(temp);
 			}
-
 			pst.close();
-
 		} catch (SQLException e1) {
 
 			e1.printStackTrace();
@@ -120,34 +102,29 @@ public class ClienteDao extends Conexao {
 
 		return resultado;
 	}
-
-	public ClienteModel getClienteID(int idCliente) {
-
-		ClienteModel cliente = new ClienteModel();
-
+	
+	public EntregadorModel getEntregadorId(int idEntregador) {
+		
+		EntregadorModel entregador = new EntregadorModel();
 		abreConexao();
-
-		try {
-
+		
+		try{
 			PreparedStatement pst = null;
-
-			String sql = "select * from pessoas where id = ? and idGrupoUsuarios = 1";
-
+			
+			String sql = "select * from pessoas where id = ? and idGrupoUsuarios = 2";
+			
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, idCliente);
-
+			pst.setInt(1, idEntregador);
+			
 			ResultSet rs = pst.executeQuery();
-
-			while (rs.next()) {
-
-				cliente.setId(rs.getString("id"));
-				cliente.setNome(rs.getString("nome"));
-				cliente.setCpf(rs.getString("cpf"));
-				cliente.setEndereco(rs.getString("endereco"));
+			
+			while(rs.next()) {
+				entregador.setId(rs.getString("id"));
+				entregador.setNome(rs.getString("nome"));
+				entregador.setCpf(rs.getString("cpf"));
+				entregador.setEndereco(rs.getString("endereco"));
 			}
-
 			pst.close();
-
 		} catch (SQLException e1) {
 
 			e1.printStackTrace();
@@ -155,13 +132,13 @@ public class ClienteDao extends Conexao {
 
 		fechaConexao();
 
-		return cliente;
+		return entregador;
 	}
-
-	public boolean deletarCliente(int idCliente) {
-
+	
+	public boolean deletarEntregador(int idEntregador) {
+		
 		abreConexao();
-
+		
 		try {
 
 			PreparedStatement pst = null;
@@ -169,32 +146,31 @@ public class ClienteDao extends Conexao {
 			String sql = "delete from pessoas where id=? ";
 
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, idCliente);
+			pst.setInt(1, idEntregador);
 
 			pst.execute();
 			pst.close();
 
 			con.commit();
-			System.out.println("Cliente deletado com sucesso!");
 
 		} catch (SQLException e1) {
 
 			try {
 
 				con.rollback();
-				System.out.println("Rollback delete de cliente");
+				System.out.println("Rollback delete de entregador");
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 				System.out
-						.println("Falha so executar rollback deletar de cliente");
+						.println("Falha so executar rollback deletar entregador");
 			}
 			e1.printStackTrace();
 			return false;
 		}
 
 		fechaConexao();
-
+		
 		return true;
 	}
 }

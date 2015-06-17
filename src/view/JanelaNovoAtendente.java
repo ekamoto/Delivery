@@ -1,7 +1,5 @@
 package view;
 
-
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -14,14 +12,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import model.EntregadorModel;
+import model.AtendenteModel;
 import model.GrupoUsuarioModel;
-import controller.EntregadorController;
+
+import java.awt.Container;
+
+import controller.AtendenteController;
 import controller.GrupoUsuarioController;
 
-
-public class JanelaNovoEntregador extends JFrame implements ActionListener{
-
+public class JanelaNovoAtendente extends JFrame implements ActionListener{
 	private JTextField tfNome;
 	private JLabel lNome;
 
@@ -49,11 +48,11 @@ public class JanelaNovoEntregador extends JFrame implements ActionListener{
 	
 	private List<GrupoUsuarioModel> listaGrupoUsuario;
 	
-	private EntregadorController controller = new EntregadorController();
+	private AtendenteController controller = new AtendenteController();
 	
 	private GrupoUsuarioController grupoUsuarioController = new GrupoUsuarioController();
 
-	public JanelaNovoEntregador() {
+	public JanelaNovoAtendente() {
 
 		lNome = new JLabel("Nome");
 		tfNome = new JTextField(40);
@@ -178,7 +177,7 @@ public class JanelaNovoEntregador extends JFrame implements ActionListener{
 		this.setResizable(true);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
-		this.setTitle("Cadastro de Novo Entregador");
+		this.setTitle("Cadastro de Novo Atendente");
 		this.setSize(875, 300);
 	}
 
@@ -187,18 +186,18 @@ public class JanelaNovoEntregador extends JFrame implements ActionListener{
 		
 		if (e.getSource() == btCadastrar) {
 			
-			EntregadorModel novo = new EntregadorModel();
+			AtendenteModel novo = new AtendenteModel();
 			novo.setNome(tfNome.getText());
 			novo.setCpf(tfCpf.getText());
 			novo.setEndereco(tfEndereco.getText());
 			novo.setCelular(tfCelular.getText());
 			novo.setTelefone(tfTelefone.getText());
 			
-			GrupoUsuarioModel selecionaEntregador = (GrupoUsuarioModel) comboGrupoUsuario.getSelectedItem();
+			GrupoUsuarioModel selecionaCliente = (GrupoUsuarioModel) comboGrupoUsuario.getSelectedItem();
 			
-			novo.setIdGrupoUsuario(selecionaEntregador.getId());
+			novo.setIdGrupoUsuario(selecionaCliente.getId());
 			
-			controller.cadastrarEntregador(novo);
+			controller.cadastrarAtendente(novo);
 			
 			JOptionPane.showMessageDialog(this,
 					"Cadastro realizado com sucesso");
@@ -218,6 +217,4 @@ public class JanelaNovoEntregador extends JFrame implements ActionListener{
 		tfCelular.setText("");
 		tfTelefone.setText("");
 	}
-	
 }
-

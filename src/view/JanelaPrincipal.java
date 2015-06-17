@@ -36,6 +36,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenu menuCliente;
 	private JMenu menuEntregador;
 	private JMenu menuProduto;
+	private JMenu menuAtendente;
 	private JMenu menuAjuda;
 	
 	// Itens dos atributos
@@ -43,6 +44,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemNovoCliente;
 	private JMenuItem itemNovoProduto;
 	private JMenuItem itemNovoEntregador;
+	private JMenuItem itemNovoAtendente;
 	private JMenuItem itemSobre;
 	
 	private JMenuItem itemBuscarCliente;
@@ -52,6 +54,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemListarProduto;
 	private JMenuItem itemListarEntregador;
 	private JMenuItem itemListarPedido;
+	private JMenuItem itemListarAtendente;
 	private JMenuItem itemDesativarProduto;
 	private JMenuItem itemAtivarProduto;
 	
@@ -97,7 +100,6 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		entregador.setNome("Entregador1");
 		entregador.setEndereco("asdfasdf");
 		entregador.setCpf("asdfasffsad");
-		entregador.setCarteiraDeTrabalho("asdfasdf");
 		Delivery.listaDeEntregador.add(entregador);
 		
 		EntregadorModel entregador2 = new EntregadorModel();
@@ -105,7 +107,6 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		entregador2.setNome("Entregador2");
 		entregador2.setEndereco("asdfasdf");
 		entregador2.setCpf("asdfasffsad");
-		entregador2.setCarteiraDeTrabalho("asdfasdf");
 		Delivery.listaDeEntregador.add(entregador2);
 		
 		barraMenus = new JMenuBar();
@@ -113,12 +114,14 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		menuProduto = new JMenu("Produto");
 		menuCliente = new JMenu("Cliente");
 		menuEntregador = new JMenu("Entregador");
+		menuAtendente = new JMenu("Atendente");
 		menuAjuda = new JMenu("Ajuda");
 		
 		itemNovoPedido = new JMenuItem("Novo");
 		itemNovoCliente = new JMenuItem("Novo");
 		itemNovoProduto = new JMenuItem("Novo");
 		itemNovoEntregador = new JMenuItem("Novo");
+		itemNovoAtendente = new JMenuItem("Novo");
 		itemSobre = new JMenuItem("Sobre");
 		
 		itemBuscarCliente = new JMenuItem("Buscar");
@@ -128,6 +131,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarProduto = new JMenuItem("Listar");
 		itemListarEntregador = new JMenuItem("Listar");
 		itemListarPedido = new JMenuItem("Listar");
+		itemListarAtendente = new JMenuItem("Listar");
 		itemDesativarProduto = new JMenuItem("Desativar");
 		itemAtivarProduto = new JMenuItem("Ativar");
 		
@@ -135,12 +139,14 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		barraMenus.add(menuCliente);
 		barraMenus.add(menuProduto);
 		barraMenus.add(menuEntregador);
+		barraMenus.add(menuAtendente);
 		barraMenus.add(menuAjuda);
 		
 		menuPedido.add(itemNovoPedido);
 		menuProduto.add(itemNovoProduto);
 		menuEntregador.add(itemNovoEntregador);
 		menuCliente.add(itemNovoCliente);
+		menuAtendente.add(itemNovoAtendente);
 		menuAjuda.add(itemSobre);
 		
 		menuCliente.add(itemBuscarCliente);
@@ -150,6 +156,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		menuProduto.add(itemListarProduto);
 		menuEntregador.add(itemListarEntregador);
 		menuPedido.add(itemListarPedido);
+		menuAtendente.add(itemListarAtendente);
 		menuProduto.add(itemDesativarProduto);
 		menuProduto.add(itemAtivarProduto);
 		
@@ -157,6 +164,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemNovoPedido.addActionListener(this);
 		itemNovoProduto.addActionListener(this);
 		itemNovoEntregador.addActionListener(this);
+		itemNovoAtendente.addActionListener(this);
 		itemSobre.addActionListener(this);
 		
 		itemBuscarCliente.addActionListener(this);
@@ -166,6 +174,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarProduto.addActionListener(this);
 		itemListarEntregador.addActionListener(this);
 		itemListarPedido.addActionListener(this);
+		itemListarAtendente.addActionListener(this);
 		itemDesativarProduto.addActionListener(this);
 		itemAtivarProduto.addActionListener(this);
 		
@@ -190,6 +199,8 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		} else if(e.getSource() == itemNovoProduto) {
 			
 			JanelaNovoProduto janelaNovoProduto = new JanelaNovoProduto();
+		} else if(e.getSource() == itemNovoAtendente) {
+			JanelaNovoAtendente janelaNovoAtendente = new JanelaNovoAtendente();
 		} else if(e.getSource() == itemNovoPedido) {
 			
 			JanelaNovoPedido janelaNovoPedido = new JanelaNovoPedido();
@@ -224,6 +235,8 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		} else if(e.getSource() == itemAtivarProduto) {
 
 			JanelaAtivarProduto jap = new JanelaAtivarProduto();
+		} else if(e.getSource() == itemListarAtendente) {
+			JanelaListarAtendente janelaListarAtendente = new JanelaListarAtendente();
 		}
 	}
 }

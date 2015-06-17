@@ -233,8 +233,6 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 			temp.setCpf(Delivery.listaDeEntregador.get(i).getCpf());
 			temp.setNome(Delivery.listaDeEntregador.get(i).getNome());
 			temp.setEndereco(Delivery.listaDeEntregador.get(i).getEndereco());
-			temp.setCarteiraDeTrabalho(Delivery.listaDeEntregador.get(i)
-					.getCarteiraDeTrabalho());
 			resultado.add(temp);
 		}
 		return resultado;

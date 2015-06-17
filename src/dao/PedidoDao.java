@@ -169,8 +169,6 @@ public class PedidoDao extends Conexao {
 						temp1.setCpf(Delivery.listaDeEntregador.get(i).getCpf());
 						temp1.setNome(Delivery.listaDeEntregador.get(i).getNome());
 						temp1.setEndereco(Delivery.listaDeEntregador.get(i).getEndereco());
-						temp1.setCarteiraDeTrabalho(Delivery.listaDeEntregador.get(i)
-								.getCarteiraDeTrabalho());	
 					}
 				}
 				

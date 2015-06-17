@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +11,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import main.Delivery;
+import model.EntregadorModel;
+import controller.EntregadorController;
 
 public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 	private JLabel iLabel;
@@ -23,12 +23,11 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 	private JTextField tfCpf;
 	private JLabel eLabel;
 	private JTextField tfEndereco;
-	private JTextField tfCarteira;
-	private JLabel ctLabel;
 	private JButton btBuscar;
 	private JButton btFechar;
 	private JButton btExcluir;
 	private Container container;
+	private EntregadorController controller = new EntregadorController();
 	private SpringLayout layout = new SpringLayout();
 
 	public JanelaBuscarEntregador() {
@@ -44,9 +43,6 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 		eLabel = new JLabel("Endereco");
 		tfEndereco = new JTextField(52);
 		tfEndereco.setEditable(false);
-		ctLabel = new JLabel("N� Carteira");
-		tfCarteira = new JTextField(15);
-		tfCarteira.setEditable(false);
 
 		btBuscar = new JButton("Buscar");
 		btFechar = new JButton("Fechar");
@@ -99,16 +95,6 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 				SpringLayout.WEST, eLabel);
 		layout.putConstraint(SpringLayout.NORTH, tfEndereco, 150,
 				SpringLayout.NORTH, container);
-		container.add(ctLabel);
-		layout.putConstraint(SpringLayout.WEST, ctLabel, 40, SpringLayout.WEST,
-				container);
-		layout.putConstraint(SpringLayout.NORTH, ctLabel, 175,
-				SpringLayout.NORTH, container);
-		container.add(tfCarteira);
-		layout.putConstraint(SpringLayout.WEST, tfCarteira, 65,
-				SpringLayout.WEST, ctLabel);
-		layout.putConstraint(SpringLayout.NORTH, tfCarteira, 175,
-				SpringLayout.NORTH, container);
 		container.add(btExcluir);
 		layout.putConstraint(SpringLayout.WEST, btExcluir, 220,
 				SpringLayout.WEST, container);
@@ -136,16 +122,54 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 		if (e.getSource() == btBuscar) {
 			buscaPorId(tfId.getText());
 		} else if (e.getSource() == btExcluir) {
-			remove();
-			JOptionPane.showMessageDialog(null, "Entregador apagado com sucesso!");
-			dispose();
-			JanelaBuscarEntregador jne = new JanelaBuscarEntregador();
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			int dialogResult = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir?", "Aviso", dialogButton);
+			if(dialogResult == 0) {
+				remover();
+				//JOptionPane.showMessageDialog(null, "Entregador apagado com sucesso!");
+				dispose();
+				JanelaBuscarEntregador jne = new JanelaBuscarEntregador();
+			}
 		} else if (e.getSource() == btFechar) {
 			dispose();
 		}
 	}
 
-	public void remove() {
+	public void remover() {
+
+		String remover = JOptionPane
+				.showInputDialog("Digite o ID do Entregador que deseja excluir:");
+
+		if (controller.deletarEntregador(Integer.parseInt(remover))) {
+
+			JOptionPane.showMessageDialog(null, "Entregador apagado com sucesso!");
+		} else {
+
+			JOptionPane.showMessageDialog(null, "Falha ao deletar Entregador!");
+		}
+	}
+
+	public void buscaPorId(String id) {
+
+		EntregadorModel entregador = controller.getEntregadorId(Integer.parseInt(id));
+
+		if (entregador.getId() != null) {
+
+			tfNome.setText(entregador.getNome());
+			tfCpf.setText(entregador.getCpf());
+			tfEndereco.setText(entregador.getEndereco());
+		} else {
+
+			System.out.println("Deu errado");
+			JOptionPane.showMessageDialog(null, "Entregador nao cadastrado");
+			tfId.setText("");
+			tfNome.setText("");
+			tfCpf.setText("");
+			tfEndereco.setText("");
+		}
+	}
+	
+	/*public void remove() {
 		String remover = JOptionPane
 				.showInputDialog("Digite o ID do Entregador que deseja excluir:");
 		for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
@@ -165,8 +189,6 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 				tfCpf.setText(Delivery.listaDeEntregador.get(i).getCpf());
 				tfEndereco.setText(Delivery.listaDeEntregador.get(i)
 						.getEndereco());
-				tfCarteira.setText(Delivery.listaDeEntregador.get(i)
-						.getCarteiraDeTrabalho());
 			}
 		}
 		if (!encontrou) {
@@ -177,5 +199,5 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 			tfEndereco.setText("");
 			tfCarteira.setText("");
 		}
-	}
+	}*/
 }

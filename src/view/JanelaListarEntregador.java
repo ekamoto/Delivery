@@ -10,17 +10,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-
+import controller.EntregadorController;
 import main.Delivery;
-import model.ClienteModel;
 import model.EntregadorModel;
 
-public class JanelaListarEntregador  extends JFrame{
+public class JanelaListarEntregador extends JFrame{
 	
 	private JPanel painelFundo;
 	private JTable tabela;
 	private JScrollPane barraRolagem;
 	private DefaultTableModel modelo = new DefaultTableModel();
+	private EntregadorController controller = new EntregadorController();
 	
 	public JanelaListarEntregador () {
 		super("Lista de Entregadores");
@@ -45,24 +45,34 @@ public class JanelaListarEntregador  extends JFrame{
 		modelo.addColumn("Nome");
 		modelo.addColumn("CPF");
 		modelo.addColumn("Endereco");
-		modelo.addColumn("N� Carteira");
+		modelo.addColumn("Celular");
+		modelo.addColumn("Telefone");
+		modelo.addColumn("Grupo");
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(4);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
-		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(120);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
+		
 		pesquisar(modelo);
 	}
 	
 	public void pesquisar(DefaultTableModel modelo) {
 		modelo.setNumRows(0);
 		
-		for(EntregadorModel e: listarEntregador()) {
-			modelo.addRow(new Object[] {e.getId() ,e.getNome(), e.getCpf(), e.getEndereco(), e.getCarteiraDeTrabalho()});
+		List<EntregadorModel> entregadores = new ArrayList<EntregadorModel>();
+		entregadores = controller.getEntregador();
+		
+		for(EntregadorModel e: entregadores) {
+			modelo.addRow(new Object[] { e.getId(), e.getNome(), e.getCpf(),
+					e.getEndereco(), e.getCelular(), e.getTelefone(),
+					e.getGrupoUsuarioModel().getDescricao() });
 		}
 	}
 	
-	public List<EntregadorModel> listarEntregador() {
+	/*public List<EntregadorModel> listarEntregador() {
 		List<EntregadorModel> resultado = new ArrayList<EntregadorModel>();
 		
 		for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
@@ -71,10 +81,9 @@ public class JanelaListarEntregador  extends JFrame{
 			temp.setNome(Delivery.listaDeEntregador.get(i).getNome());
 			temp.setCpf(Delivery.listaDeEntregador.get(i).getCpf());
 			temp.setEndereco(Delivery.listaDeEntregador.get(i).getEndereco());
-			temp.setCarteiraDeTrabalho(Delivery.listaDeEntregador.get(i).getCarteiraDeTrabalho());
 			resultado.add(temp);
 		}
 		return resultado;
-	}
+	}*/
 
 }

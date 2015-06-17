@@ -6,19 +6,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Delivery;
-import model.ClienteModel;
+import model.AtendenteModel;
 import model.GrupoUsuarioModel;
-
 import conexao.Conexao;
 
-public class ClienteDao extends Conexao {
-
-	public ClienteDao() {
-
+public class AtendenteDao extends Conexao{
+	
+	public AtendenteDao() {
+		
 	}
 
-	public boolean cadastrar(ClienteModel cliente) {
+	public boolean cadastrar(AtendenteModel atendente) {
 
 		abreConexao();
 
@@ -30,30 +28,30 @@ public class ClienteDao extends Conexao {
 					+ "values(?, ?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
-			pst.setString(1, cliente.getNome());
-			pst.setString(2, cliente.getCpf());
-			pst.setString(3, cliente.getEndereco());
-			pst.setString(4, cliente.getCelular());
-			pst.setString(5, cliente.getTelefone());
-			pst.setInt(6, cliente.getIdGrupoUsuario());
+			pst.setString(1, atendente.getNome());
+			pst.setString(2, atendente.getCpf());
+			pst.setString(3, atendente.getEndereco());
+			pst.setString(4, atendente.getCelular());
+			pst.setString(5, atendente.getTelefone());
+			pst.setInt(6, atendente.getIdGrupoUsuario());
 
 			pst.execute();
 			pst.close();
 
 			con.commit();
-			System.out.println("Cliente inserido com sucesso!");
+			System.out.println("Atendente inserido com sucesso!");
 
 		} catch (SQLException e1) {
 
 			try {
 
 				con.rollback();
-				System.out.println("Rollback na inserção de cliente");
+				System.out.println("Rollback na inserção de atendente");
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 				System.out
-						.println("Falha so executar rollback na inserção de cliente");
+						.println("Falha so executar rollback na inserção de atendente");
 			}
 			e1.printStackTrace();
 			return false;
@@ -63,13 +61,12 @@ public class ClienteDao extends Conexao {
 
 		return true;
 	}
-
-	public List<ClienteModel> getClientes() {
-
-		List<ClienteModel> resultado = new ArrayList<ClienteModel>();
-
+	
+	public List<AtendenteModel> getAtendentes() {
+		
+		List<AtendenteModel> resultado = new ArrayList<AtendenteModel>();
 		abreConexao();
-
+		
 		try {
 
 			PreparedStatement pst = null;
@@ -79,7 +76,7 @@ public class ClienteDao extends Conexao {
 					" grupoUsuarios.id as idGrupoUsuarios, grupoUsuarios.descricao "+
 					" from pessoas  " +
 					"inner join grupoUsuarios on (pessoas.idGrupoUsuarios = grupoUsuarios.id) "
-					+ "and idGrupoUsuarios = 1";
+					+ "and idGrupoUsuarios = 3";
 
 			pst = con.prepareStatement(sql);
 
@@ -93,7 +90,7 @@ public class ClienteDao extends Conexao {
 				
 				GrupoUsuarioModel grupoUsuarioModel = new GrupoUsuarioModel();
 
-				ClienteModel temp = new ClienteModel();
+				AtendenteModel temp = new AtendenteModel();
 				temp.setId(rs.getString("idPessoa"));
 				temp.setNome(rs.getString("nome"));
 				temp.setCpf(rs.getString("cpf"));
@@ -120,30 +117,25 @@ public class ClienteDao extends Conexao {
 
 		return resultado;
 	}
-
-	public ClienteModel getClienteID(int idCliente) {
-
-		ClienteModel cliente = new ClienteModel();
-
+	
+	public AtendenteModel getAtendenteId(int idAtendente) {
+		AtendenteModel atendente = new AtendenteModel();
 		abreConexao();
-
+		
 		try {
-
 			PreparedStatement pst = null;
-
-			String sql = "select * from pessoas where id = ? and idGrupoUsuarios = 1";
-
+			String sql = "select * from pessoas where id = ? ";
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, idCliente);
-
+			pst.setInt(1, idAtendente);
+			
 			ResultSet rs = pst.executeQuery();
 
 			while (rs.next()) {
 
-				cliente.setId(rs.getString("id"));
-				cliente.setNome(rs.getString("nome"));
-				cliente.setCpf(rs.getString("cpf"));
-				cliente.setEndereco(rs.getString("endereco"));
+				atendente.setId(rs.getString("id"));
+				atendente.setNome(rs.getString("nome"));
+				atendente.setCpf(rs.getString("cpf"));
+				atendente.setEndereco(rs.getString("endereco"));
 			}
 
 			pst.close();
@@ -155,10 +147,10 @@ public class ClienteDao extends Conexao {
 
 		fechaConexao();
 
-		return cliente;
+		return atendente;
 	}
-
-	public boolean deletarCliente(int idCliente) {
+	
+	public boolean deletarAtendente(int idAtendente) {
 
 		abreConexao();
 
@@ -169,25 +161,25 @@ public class ClienteDao extends Conexao {
 			String sql = "delete from pessoas where id=? ";
 
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, idCliente);
+			pst.setInt(1, idAtendente);
 
 			pst.execute();
 			pst.close();
 
 			con.commit();
-			System.out.println("Cliente deletado com sucesso!");
+			System.out.println("Atendente deletado com sucesso!");
 
 		} catch (SQLException e1) {
 
 			try {
 
 				con.rollback();
-				System.out.println("Rollback delete de cliente");
+				System.out.println("Rollback delete de Atendente");
 			} catch (SQLException e) {
 
 				e.printStackTrace();
 				System.out
-						.println("Falha so executar rollback deletar de cliente");
+						.println("Falha so executar rollback deletar de atendente");
 			}
 			e1.printStackTrace();
 			return false;
