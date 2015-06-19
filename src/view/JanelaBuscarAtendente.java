@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,19 +8,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
-import javax.swing.table.DefaultTableModel;
 
-import controller.ClienteController;
+import model.AtendenteModel;
+import controller.AtendenteController;
 
-import main.Delivery;
-import model.ClienteModel;
-
-public class JanelaBuscarCliente extends JFrame implements ActionListener {
-
+public class JanelaBuscarAtendente extends JFrame implements ActionListener{
 	private JLabel iLabel;
 	private JTextField tfId;
 	private JLabel nLabel;
@@ -38,10 +31,10 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 	private JButton btFechar;
 	private JButton btExcluir;
 	private Container container;
+	private AtendenteController controller = new AtendenteController();
 	private SpringLayout layout = new SpringLayout();
-	private ClienteController controller = new ClienteController();
 
-	public JanelaBuscarCliente() {
+	public JanelaBuscarAtendente() {
 
 		iLabel = new JLabel("Id");
 		tfId = new JTextField(4);
@@ -64,16 +57,16 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 		btBuscar = new JButton("Buscar");
 		btFechar = new JButton("Fechar");
 		btExcluir = new JButton("Excluir");
+
 		container = this.getContentPane();
 		container.setLayout(layout);
-
 		container.add(iLabel);
 		layout.putConstraint(SpringLayout.WEST, iLabel, 275, SpringLayout.WEST,
 				container);
 		layout.putConstraint(SpringLayout.NORTH, iLabel, 30,
 				SpringLayout.NORTH, container);
 		container.add(tfId);
-		layout.putConstraint(SpringLayout.EAST, tfId, 60, SpringLayout.EAST,
+		layout.putConstraint(SpringLayout.EAST, tfId, 70, SpringLayout.EAST,
 				iLabel);
 		layout.putConstraint(SpringLayout.NORTH, tfId, 30, SpringLayout.NORTH,
 				container);
@@ -143,14 +136,15 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 				SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, btFechar, 240,
 				SpringLayout.NORTH, container);
+
 		btBuscar.addActionListener(this);
 		btFechar.addActionListener(this);
 		btExcluir.addActionListener(this);
-
+		
 		this.setResizable(true);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setVisible(true);
-		this.setTitle("Buscar Cliente");
+		this.setTitle("Buscar Atendente");
 		this.setSize(700, 300);
 	}
 
@@ -159,9 +153,14 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 		if (e.getSource() == btBuscar) {
 			buscaPorId(tfId.getText());
 		} else if (e.getSource() == btExcluir) {
-			remover();
-			dispose();
-			JanelaBuscarCliente jbc = new JanelaBuscarCliente();
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			int dialogResult = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir?", "Aviso", dialogButton);
+			if(dialogResult == 0) {
+				remover();
+				//JOptionPane.showMessageDialog(null, "Entregador apagado com sucesso!");
+				dispose();
+				JanelaBuscarAtendente jna = new JanelaBuscarAtendente();
+			}
 		} else if (e.getSource() == btFechar) {
 			dispose();
 		}
@@ -170,32 +169,32 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 	public void remover() {
 
 		String remover = JOptionPane
-				.showInputDialog("Digite o ID do Cliente que deseja excluir:");
+				.showInputDialog("Digite o ID do Atendente que deseja excluir:");
 
-		if (controller.deletarCliente(Integer.parseInt(remover))) {
+		if (controller.deletarAtendente(Integer.parseInt(remover))) {
 
-			JOptionPane.showMessageDialog(null, "Cliente apagado com sucesso!");
+			JOptionPane.showMessageDialog(null, "Atendente apagado com sucesso!");
 		} else {
 
-			JOptionPane.showMessageDialog(null, "Falha ao deletar cliente!");
+			JOptionPane.showMessageDialog(null, "Falha ao deletar Atendente!");
 		}
 	}
 
 	public void buscaPorId(String id) {
 
-		ClienteModel cliente = controller.getClienteID(Integer.parseInt(id));
+		AtendenteModel atendente = controller.getAtendenteId(Integer.parseInt(id));
 
-		if (cliente.getId() != null) {
+		if (atendente.getId() != null) {
 
-			tfNome.setText(cliente.getNome());
-			tfCpf.setText(cliente.getCpf());
-			tfEndereco.setText(cliente.getEndereco());
-			tfCel.setText(cliente.getCelular());
-			tfTel.setText(cliente.getTelefone());
+			tfNome.setText(atendente.getNome());
+			tfCpf.setText(atendente.getCpf());
+			tfEndereco.setText(atendente.getEndereco());
+			tfCel.setText(atendente.getCelular());
+			tfTel.setText(atendente.getTelefone());
 		} else {
 
 			System.out.println("Deu errado");
-			JOptionPane.showMessageDialog(null, "Cliente nao cadastrado");
+			JOptionPane.showMessageDialog(null, "Atendente nao cadastrado");
 			tfId.setText("");
 			tfNome.setText("");
 			tfCpf.setText("");
@@ -204,4 +203,36 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 			tfTel.setText("");
 		}
 	}
+	
+	/*public void remove() {
+		String remover = JOptionPane
+				.showInputDialog("Digite o ID do Entregador que deseja excluir:");
+		for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
+			if (Delivery.listaDeEntregador.get(i).getId().equals(remover)) {
+				remover += Delivery.listaDeEntregador.remove(i);
+			}
+		}
+	}
+
+	public void buscaPorId(String id) {
+		boolean encontrou = false;
+
+		for (int i = 0; !encontrou && i < Delivery.listaDeEntregador.size(); i++) {
+			if (Delivery.listaDeEntregador.get(i).getId().equals(id)) {
+				encontrou = true;
+				tfNome.setText(Delivery.listaDeEntregador.get(i).getNome());
+				tfCpf.setText(Delivery.listaDeEntregador.get(i).getCpf());
+				tfEndereco.setText(Delivery.listaDeEntregador.get(i)
+						.getEndereco());
+			}
+		}
+		if (!encontrou) {
+			JOptionPane.showMessageDialog(null, "Entregador nao cadastrado");
+			tfId.setText("");
+			tfNome.setText("");
+			tfCpf.setText("");
+			tfEndereco.setText("");
+			tfCarteira.setText("");
+		}
+	}*/
 }

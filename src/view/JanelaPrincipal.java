@@ -50,6 +50,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemBuscarCliente;
 	private JMenuItem itemBuscarProduto;
 	private JMenuItem itemBuscarEntregador;
+	private JMenuItem itemBuscarAtendente;
 	private JMenuItem itemListarCliente;
 	private JMenuItem itemListarProduto;
 	private JMenuItem itemListarEntregador;
@@ -127,6 +128,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemBuscarCliente = new JMenuItem("Buscar");
 		itemBuscarProduto = new JMenuItem("Buscar");
 		itemBuscarEntregador = new JMenuItem("Buscar");
+		itemBuscarAtendente = new JMenuItem("Buscar");
 		itemListarCliente = new JMenuItem("Listar");
 		itemListarProduto = new JMenuItem("Listar");
 		itemListarEntregador = new JMenuItem("Listar");
@@ -136,8 +138,8 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemAtivarProduto = new JMenuItem("Ativar");
 		
 		barraMenus.add(menuPedido);
-		barraMenus.add(menuCliente);
 		barraMenus.add(menuProduto);
+		barraMenus.add(menuCliente);
 		barraMenus.add(menuEntregador);
 		barraMenus.add(menuAtendente);
 		barraMenus.add(menuAjuda);
@@ -152,6 +154,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		menuCliente.add(itemBuscarCliente);
 		menuProduto.add(itemBuscarProduto);
 		menuEntregador.add(itemBuscarEntregador);
+		menuAtendente.add(itemBuscarAtendente);
 		menuCliente.add(itemListarCliente);
 		menuProduto.add(itemListarProduto);
 		menuEntregador.add(itemListarEntregador);
@@ -170,6 +173,7 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemBuscarCliente.addActionListener(this);
 		itemBuscarProduto.addActionListener(this);
 		itemBuscarEntregador.addActionListener(this);
+		itemBuscarAtendente.addActionListener(this);
 		itemListarCliente.addActionListener(this);
 		itemListarProduto.addActionListener(this);
 		itemListarEntregador.addActionListener(this);
@@ -237,6 +241,8 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 			JanelaAtivarProduto jap = new JanelaAtivarProduto();
 		} else if(e.getSource() == itemListarAtendente) {
 			JanelaListarAtendente janelaListarAtendente = new JanelaListarAtendente();
+		} else if(e.getSource() == itemBuscarAtendente) {
+			JanelaBuscarAtendente janelaBuscarAtendente = new JanelaBuscarAtendente();
 		}
 	}
 }

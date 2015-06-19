@@ -23,6 +23,10 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 	private JTextField tfCpf;
 	private JLabel eLabel;
 	private JTextField tfEndereco;
+	private JLabel celLabel;
+	private JTextField tfCel;
+	private JLabel tLabel;
+	private JTextField tfTel;
 	private JButton btBuscar;
 	private JButton btFechar;
 	private JButton btExcluir;
@@ -43,6 +47,12 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 		eLabel = new JLabel("Endereco");
 		tfEndereco = new JTextField(52);
 		tfEndereco.setEditable(false);
+		celLabel = new JLabel("Celular");
+		tfCel = new JTextField(11);
+		tfCel.setEditable(false);
+		tLabel = new JLabel("Telefone");
+		tfTel = new JTextField(11);
+		tfTel.setEditable(false);
 
 		btBuscar = new JButton("Buscar");
 		btFechar = new JButton("Fechar");
@@ -95,15 +105,36 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 				SpringLayout.WEST, eLabel);
 		layout.putConstraint(SpringLayout.NORTH, tfEndereco, 150,
 				SpringLayout.NORTH, container);
+		container.add(celLabel);
+		layout.putConstraint(SpringLayout.WEST, celLabel, 40, SpringLayout.WEST,
+				container);
+		layout.putConstraint(SpringLayout.NORTH, celLabel, 175,
+				SpringLayout.NORTH, container);
+		container.add(tfCel);
+		layout.putConstraint(SpringLayout.WEST, tfCel, 65,
+				SpringLayout.WEST, celLabel);
+		layout.putConstraint(SpringLayout.NORTH, tfCel, 175,
+				SpringLayout.NORTH, container);
+		container.add(tLabel);
+		layout.putConstraint(SpringLayout.WEST, tLabel, 40, SpringLayout.WEST,
+				container);
+		layout.putConstraint(SpringLayout.NORTH, tLabel, 200,
+				SpringLayout.NORTH, container);
+		container.add(tfTel);
+		layout.putConstraint(SpringLayout.WEST, tfTel, 65,
+				SpringLayout.WEST, tLabel);
+		layout.putConstraint(SpringLayout.NORTH, tfTel, 200,
+				SpringLayout.NORTH, container);
+		
 		container.add(btExcluir);
 		layout.putConstraint(SpringLayout.WEST, btExcluir, 220,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btExcluir, 220,
+		layout.putConstraint(SpringLayout.NORTH, btExcluir, 240,
 				SpringLayout.NORTH, container);
 		container.add(btFechar);
 		layout.putConstraint(SpringLayout.WEST, btFechar, 350,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btFechar, 220,
+		layout.putConstraint(SpringLayout.NORTH, btFechar, 240,
 				SpringLayout.NORTH, container);
 
 		btBuscar.addActionListener(this);
@@ -158,6 +189,8 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 			tfNome.setText(entregador.getNome());
 			tfCpf.setText(entregador.getCpf());
 			tfEndereco.setText(entregador.getEndereco());
+			tfCel.setText(entregador.getCelular());
+			tfTel.setText(entregador.getTelefone());
 		} else {
 
 			System.out.println("Deu errado");
@@ -166,6 +199,8 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 			tfNome.setText("");
 			tfCpf.setText("");
 			tfEndereco.setText("");
+			tfCel.setText("");
+			tfTel.setText("");
 		}
 	}
 	

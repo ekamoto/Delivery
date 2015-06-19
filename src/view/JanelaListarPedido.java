@@ -71,13 +71,17 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 		tabela = new JTable(modelo);
 		modelo.addColumn("Codigo");
 		modelo.addColumn("Cliente");
+		modelo.addColumn("Atendente");
 		modelo.addColumn("Valor do Pedido");
 		modelo.addColumn("Valor do Pagamento");
 		modelo.addColumn("Troco");
 		modelo.addColumn("Entregador");
+		modelo.addColumn("Forma de Pagamento");
 		modelo.addColumn("Itens");
 		modelo.addColumn("Status");
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(5);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -153,8 +157,10 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 
 		for (PedidoModel p : listarPedidos()) {
 			
-			modelo.addRow(new Object[] {p.getId(), p.getCliente(), p.getValorPedido(),
-					p.getValorPagamento(), p.getValorTroco(), p.getEntregador(), getProdutos(p), p.getStatusDescricao()});
+			modelo.addRow(new Object[] {p.getId(), p.getCliente().getNome(), p.getAtendente().getNome(), p.getValorPedido(), 
+					p.getValorPagamento(), p.getValorTroco(), p.getEntregador().getNome(), 
+					p.getFormaPagamento().getTipo(), 
+					getProdutos(p), p.getStatusDescricao()});
 		}
 	}
 

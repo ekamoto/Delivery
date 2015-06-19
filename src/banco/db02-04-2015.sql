@@ -14,6 +14,7 @@ descricao varchar(150) not null
 
 insert into grupoUsuarios (descricao) values('Cliente');
 insert into grupoUsuarios (descricao) values('Entregador');
+insert into grupoUsuarios (descricao) values('Atendente');
 
 create table pessoas (
 id serial primary key not null,
@@ -44,12 +45,22 @@ idCategoria int not null references categorias(id),
 status int NOT NULL
 );
 
+create table formaPagamento (
+id serial primary key not null,
+tipo varchar(50) not null
+);
+insert into formaPagamento (tipo) values ('Dinheiro');
+insert into formaPagamento (tipo) values ('Credito');
+insert into formaPagamento (tipo) values ('Debito');
+
 create table pedidos (
 id serial primary key not null,
 idCliente int not null references pessoas(id),
-idEntregador int not null, /*Não está forenkey por causa da iteração, isso será feito em outra iteração*/
+idEntregador int not null references pessoas(id), 
+idAtendente int not null references pessoas(id),
 valorPedido float not null,
 valorPagamento float not null,
+idFormaPagamento int not null references formaPagamento(id),
 valorTroco float not null,
 status int NOT NULL
 );

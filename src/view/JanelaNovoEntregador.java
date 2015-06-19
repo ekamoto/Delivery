@@ -105,70 +105,70 @@ public class JanelaNovoEntregador extends JFrame implements ActionListener{
 		container.add(lCpf);
 		layout.putConstraint(SpringLayout.WEST, lCpf, 30, SpringLayout.WEST,
 				container);
-		layout.putConstraint(SpringLayout.NORTH, lCpf, 75, SpringLayout.NORTH,
+		layout.putConstraint(SpringLayout.NORTH, lCpf, 80, SpringLayout.NORTH,
 				container);
 		container.add(tfCpf);
 		layout.putConstraint(SpringLayout.WEST, tfCpf, 65, SpringLayout.WEST,
 				lCpf);
-		layout.putConstraint(SpringLayout.NORTH, tfCpf, 75, SpringLayout.NORTH,
+		layout.putConstraint(SpringLayout.NORTH, tfCpf, 80, SpringLayout.NORTH,
 				container);
 
 		container.add(lEndereco);
 		layout.putConstraint(SpringLayout.WEST, lEndereco, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lEndereco, 95,
+		layout.putConstraint(SpringLayout.NORTH, lEndereco, 110,
 				SpringLayout.NORTH, container);
 		container.add(tfEndereco);
 		layout.putConstraint(SpringLayout.WEST, tfEndereco, 65,
 				SpringLayout.WEST, lEndereco);
-		layout.putConstraint(SpringLayout.NORTH, tfEndereco, 95,
+		layout.putConstraint(SpringLayout.NORTH, tfEndereco, 110,
 				SpringLayout.NORTH, container);
 
 		container.add(lCelular);
 		layout.putConstraint(SpringLayout.WEST, lCelular, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lCelular, 115,
+		layout.putConstraint(SpringLayout.NORTH, lCelular, 140,
 				SpringLayout.NORTH, container);
 		container.add(tfCelular);
 		layout.putConstraint(SpringLayout.WEST, tfCelular, 65,
 				SpringLayout.WEST, lCelular);
-		layout.putConstraint(SpringLayout.NORTH, tfCelular, 115,
+		layout.putConstraint(SpringLayout.NORTH, tfCelular, 140,
 				SpringLayout.NORTH, container);
 		
 		container.add(lTelefone);
 		layout.putConstraint(SpringLayout.WEST, lTelefone, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lTelefone, 140,
+		layout.putConstraint(SpringLayout.NORTH, lTelefone, 170,
 				SpringLayout.NORTH, container);
 		container.add(tfTelefone);
 		layout.putConstraint(SpringLayout.WEST, tfTelefone, 65,
 				SpringLayout.WEST, lTelefone);
-		layout.putConstraint(SpringLayout.NORTH, tfTelefone, 140,
+		layout.putConstraint(SpringLayout.NORTH, tfTelefone, 170,
 				SpringLayout.NORTH, container);
 		
 		container.add(btLimpar);
 		layout.putConstraint(SpringLayout.WEST, btLimpar, 130,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btLimpar, 200,
+		layout.putConstraint(SpringLayout.NORTH, btLimpar, 240,
 				SpringLayout.NORTH, container);
 		container.add(btCadastrar);
 		layout.putConstraint(SpringLayout.WEST, btCadastrar, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btCadastrar, 200,
+		layout.putConstraint(SpringLayout.NORTH, btCadastrar, 240,
 				SpringLayout.NORTH, container);
 		container.add(btFechar);
 		layout.putConstraint(SpringLayout.WEST, btFechar, 30,
 				SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, btFechar, 250,
+		layout.putConstraint(SpringLayout.NORTH, btFechar, 270,
 				SpringLayout.NORTH, container);
 		
 		container.add(lGrupoUsuario);
 		layout.putConstraint(SpringLayout.WEST, lGrupoUsuario, 30, SpringLayout.WEST, container);
-		layout.putConstraint(SpringLayout.NORTH, lGrupoUsuario, 175, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, lGrupoUsuario, 200, SpringLayout.NORTH, container);
 		
 		container.add(comboGrupoUsuario);
 		layout.putConstraint(SpringLayout.WEST, comboGrupoUsuario, 65, SpringLayout.WEST, lGrupoUsuario);
-		layout.putConstraint(SpringLayout.NORTH, comboGrupoUsuario, 175, SpringLayout.NORTH, container);
+		layout.putConstraint(SpringLayout.NORTH, comboGrupoUsuario, 200, SpringLayout.NORTH, container);
 
 		btLimpar.addActionListener(this);
 		btCadastrar.addActionListener(this);

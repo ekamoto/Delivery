@@ -124,7 +124,7 @@ public class AtendenteDao extends Conexao{
 		
 		try {
 			PreparedStatement pst = null;
-			String sql = "select * from pessoas where id = ? ";
+			String sql = "select * from pessoas where id = ? and idGrupoUsuarios = 3";
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, idAtendente);
 			
@@ -136,6 +136,8 @@ public class AtendenteDao extends Conexao{
 				atendente.setNome(rs.getString("nome"));
 				atendente.setCpf(rs.getString("cpf"));
 				atendente.setEndereco(rs.getString("endereco"));
+				atendente.setCelular(rs.getString("celular"));
+				atendente.setTelefone(rs.getString("telefone"));
 			}
 
 			pst.close();

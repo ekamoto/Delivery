@@ -6,6 +6,7 @@ import model.AtendenteModel;
 import model.CategoriaModel;
 import model.ClienteModel;
 import model.EntregadorModel;
+import model.FormaPagamentoModel;
 import model.PedidoModel;
 import model.ProdutoModel;
 import view.JanelaLogin;
@@ -20,6 +21,7 @@ public class Delivery {
 	static public List<AtendenteModel> listaDeAtendente;
 	static public List<PedidoModel> listaDePedidos;
 	static public List<CategoriaModel> listaDeCategorias;
+	static public List<FormaPagamentoModel> listaDeFormaPagamento;
 	
 	public static void main(String[] args) {
 		
@@ -30,6 +32,7 @@ public class Delivery {
 		listaProdSelec = new ArrayList<ProdutoModel>();
 		listaDeCategorias = new ArrayList<CategoriaModel>();
 		listaDeAtendente = new ArrayList<AtendenteModel>();
+		listaDeFormaPagamento = new ArrayList<FormaPagamentoModel>();
 		
 		// JanelaPrincipal janelaPrincipal = new JanelaPrincipal();
 		JanelaLogin.start();

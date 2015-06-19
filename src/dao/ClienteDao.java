@@ -144,6 +144,8 @@ public class ClienteDao extends Conexao {
 				cliente.setNome(rs.getString("nome"));
 				cliente.setCpf(rs.getString("cpf"));
 				cliente.setEndereco(rs.getString("endereco"));
+				cliente.setCelular(rs.getString("celular"));
+				cliente.setTelefone(rs.getString("telefone"));
 			}
 
 			pst.close();

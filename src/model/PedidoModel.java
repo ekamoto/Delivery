@@ -7,11 +7,13 @@ public class PedidoModel {
 
 	private int id;
 	private ClienteModel cliente;
+	private AtendenteModel atendente;
 	private List<ProdutoModel> listaProduto = new ArrayList<ProdutoModel>();
 	private double valorPedido;
 	private double valorPagamento;
 	private double valorTroco;
 	private EntregadorModel entregador;
+	private FormaPagamentoModel formaPagamento;
 	private int status;
 	
 	public PedidoModel() {
@@ -64,6 +66,14 @@ public class PedidoModel {
 
 	public void setCliente(ClienteModel cliente) {
 		this.cliente = cliente;
+	}
+
+	public AtendenteModel getAtendente() {
+		return atendente;
+	}
+
+	public void setAtendente(AtendenteModel atendente) {
+		this.atendente = atendente;
 	}
 
 	public List<ProdutoModel> getListaProduto() {
@@ -125,6 +135,14 @@ public class PedidoModel {
 		
 		result = String.valueOf(resultado);
 		return result;
+	}
+
+	public FormaPagamentoModel getFormaPagamento() {
+		return formaPagamento;
+	}
+
+	public void setFormaPagamento(FormaPagamentoModel formaPagamento) {
+		this.formaPagamento = formaPagamento;
 	}
 	
 	

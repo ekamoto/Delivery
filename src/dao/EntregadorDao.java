@@ -123,6 +123,8 @@ public class EntregadorDao extends Conexao {
 				entregador.setNome(rs.getString("nome"));
 				entregador.setCpf(rs.getString("cpf"));
 				entregador.setEndereco(rs.getString("endereco"));
+				entregador.setCelular(rs.getString("celular"));
+				entregador.setTelefone(rs.getString("telefone"));
 			}
 			pst.close();
 		} catch (SQLException e1) {

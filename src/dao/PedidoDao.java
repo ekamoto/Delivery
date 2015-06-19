@@ -13,10 +13,11 @@ import javax.swing.JOptionPane;
 import conexao.Conexao;
 import controller.ProdutoController;
 import enums.EnumStatusPedido;
-
 import main.Delivery;
+import model.AtendenteModel;
 import model.ClienteModel;
 import model.EntregadorModel;
+import model.FormaPagamentoModel;
 import model.ItensPedidoModel;
 import model.PedidoModel;
 import model.ProdutoModel;
@@ -26,8 +27,10 @@ public class PedidoDao extends Conexao {
 	
 	
 	private ClienteDao clienteDao = new ClienteDao();
+	private EntregadorDao entregadorDao = new EntregadorDao();
+	private AtendenteDao atendenteDao = new AtendenteDao();
 	private ProdutoController produtoController = new ProdutoController();
-	
+	private FormaPagamentoDao formaPagamentoDao = new FormaPagamentoDao();
 	
 	public PedidoDao() {
 
@@ -41,17 +44,21 @@ public class PedidoDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into pedidos (idCliente, idEntregador, valorPedido, valorPagamento, valorTroco, status) values(?, ?, ?, ?, ?, ?)";
+			String sql = "insert into pedidos (idCliente, idAtendente, idEntregador, valorPedido, valorPagamento, "
+					+ "idFormaPagamento, valorTroco, status)"
+					+ " values(?, ?, ?, ?, ?, ?, ?, ?)";
 
 			System.out.println("idCliente:"+pedido.getCliente().getId());
 			
 			pst = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, Integer.parseInt(pedido.getCliente().getId()));
-			pst.setInt(2, Integer.parseInt(pedido.getEntregador().getId()));
-			pst.setDouble(3, pedido.getValorPedido());
-			pst.setDouble(4, pedido.getValorPagamento());
-			pst.setDouble(5, pedido.getValorTroco());
-			pst.setInt(6, EnumStatusPedido.ADICIONADO.getStatus());
+			pst.setInt(2, Integer.parseInt(pedido.getAtendente().getId()));
+			pst.setInt(3, Integer.parseInt(pedido.getEntregador().getId()));
+			pst.setDouble(4, pedido.getValorPedido());
+			pst.setDouble(5, pedido.getValorPagamento());
+			pst.setInt(6, Integer.parseInt(pedido.getFormaPagamento().getId()));
+			pst.setDouble(7, pedido.getValorTroco());
+			pst.setInt(8, EnumStatusPedido.ADICIONADO.getStatus());
 
 			pst.execute();
 			
@@ -158,9 +165,14 @@ public class PedidoDao extends Conexao {
 				ClienteModel cliente = clienteDao.getClienteID(rs.getInt("idCliente"));
 				temp.setCliente(cliente);
 				
-				EntregadorModel temp1 = new EntregadorModel();
+				AtendenteModel atendente = atendenteDao.getAtendenteId(rs.getInt("idAtendente"));
+				temp.setAtendente(atendente);
 				
-				for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
+				EntregadorModel entregador = entregadorDao.getEntregadorId(rs.getInt("idEntregador"));
+				temp.setEntregador(entregador);
+				
+				
+				/*for (int i = 0; i < Delivery.listaDeEntregador.size(); i++) {
 					
 					System.out.println("Id Entregador: "+Delivery.listaDeEntregador.get(i).getId()+"-"+rs.getString("idEntregador"));
 					if(Integer.parseInt(Delivery.listaDeEntregador.get(i).getId().trim()) == Integer.parseInt(rs.getString("idEntregador").trim())) {
@@ -170,7 +182,7 @@ public class PedidoDao extends Conexao {
 						temp1.setNome(Delivery.listaDeEntregador.get(i).getNome());
 						temp1.setEndereco(Delivery.listaDeEntregador.get(i).getEndereco());
 					}
-				}
+				}*/
 				
 				ItensPedidoDao pedidoDao = new ItensPedidoDao();
 				List<ItensPedidoModel> itensPedido = new ArrayList<ItensPedidoModel>();
@@ -192,14 +204,17 @@ public class PedidoDao extends Conexao {
 					
 				}
 				
-				temp.setEntregador(temp1);
+				//temp.setEntregador(entregador);
 				
 				temp.setValorPagamento(rs.getDouble("valorPagamento"));
+				FormaPagamentoModel formaPagamento = 
+						formaPagamentoDao.getFormaPagamentoId(rs.getInt("idFormaPagamento"));
+				temp.setFormaPagamento(formaPagamento);
 				temp.setValorPedido(rs.getDouble("valorPedido"));
 				temp.setValorTroco(rs.getDouble("valorTroco"));
 				temp.setStatus(rs.getInt("status"));
 				temp.setListaProduto(produtosPedido);
-
+				
 				resultado.add(temp);
 			}
 			
