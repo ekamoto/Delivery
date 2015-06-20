@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -36,8 +37,9 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 	private JScrollPane barraRolagem;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private JMenuBar menuBar;
-	private JMenu menu;
-	private JMenuItem menuItemCancelar;
+	private JMenu menu, submenu;
+	private JMenuItem menuItemCancelar, menuItemFinalizar, listarPedidoFinalizado, 
+	listarPedidoAtivo, listarPedidoCancelado;
 	private PedidoController pedidoController = new PedidoController();
 
 	public JanelaListarPedido() {
@@ -53,9 +55,20 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 		barraRolagem = new JScrollPane(tabela);
 		menuBar = new JMenuBar();
 		menu = new JMenu("Opções");
+		submenu = new JMenu("Ver Pedidos");
 		menuItemCancelar = new JMenuItem("Cancelar");
+		menuItemFinalizar = new JMenuItem("Finalizar Pedido");
+		listarPedidoFinalizado = new JMenuItem("Listar Pedidos Finalizados");
+		listarPedidoCancelado = new JMenuItem("Listar Pedidos Cancelado");
+		listarPedidoAtivo = new JMenuItem("Listar Pedidos Ativos");
 		menuBar.add(menu);
 		menu.add(menuItemCancelar);
+		menu.add(menuItemFinalizar);
+		menu.addSeparator();
+		menu.add(submenu);
+		submenu.add(listarPedidoAtivo);
+		submenu.add(listarPedidoFinalizado);
+		submenu.add(listarPedidoCancelado);
 		
 		painelFundo.setLayout(new BorderLayout());
 		painelFundo.add(BorderLayout.NORTH, menuBar);
@@ -64,6 +77,10 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 		setSize(700, 320);
 		setVisible(true);
 		menuItemCancelar.addActionListener(this);
+		menuItemFinalizar.addActionListener(this);
+		listarPedidoFinalizado.addActionListener(this);
+		listarPedidoCancelado.addActionListener(this);
+		listarPedidoAtivo.addActionListener(this);
 	}
 
 	public void criaJTable() {
@@ -110,6 +127,22 @@ public class JanelaListarPedido extends JFrame implements ActionListener{
 			}
 			
 			dispose();
+		} else if(e.getSource() == menuItemFinalizar) {
+			String idPedido = JOptionPane.showInputDialog("Digite o Codigo do Pedido que deseja Finalizar:");
+			boolean res = pedidoController.finalizarPedido(Integer.parseInt(idPedido));
+			
+			if(res) {
+				JOptionPane.showMessageDialog(null, "Pedido finalizado com sucesso!");
+			} else  {
+				JOptionPane.showMessageDialog(null, "Falha ao finalizar pedido!");
+			}
+			dispose();
+		} else if(e.getSource() == listarPedidoFinalizado) {
+			JanelaListarPedidoFinalizado jlpf = new JanelaListarPedidoFinalizado();
+		} else if(e.getSource() == listarPedidoCancelado) {
+			JanelaListarPedidoCancelado jlpc = new JanelaListarPedidoCancelado();
+		} else if(e.getSource() == listarPedidoAtivo) {
+			JanelaListarPedidoAberto jlpa = new JanelaListarPedidoAberto();
 		}
 		
 	}

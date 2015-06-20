@@ -47,4 +47,8 @@ public class PedidoController {
 	public boolean cancelarPedido(int idPedido) {
 		return dao.cancelarPedido(idPedido);
 	}
+	
+	public boolean finalizarPedido(int idPedido) {
+		return dao.finalizarPedido(idPedido);
+	}
 }

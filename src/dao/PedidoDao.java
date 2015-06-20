@@ -406,4 +406,26 @@ public class PedidoDao extends Conexao {
 			return false;
 		}
 	}
+	
+	public boolean finalizarPedido(int idEntregador) {
+		try {
+			abreConexao();
+			PreparedStatement pst = null;
+			
+			String sql = "update pedidos set status=? where id=? ";
+			pst = con.prepareStatement(sql);
+			
+			pst.setInt(1, EnumStatusPedido.FINALIZADO.getStatus());
+			pst.setInt(2, idEntregador);
+			
+			pst.execute();
+			pst.close();
+			con.commit();
+			
+			fechaConexao();
+			return true;
+		} catch(SQLException e1) {
+			return false;
+		}
+	}
 }

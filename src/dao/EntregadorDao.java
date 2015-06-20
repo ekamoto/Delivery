@@ -25,7 +25,7 @@ public class EntregadorDao extends Conexao {
 			PreparedStatement pst = null;
 			
 			String sql = "insert into pessoas(nome, cpf, endereco, celular, telefone, idGrupoUsuarios, status)"
-					+ "values(?,?,?,?,?,?,?)";
+					+ "values(?, ?, ?, ?, ?, ?, ?)";
 			pst = con.prepareStatement(sql);
 			pst.setString(1, entregador.getNome());
 			pst.setString(2, entregador.getCpf());
@@ -64,7 +64,7 @@ public class EntregadorDao extends Conexao {
 		try {
 			PreparedStatement pst = null;
 			String sql = "select pessoas.id as idPessoa, pessoas.nome, pessoas.cpf, pessoas.endereco, "
-					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios, pessoas.status" +
+					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios, pessoas.status, " +
 					" grupoUsuarios.id as idGrupoUsuarios, grupoUsuarios.descricao "+
 					" from pessoas  " +
 					"inner join grupoUsuarios on (pessoas.idGrupoUsuarios = grupoUsuarios.id) "

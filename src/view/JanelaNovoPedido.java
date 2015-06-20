@@ -87,7 +87,9 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		comboEntregador = new JComboBox();
 		listaEntregador = listarEntregador();
 		for (EntregadorModel entregador : listaEntregador) {
-			comboEntregador.addItem(entregador);
+			if(entregador.getStatus() == EnumStatusPessoa.ATIVO.getStatus()) {
+				comboEntregador.addItem(entregador);
+			}
 		}
 
 		// Lista de Atendente
@@ -95,7 +97,9 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		comboAtendente = new JComboBox();
 		listaAtendente = listarAtendente();
 		for (AtendenteModel atendente : listaAtendente) {
-			comboAtendente.addItem(atendente);
+			if(atendente.getStatus() == EnumStatusPessoa.ATIVO.getStatus()) {
+				comboAtendente.addItem(atendente);
+			}
 		}
 		
 		// Lista de Forma de Pagamento

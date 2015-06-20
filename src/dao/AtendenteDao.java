@@ -26,7 +26,7 @@ public class AtendenteDao extends Conexao{
 			PreparedStatement pst = null;
 
 			String sql = "insert into pessoas (nome, cpf, endereco, celular, telefone, idGrupoUsuarios, status)"
-					+ "values(?, ?, ?, ?, ?, ?)";
+					+ "values(?, ?, ?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, atendente.getNome());
