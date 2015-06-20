@@ -39,8 +39,89 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 	private ProdutoController produtoController = new ProdutoController();
 
 	public JanelaBuscarProduto() {
-
+		
+		lbCodigo = new JLabel("Codigo");
 		tfCodigo = new JTextField(4);
+		lbNome = new JLabel("Nome");
+		tfNome = new JTextField(40);
+		lbDescricao = new JLabel("Descricao");
+		taDescricao = new JTextField(40);
+		lbQuantidade = new JLabel("Quantidade");
+		tfQuantidade = new JTextField(4);
+		lbValor = new JLabel("Valor Un.");
+		tfValor = new JTextField(4);
+		
+		btFechar = new JButton("Fechar");
+		btnBuscar = new JButton("Buscar");
+		
+		container = this.getContentPane();
+		container.setLayout(layout);
+		
+		container.add(lbCodigo);
+		layout.putConstraint(SpringLayout.WEST, lbCodigo, 275, SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, lbCodigo, 30, SpringLayout.NORTH, container);
+		container.add(tfCodigo);
+		layout.putConstraint(SpringLayout.EAST, tfCodigo, 60, SpringLayout.EAST,
+				lbCodigo);
+		layout.putConstraint(SpringLayout.NORTH, tfCodigo, 30, SpringLayout.NORTH,
+				container);
+		
+		container.add(btnBuscar);
+		layout.putConstraint(SpringLayout.WEST, btnBuscar, 285,
+				SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, btnBuscar, 60,
+				SpringLayout.NORTH, container);
+		
+		container.add(lbNome);
+		layout.putConstraint(SpringLayout.WEST, lbNome, 40, SpringLayout.WEST,
+				container);
+		layout.putConstraint(SpringLayout.NORTH, lbNome, 100,
+				SpringLayout.NORTH, container);
+		container.add(tfNome);
+		layout.putConstraint(SpringLayout.WEST, tfNome, 75, SpringLayout.WEST,
+				lbNome);
+		layout.putConstraint(SpringLayout.NORTH, tfNome, 100,
+				SpringLayout.NORTH, container);
+		
+		container.add(lbDescricao);
+		layout.putConstraint(SpringLayout.WEST, lbDescricao, 40, SpringLayout.WEST,
+				container);
+		layout.putConstraint(SpringLayout.NORTH, lbDescricao, 125,
+				SpringLayout.NORTH, container);
+		container.add(taDescricao);
+		layout.putConstraint(SpringLayout.WEST, taDescricao, 75, SpringLayout.WEST,
+				lbDescricao);
+		layout.putConstraint(SpringLayout.NORTH, taDescricao, 125,
+				SpringLayout.NORTH, container);
+		
+		container.add(lbQuantidade);
+		layout.putConstraint(SpringLayout.WEST, lbQuantidade, 40, SpringLayout.WEST,
+				container);
+		layout.putConstraint(SpringLayout.NORTH, lbQuantidade, 150,
+				SpringLayout.NORTH, container);
+		container.add(tfQuantidade);
+		layout.putConstraint(SpringLayout.WEST, tfQuantidade, 75,
+				SpringLayout.WEST, lbQuantidade);
+		layout.putConstraint(SpringLayout.NORTH, tfQuantidade, 150,
+				SpringLayout.NORTH, container);
+		
+		container.add(lbValor);
+		layout.putConstraint(SpringLayout.WEST, lbValor, 40, SpringLayout.WEST,
+				container);
+		layout.putConstraint(SpringLayout.NORTH, lbValor, 175,
+				SpringLayout.NORTH, container);
+		container.add(tfValor);
+		layout.putConstraint(SpringLayout.WEST, tfValor, 75,
+				SpringLayout.WEST, lbValor);
+		layout.putConstraint(SpringLayout.NORTH, tfValor, 175,
+				SpringLayout.NORTH, container);
+		
+		container.add(btFechar);
+		layout.putConstraint(SpringLayout.WEST, btFechar, 75,
+				SpringLayout.WEST, container);
+		layout.putConstraint(SpringLayout.NORTH, btFechar, 220,
+				SpringLayout.NORTH, container);
+		/*tfCodigo = new JTextField(4);
 		tfNome = new JTextField(30);
 		layout.putConstraint(SpringLayout.WEST, tfNome, 105, SpringLayout.WEST, getContentPane());
 		tfNome.setEditable(false);
@@ -76,8 +157,8 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 				SpringLayout.NORTH, tfValor);
 		layout.putConstraint(SpringLayout.WEST, lbValor, 0, SpringLayout.WEST, lbNome);
 		btnBuscar = new JButton("Buscar");
-		layout.putConstraint(SpringLayout.NORTH, btnBuscar, 0, SpringLayout.NORTH, lbCodigo);
-		layout.putConstraint(SpringLayout.EAST, btnBuscar, -1700, SpringLayout.EAST, getContentPane());
+		layout.putConstraint(SpringLayout.NORTH, btnBuscar, 20, SpringLayout.NORTH, lbCodigo);
+		layout.putConstraint(SpringLayout.EAST, btnBuscar, 200, SpringLayout.EAST, getContentPane());
 		btFechar = new JButton("Fechar");
 		layout.putConstraint(SpringLayout.NORTH, btFechar, 67, SpringLayout.SOUTH, taDescricao);
 		layout.putConstraint(SpringLayout.WEST, btFechar, 388, SpringLayout.WEST, getContentPane());
@@ -109,7 +190,7 @@ public class JanelaBuscarProduto extends JFrame implements ActionListener {
 		container.add(tfValor);
 		layout.putConstraint(SpringLayout.NORTH, tfValor, 175,
 				SpringLayout.NORTH, container);
-		container.add(btFechar);
+		container.add(btFechar);*/
 
 		btnBuscar.addActionListener(this);
 		btFechar.addActionListener(this);

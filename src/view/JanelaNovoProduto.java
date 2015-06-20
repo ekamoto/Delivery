@@ -62,7 +62,7 @@ public class JanelaNovoProduto extends JFrame implements ActionListener {
 		lbQuantidade = new JLabel("Quantidade");
 		tfQuantidade = new JTextField(3);
 
-		lbValor = new JLabel("Valor");
+		lbValor = new JLabel("Valor Un.");
 		tfValor = new JTextField(10);
 		
 		lbFabricante = new JLabel("Fabricante");
