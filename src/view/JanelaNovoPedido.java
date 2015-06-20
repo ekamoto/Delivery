@@ -31,6 +31,7 @@ import controller.EntregadorController;
 import controller.FormaPagamentoController;
 import controller.PedidoController;
 import controller.ProdutoController;
+import enums.EnumStatusPessoa;
 import enums.EnumStatusProduto;
 
 public class JanelaNovoPedido extends JFrame implements ActionListener {
@@ -76,7 +77,9 @@ public class JanelaNovoPedido extends JFrame implements ActionListener {
 		comboCliente = new JComboBox();
 		listaCliente = listarClientes();
 		for (ClienteModel cliente : listaCliente) {
-			comboCliente.addItem(cliente);
+			if(cliente.getStatus() == EnumStatusPessoa.ATIVO.getStatus()) {
+				comboCliente.addItem(cliente);
+			}		
 		}
 
 		// Lista de Entregador

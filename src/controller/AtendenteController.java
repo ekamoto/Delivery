@@ -28,4 +28,12 @@ public class AtendenteController {
 	public boolean deletarAtendente(int idAtendente) {
 		return dao.deletarAtendente(idAtendente);
 	}
+	
+	public boolean desativarAtendente(int idAtendente) {
+		return dao.desativarAtendente(idAtendente);
+	}
+	
+	public boolean ativarAtendente(int idAtendente) {
+		return dao.ativarProduto(idAtendente);
+	}
 }

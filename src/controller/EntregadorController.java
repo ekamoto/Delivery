@@ -28,4 +28,12 @@ public class EntregadorController {
 	public boolean deletarEntregador(int idEntregador) {
 		return dao.deletarEntregador(idEntregador);
 	}
+	
+	public boolean desativarEntregador(int idEntregador) {
+		return dao.desativarEntregador(idEntregador);
+	}
+	
+	public boolean ativarEntregador(int idEntregador) {
+		return dao.ativarEntregador(idEntregador);
+	}
 }

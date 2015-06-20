@@ -48,9 +48,11 @@ public class JanelaListarEntregador extends JFrame{
 		modelo.addColumn("Celular");
 		modelo.addColumn("Telefone");
 		modelo.addColumn("Grupo");
+		modelo.addColumn("Status");
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(4);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(120);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
@@ -68,7 +70,7 @@ public class JanelaListarEntregador extends JFrame{
 		for(EntregadorModel e: entregadores) {
 			modelo.addRow(new Object[] { e.getId(), e.getNome(), e.getCpf(),
 					e.getEndereco(), e.getCelular(), e.getTelefone(),
-					e.getGrupoUsuarioModel().getDescricao() });
+					e.getGrupoUsuarioModel().getDescricao(), e.getStatusDescricao() });
 		}
 	}
 	

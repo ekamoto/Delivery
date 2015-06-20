@@ -56,7 +56,7 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 
 		btBuscar = new JButton("Buscar");
 		btFechar = new JButton("Fechar");
-		btExcluir = new JButton("Excluir");
+		btExcluir = new JButton("Desativar");
 
 		container = this.getContentPane();
 		container.setLayout(layout);
@@ -153,20 +153,14 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 		if (e.getSource() == btBuscar) {
 			buscaPorId(tfId.getText());
 		} else if (e.getSource() == btExcluir) {
-			int dialogButton = JOptionPane.YES_NO_OPTION;
-			int dialogResult = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir?", "Aviso", dialogButton);
-			if(dialogResult == 0) {
-				remover();
-				//JOptionPane.showMessageDialog(null, "Entregador apagado com sucesso!");
-				dispose();
-				JanelaBuscarEntregador jne = new JanelaBuscarEntregador();
-			}
+			JanelaDesativarEntregador jde = new JanelaDesativarEntregador();
+			limpar();
 		} else if (e.getSource() == btFechar) {
 			dispose();
 		}
 	}
 
-	public void remover() {
+	/*public void remover() {
 
 		String remover = JOptionPane
 				.showInputDialog("Digite o ID do Entregador que deseja excluir:");
@@ -178,7 +172,7 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 
 			JOptionPane.showMessageDialog(null, "Falha ao deletar Entregador!");
 		}
-	}
+	}*/
 
 	public void buscaPorId(String id) {
 
@@ -235,4 +229,12 @@ public class JanelaBuscarEntregador extends JFrame implements ActionListener {
 			tfCarteira.setText("");
 		}
 	}*/
+	
+	public void limpar() {
+		tfNome.setText("");
+		tfCpf.setText("");
+		tfEndereco.setText("");
+		tfCel.setText("");
+		tfTel.setText("");
+	}
 }

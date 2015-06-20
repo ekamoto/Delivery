@@ -9,8 +9,11 @@ import java.util.List;
 import main.Delivery;
 import model.ClienteModel;
 import model.GrupoUsuarioModel;
-
+import model.PessoaModel;
+import model.ProdutoModel;
 import conexao.Conexao;
+import enums.EnumStatusPessoa;
+import enums.EnumStatusProduto;
 
 public class ClienteDao extends Conexao {
 
@@ -26,8 +29,8 @@ public class ClienteDao extends Conexao {
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into pessoas (nome, cpf, endereco, celular, telefone, idGrupoUsuarios)"
-					+ "values(?, ?, ?, ?, ?, ?)";
+			String sql = "insert into pessoas (nome, cpf, endereco, celular, telefone, idGrupoUsuarios, status)"
+					+ "values(?, ?, ?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
 			pst.setString(1, cliente.getNome());
@@ -36,6 +39,7 @@ public class ClienteDao extends Conexao {
 			pst.setString(4, cliente.getCelular());
 			pst.setString(5, cliente.getTelefone());
 			pst.setInt(6, cliente.getIdGrupoUsuario());
+			pst.setInt(7, EnumStatusPessoa.ATIVO.getStatus());
 
 			pst.execute();
 			pst.close();
@@ -75,7 +79,7 @@ public class ClienteDao extends Conexao {
 			PreparedStatement pst = null;
 
 			String sql = "select pessoas.id as idPessoa, pessoas.nome, pessoas.cpf, pessoas.endereco, "
-					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios," +
+					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios, pessoas.status, " +
 					" grupoUsuarios.id as idGrupoUsuarios, grupoUsuarios.descricao "+
 					" from pessoas  " +
 					"inner join grupoUsuarios on (pessoas.idGrupoUsuarios = grupoUsuarios.id) "
@@ -101,6 +105,7 @@ public class ClienteDao extends Conexao {
 				temp.setCelular(rs.getString("celular"));
 				temp.setTelefone(rs.getString("telefone"));
 				temp.setIdGrupoUsuario(rs.getInt("idGrupoUsuarios"));
+				temp.setStatus(rs.getInt("status"));
 				
 				grupoUsuarioModel.setDescricao(rs.getString("descricao"));
 				grupoUsuarioModel.setId(rs.getInt("idGrupoUsuarios"));
@@ -146,6 +151,7 @@ public class ClienteDao extends Conexao {
 				cliente.setEndereco(rs.getString("endereco"));
 				cliente.setCelular(rs.getString("celular"));
 				cliente.setTelefone(rs.getString("telefone"));
+				cliente.setStatus(rs.getInt("status"));
 			}
 
 			pst.close();
@@ -198,5 +204,69 @@ public class ClienteDao extends Conexao {
 		fechaConexao();
 
 		return true;
+	}
+	
+	public boolean desativarCliente(int idCliente) {
+		
+		PessoaModel cliente = getClienteID(idCliente);
+		
+		if(cliente != null && !cliente.getNome().equals("")) {
+			try {
+				abreConexao();
+				PreparedStatement pst = null;
+				String sql = "update pessoas set status=? where id=? ";
+				
+				pst = con.prepareStatement(sql);
+				
+				pst.setInt(1, EnumStatusPessoa.INATIVO.getStatus());
+				pst.setInt(2, idCliente);
+				
+				pst.execute();
+				pst.close();
+				
+				con.commit();
+				fechaConexao();
+				return true;
+			} catch (SQLException e1) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean ativarCliente(int idCliente) {
+		ClienteModel cliente = getClienteID(idCliente);
+		
+		if(!cliente.getNome().equals("")) {
+			
+			try {
+				
+				abreConexao();
+				
+				PreparedStatement pst = null;
+
+				String sql = "update pessoas set status=? where id=? ";
+
+				pst = con.prepareStatement(sql);
+				pst.setInt(1, EnumStatusPessoa.ATIVO.getStatus());
+				pst.setInt(2, idCliente);
+
+				pst.execute();
+				pst.close();
+
+				con.commit();
+				
+				fechaConexao();
+				return true;
+			}catch (SQLException e1) {
+				
+				return false;
+			}
+			
+		} else {
+			
+			return false;
+		}
 	}
 }

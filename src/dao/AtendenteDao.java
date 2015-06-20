@@ -9,6 +9,7 @@ import java.util.List;
 import model.AtendenteModel;
 import model.GrupoUsuarioModel;
 import conexao.Conexao;
+import enums.EnumStatusPessoa;
 
 public class AtendenteDao extends Conexao{
 	
@@ -24,7 +25,7 @@ public class AtendenteDao extends Conexao{
 
 			PreparedStatement pst = null;
 
-			String sql = "insert into pessoas (nome, cpf, endereco, celular, telefone, idGrupoUsuarios)"
+			String sql = "insert into pessoas (nome, cpf, endereco, celular, telefone, idGrupoUsuarios, status)"
 					+ "values(?, ?, ?, ?, ?, ?)";
 
 			pst = con.prepareStatement(sql);
@@ -34,6 +35,7 @@ public class AtendenteDao extends Conexao{
 			pst.setString(4, atendente.getCelular());
 			pst.setString(5, atendente.getTelefone());
 			pst.setInt(6, atendente.getIdGrupoUsuario());
+			pst.setInt(7, EnumStatusPessoa.ATIVO.getStatus());
 
 			pst.execute();
 			pst.close();
@@ -72,7 +74,7 @@ public class AtendenteDao extends Conexao{
 			PreparedStatement pst = null;
 
 			String sql = "select pessoas.id as idPessoa, pessoas.nome, pessoas.cpf, pessoas.endereco, "
-					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios," +
+					+ "pessoas.celular, pessoas.telefone, pessoas.idGrupoUsuarios, pessoas.status, " +
 					" grupoUsuarios.id as idGrupoUsuarios, grupoUsuarios.descricao "+
 					" from pessoas  " +
 					"inner join grupoUsuarios on (pessoas.idGrupoUsuarios = grupoUsuarios.id) "
@@ -98,6 +100,7 @@ public class AtendenteDao extends Conexao{
 				temp.setCelular(rs.getString("celular"));
 				temp.setTelefone(rs.getString("telefone"));
 				temp.setIdGrupoUsuario(rs.getInt("idGrupoUsuarios"));
+				temp.setStatus(rs.getInt("status"));
 				
 				grupoUsuarioModel.setDescricao(rs.getString("descricao"));
 				grupoUsuarioModel.setId(rs.getInt("idGrupoUsuarios"));
@@ -138,6 +141,7 @@ public class AtendenteDao extends Conexao{
 				atendente.setEndereco(rs.getString("endereco"));
 				atendente.setCelular(rs.getString("celular"));
 				atendente.setTelefone(rs.getString("telefone"));
+				atendente.setStatus(rs.getInt("status"));
 			}
 
 			pst.close();
@@ -190,5 +194,65 @@ public class AtendenteDao extends Conexao{
 		fechaConexao();
 
 		return true;
+	}
+	
+	public boolean desativarAtendente(int idAtendente) {
+		
+		AtendenteModel atendente = getAtendenteId(idAtendente);
+		
+		if(atendente != null && !atendente.getNome().equals("")) {
+			try {
+				abreConexao();
+				PreparedStatement pst = null;
+				String sql = "update pessoas set status=? where id=? ";
+				
+				pst = con.prepareStatement(sql);
+				
+				pst.setInt(1, EnumStatusPessoa.INATIVO.getStatus());
+				pst.setInt(2, idAtendente);
+				
+				pst.execute();
+				pst.close();
+				
+				con.commit();
+				fechaConexao();
+				return true;
+			} catch (SQLException e1) {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	} 
+	
+	public boolean ativarProduto (int idAtendente) {
+		
+		AtendenteModel atendente = getAtendenteId(idAtendente);
+		
+		if(!atendente.getNome().equals("")) {
+			try {
+				abreConexao();
+				
+				PreparedStatement pst = null;
+
+				String sql = "update pessoas set status=? where id=? ";
+
+				pst = con.prepareStatement(sql);
+				pst.setInt(1, EnumStatusPessoa.ATIVO.getStatus());
+				pst.setInt(2, idAtendente);
+
+				pst.execute();
+				pst.close();
+
+				con.commit();
+				
+				fechaConexao();
+				return true;
+				} catch (SQLException e1) {
+				return false;
+				}
+		}else {
+			return false;
+		}
 	}
 }

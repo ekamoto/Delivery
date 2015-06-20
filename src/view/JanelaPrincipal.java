@@ -58,6 +58,12 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemListarAtendente;
 	private JMenuItem itemDesativarProduto;
 	private JMenuItem itemAtivarProduto;
+	private JMenuItem itemDesativarCliente;
+	private JMenuItem itemAtivarCliente;
+	private JMenuItem itemAtivarEntregador;
+	private JMenuItem itemDesativarEntregador;
+	private JMenuItem itemAtivarAtendente;
+	private JMenuItem itemDesativarAtendente;
 	
 	// Construtor
 	public JanelaPrincipal() {
@@ -136,6 +142,12 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarAtendente = new JMenuItem("Listar");
 		itemDesativarProduto = new JMenuItem("Desativar");
 		itemAtivarProduto = new JMenuItem("Ativar");
+		itemDesativarCliente = new JMenuItem("Desativar");
+		itemAtivarCliente = new JMenuItem("Ativar");
+		itemAtivarEntregador = new JMenuItem("Ativar");
+		itemDesativarEntregador = new JMenuItem("Desativar");
+		itemAtivarAtendente = new JMenuItem("Ativar");
+		itemDesativarAtendente = new JMenuItem("Desativar");
 		
 		barraMenus.add(menuPedido);
 		barraMenus.add(menuProduto);
@@ -153,13 +165,19 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		
 		menuCliente.add(itemBuscarCliente);
 		menuProduto.add(itemBuscarProduto);
-		menuEntregador.add(itemBuscarEntregador);
-		menuAtendente.add(itemBuscarAtendente);
 		menuCliente.add(itemListarCliente);
+		menuCliente.add(itemAtivarCliente);
+		menuCliente.add(itemDesativarCliente);
 		menuProduto.add(itemListarProduto);
+		menuEntregador.add(itemBuscarEntregador);
 		menuEntregador.add(itemListarEntregador);
+		menuEntregador.add(itemAtivarEntregador);
+		menuEntregador.add(itemDesativarEntregador);
 		menuPedido.add(itemListarPedido);
+		menuAtendente.add(itemBuscarAtendente);
 		menuAtendente.add(itemListarAtendente);
+		menuAtendente.add(itemAtivarAtendente);
+		menuAtendente.add(itemDesativarAtendente);
 		menuProduto.add(itemDesativarProduto);
 		menuProduto.add(itemAtivarProduto);
 		
@@ -181,6 +199,12 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 		itemListarAtendente.addActionListener(this);
 		itemDesativarProduto.addActionListener(this);
 		itemAtivarProduto.addActionListener(this);
+		itemDesativarCliente.addActionListener(this);
+		itemAtivarCliente.addActionListener(this);
+		itemDesativarEntregador.addActionListener(this);
+		itemAtivarEntregador.addActionListener(this);
+		itemDesativarAtendente.addActionListener(this);
+		itemAtivarAtendente.addActionListener(this);
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Finalizar a tela
 		this.setLayout(new FlowLayout());
@@ -243,6 +267,18 @@ public class JanelaPrincipal extends JFrame implements ActionListener{
 			JanelaListarAtendente janelaListarAtendente = new JanelaListarAtendente();
 		} else if(e.getSource() == itemBuscarAtendente) {
 			JanelaBuscarAtendente janelaBuscarAtendente = new JanelaBuscarAtendente();
+		} else if(e.getSource() == itemDesativarCliente) {
+			JanelaDesativarCliente janelaDesativarCliente = new JanelaDesativarCliente();
+		} else if(e.getSource() == itemAtivarCliente) {
+			JanelaAtivarCliente janelaAtivarCliente = new JanelaAtivarCliente();
+		} else if(e.getSource() == itemAtivarEntregador) {
+			JanelaAtivarEntregador janelaAtivarEntregador = new JanelaAtivarEntregador();
+		} else if(e.getSource() == itemDesativarEntregador) {
+			JanelaDesativarEntregador janelaDesativarEntregador = new JanelaDesativarEntregador();
+		} else if(e.getSource() == itemAtivarAtendente) {
+			JanelaAtivarAtendente janelaAtivarAtendente = new JanelaAtivarAtendente();
+		} else if(e.getSource() == itemDesativarAtendente) {
+			JanelaDesativarAtendente janelaDesativarAtendente = new JanelaDesativarAtendente();
 		}
 	}
 }

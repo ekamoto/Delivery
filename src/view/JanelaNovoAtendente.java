@@ -146,12 +146,12 @@ public class JanelaNovoAtendente extends JFrame implements ActionListener{
 				SpringLayout.NORTH, container);
 		
 		container.add(btLimpar);
-		layout.putConstraint(SpringLayout.WEST, btLimpar, 130,
+		layout.putConstraint(SpringLayout.WEST, btLimpar, 30,
 				SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, btLimpar, 240,
 				SpringLayout.NORTH, container);
 		container.add(btCadastrar);
-		layout.putConstraint(SpringLayout.WEST, btCadastrar, 30,
+		layout.putConstraint(SpringLayout.WEST, btCadastrar, 130,
 				SpringLayout.WEST, container);
 		layout.putConstraint(SpringLayout.NORTH, btCadastrar, 240,
 				SpringLayout.NORTH, container);

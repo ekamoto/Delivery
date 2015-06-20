@@ -32,4 +32,12 @@ public class ClienteController {
 
 		return dao.deletarCliente(idCliente);
 	}
+	
+	public boolean desativarCliente(int idCliente) {
+		return dao.desativarCliente(idCliente);
+	}
+	
+	public boolean ativarCliente(int idCliente) {
+		return dao.ativarCliente(idCliente);
+	}
 }

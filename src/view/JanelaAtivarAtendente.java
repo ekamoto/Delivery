@@ -1,66 +1,32 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Container;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import controller.ProdutoController;
+import controller.AtendenteController;
 
-public class JanelaAtivarProduto extends JFrame implements ActionListener {
-
+public class JanelaAtivarAtendente extends JFrame implements ActionListener {
+	
 	private JTextField tfCodigo;
 	private JLabel lCodigo;
-
+	
 	private JButton btLimpar;
 	private JButton btAtivar;
 	private JButton btFechar;
-
+	
 	private Container container;
 	private SpringLayout layout = new SpringLayout();
-	private ProdutoController produtoController = new ProdutoController();
-	Image bImage;
-
-	/*public void JFrameWithBackground(String path) {
-
-		this.bImage = this.createImage(path);
-
-		this.initComponents();
-
-	}
-
-	public void initComponents() {
-
-		super.setContentPane(new NewContentPane(this.bImage));
-		super.setExtendedState(JFrame.MAXIMIZED_BOTH);
-	}
-
-	private Image createImage(String path) {
-
-		return Toolkit.getDefaultToolkit().createImage(path);
-
-	}*/
-
-	public JanelaAtivarProduto() {
-
-		
-		// Adicionando imagem de fundo
-		//JFrameWithBackground("src/imgs/eu.jpg");
-		
+	private AtendenteController atendenteController = new AtendenteController();
+	
+	public JanelaAtivarAtendente() {
 		lCodigo = new JLabel("Código");
 		tfCodigo = new JTextField(40);
 		layout.putConstraint(SpringLayout.WEST, tfCodigo, 15,
@@ -108,26 +74,19 @@ public class JanelaAtivarProduto extends JFrame implements ActionListener {
 
 		this.setResizable(true);
 		this.setVisible(true);
-		this.setTitle("Ativar Produto");
+		this.setTitle("Ativar Cliente");
 		this.setSize(875, 300);
-
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == btAtivar) {
-
-			if (produtoController.ativarProduto(Integer.parseInt(tfCodigo
-					.getText()))) {
-
-				JOptionPane.showMessageDialog(this,
-						"Produto ativado com sucesso");
+		
+		if(e.getSource() == btAtivar) {
+			if(atendenteController.ativarAtendente(Integer.parseInt(tfCodigo.getText()))) {
+				JOptionPane.showMessageDialog(this, "Cliente ativado com sucesso");
 			} else {
-
-				JOptionPane.showMessageDialog(this, "Falha ao ativar produto");
+				JOptionPane.showMessageDialog(this, "Falha ao ativar cliente");
 			}
-
 			limpar();
 		} else if (e.getSource() == btLimpar) {
 
@@ -136,11 +95,11 @@ public class JanelaAtivarProduto extends JFrame implements ActionListener {
 
 			dispose();
 		}
+		
 	}
-
+	
 	public void limpar() {
 
 		tfCodigo.setText("");
 	}
-
 }

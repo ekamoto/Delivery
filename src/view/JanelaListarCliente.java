@@ -50,6 +50,7 @@ public class JanelaListarCliente extends JFrame {
 		modelo.addColumn("Celular");
 		modelo.addColumn("Telefone");
 		modelo.addColumn("Grupo");
+		modelo.addColumn("Status");
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(4);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(70);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(120);
@@ -57,7 +58,8 @@ public class JanelaListarCliente extends JFrame {
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
-
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(11);
+		
 		pesquisar(modelo);
 	}
 
@@ -71,7 +73,7 @@ public class JanelaListarCliente extends JFrame {
 
 			modelo.addRow(new Object[] { c.getId(), c.getNome(), c.getCpf(),
 					c.getEndereco(), c.getCelular(), c.getTelefone(),
-					c.getGrupoUsuarioModel().getDescricao() });
+					c.getGrupoUsuarioModel().getDescricao(), c.getStatusDescricao() });
 		}
 	}
 }

@@ -63,7 +63,7 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 
 		btBuscar = new JButton("Buscar");
 		btFechar = new JButton("Fechar");
-		btExcluir = new JButton("Excluir");
+		btExcluir = new JButton("Desativar");
 		container = this.getContentPane();
 		container.setLayout(layout);
 
@@ -159,15 +159,23 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 		if (e.getSource() == btBuscar) {
 			buscaPorId(tfId.getText());
 		} else if (e.getSource() == btExcluir) {
-			remover();
-			dispose();
-			JanelaBuscarCliente jbc = new JanelaBuscarCliente();
+			JanelaDesativarCliente jdc = new JanelaDesativarCliente();
+			limpar();
+			//dispose();
+			//JanelaBuscarCliente jbc = new JanelaBuscarCliente();
 		} else if (e.getSource() == btFechar) {
 			dispose();
 		}
 	}
 
-	public void remover() {
+	public void limpar() {
+		tfNome.setText("");
+		tfCpf.setText("");
+		tfEndereco.setText("");
+		tfCel.setText("");
+		tfTel.setText("");
+	}
+	/*public void remover() {
 
 		String remover = JOptionPane
 				.showInputDialog("Digite o ID do Cliente que deseja excluir:");
@@ -179,7 +187,7 @@ public class JanelaBuscarCliente extends JFrame implements ActionListener {
 
 			JOptionPane.showMessageDialog(null, "Falha ao deletar cliente!");
 		}
-	}
+	}*/
 
 	public void buscaPorId(String id) {
 

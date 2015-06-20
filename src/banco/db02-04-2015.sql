@@ -23,7 +23,8 @@ cpf varchar(14) not null,
 endereco varchar(150),
 celular character varying(11),
 telefone character varying(11),
-idGrupoUsuarios int not null references grupoUsuarios(id)
+idGrupoUsuarios int not null references grupoUsuarios(id),
+status int NOT null
 );
 
 create table categorias (
